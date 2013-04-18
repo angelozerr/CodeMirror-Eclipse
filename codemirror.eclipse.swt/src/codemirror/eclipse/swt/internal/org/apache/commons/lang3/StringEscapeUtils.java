@@ -19,14 +19,14 @@ package codemirror.eclipse.swt.internal.org.apache.commons.lang3;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.commons.lang3.text.translate.AggregateTranslator;
-import org.apache.commons.lang3.text.translate.CharSequenceTranslator;
-import org.apache.commons.lang3.text.translate.EntityArrays;
-import org.apache.commons.lang3.text.translate.LookupTranslator;
-import org.apache.commons.lang3.text.translate.NumericEntityUnescaper;
-import org.apache.commons.lang3.text.translate.OctalUnescaper;
-import org.apache.commons.lang3.text.translate.UnicodeEscaper;
-import org.apache.commons.lang3.text.translate.UnicodeUnescaper;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.AggregateTranslator;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.CharSequenceTranslator;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.EntityArrays;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.LookupTranslator;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.NumericEntityUnescaper;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.OctalUnescaper;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.UnicodeEscaper;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate.UnicodeUnescaper;
 
 /**
  * <p>Escapes and unescapes {@code String}s for

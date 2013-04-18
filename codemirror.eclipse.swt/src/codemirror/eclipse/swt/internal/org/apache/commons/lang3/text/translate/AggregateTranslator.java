@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang3.text.translate;
+package codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate;
 
 import java.io.IOException;
 import java.io.Writer;

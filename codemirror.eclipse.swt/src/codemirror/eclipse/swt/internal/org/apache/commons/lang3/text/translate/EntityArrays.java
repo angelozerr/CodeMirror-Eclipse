@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang3.text.translate;
+package codemirror.eclipse.swt.internal.org.apache.commons.lang3.text.translate;
 
 /**
  * Class holding various entity data for HTML and XML - generally for use with

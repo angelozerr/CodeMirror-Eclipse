@@ -2,7 +2,9 @@ package codemirror.eclipse.ui.internal;
 
 import java.io.IOException;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -10,7 +12,6 @@ import org.eclipse.swt.widgets.Composite;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.DirtyListener;
 import codemirror.eclipse.swt.IValidator;
-import codemirror.eclipse.ui.editors.CMFormPage;
 import codemirror.eclipse.ui.editors.ICMEditorPart;
 import codemirror.eclipse.ui.internal.org.apache.commons.io.IOUtils;
 
@@ -39,6 +40,21 @@ public class CMEditorPartHelper {
 			}
 		});
 		return cm;
+	}
+
+	public static void saveCM(ICMEditorPart part, IProgressMonitor monitor) {
+		CMControl cm = part.getCMControl();
+		IFile file = part.getFile();
+		try {
+			file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
+					monitor);
+		} catch (CoreException e) {
+			// TODoO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		part.editorDirtyStateChanged();
+		cm.setDirty(false);
 	}
 
 }

@@ -25,7 +25,6 @@ import org.osgi.framework.Bundle;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
-import codemirror.eclipse.ui.internal.org.apache.commons.io.IOUtils;
 
 public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
@@ -56,6 +55,21 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	}
 
 	@Override
+	public void doSave(IProgressMonitor monitor) {
+		CMEditorPartHelper.saveCM(this, monitor);
+	}
+
+	@Override
+	public void doSaveAs() {
+		// Do nothing
+	}
+
+	@Override
+	public boolean isSaveAsAllowed() {
+		return false;
+	}
+
+	@Override
 	protected void createFormContent(IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
 		FormToolkit toolkit = managedForm.getToolkit();
@@ -77,12 +91,10 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	}
 
 	protected Image getFormTitleImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	protected String getFormTitleText() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -92,30 +104,8 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		this.cm = CMEditorPartHelper.createCM(this, body);
 	}
 
-	@Override
-	public void doSave(IProgressMonitor monitor) {
-		cm.setDirty(false);
-
-		IFile file = getFile();
-		try {
-			file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
-					monitor);
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		getEditor().editorDirtyStateChanged();
-	}
-
 	public IFile getFile() {
 		return ((IFileEditorInput) getEditorInput()).getFile();
-	}
-
-	@Override
-	public void doSaveAs() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -124,17 +114,8 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	}
 
 	@Override
-	public boolean isSaveAsAllowed() {
-		return false;
-	}
-
-	@Override
 	public void setFocus() {
 		cm.setFocus();
-	}
-
-	public CMControl getCM() {
-		return cm;
 	}
 
 	public IValidator getValidator() {
@@ -164,4 +145,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		getEditor().editorDirtyStateChanged();
 	}
 
+	public CMControl getCMControl() {
+		return cm;
+	}
 }

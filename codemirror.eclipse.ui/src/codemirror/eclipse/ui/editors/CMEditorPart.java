@@ -1,6 +1,5 @@
 package codemirror.eclipse.ui.editors;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -13,7 +12,6 @@ import org.eclipse.ui.part.EditorPart;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
-import codemirror.eclipse.ui.internal.org.apache.commons.io.IOUtils;
 
 public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
@@ -21,24 +19,17 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-		cm.setDirty(false);
-
-		IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-		try {
-			file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
-					monitor);
-		} catch (CoreException e) {
-			// TODoO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		firePropertyChange(PROP_DIRTY);
+		CMEditorPartHelper.saveCM(this, monitor);
 	}
 
 	@Override
 	public void doSaveAs() {
-		// TODO Auto-generated method stub
+		// Do nothing
+	}
 
+	@Override
+	public boolean isSaveAsAllowed() {
+		return false;
 	}
 
 	@Override
@@ -55,11 +46,6 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 	@Override
 	public boolean isDirty() {
 		return cm.isDirty();
-	}
-
-	@Override
-	public boolean isSaveAsAllowed() {
-		return false;
 	}
 
 	@Override
@@ -96,4 +82,7 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 		firePropertyChange(PROP_DIRTY);
 	}
 
+	public CMControl getCMControl() {
+		return cm;
+	}
 }
