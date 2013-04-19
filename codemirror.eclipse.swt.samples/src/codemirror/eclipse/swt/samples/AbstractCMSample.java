@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import codemirror.eclipse.swt.CMControl;
-import codemirror.eclipse.swt.DirtyListener;
+import codemirror.eclipse.swt.IDirtyListener;
 
 public abstract class AbstractCMSample {
 
@@ -32,7 +32,7 @@ public abstract class AbstractCMSample {
 
 		final CMControl editor = new CMControl(cmFile, shell, SWT.BORDER);
 		editor.setText(getInitialText());
-		editor.addDirtyListener(new DirtyListener() {
+		editor.addDirtyListener(new IDirtyListener() {
 			public void dirtyChanged(boolean dirty) {
 				System.err.println("dirty=" + dirty);
 			}

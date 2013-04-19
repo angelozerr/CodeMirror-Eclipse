@@ -1,15 +1,18 @@
-package codemirror.eclipse.ui.editors;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+/*******************************************************************************
+ * Copyright (c) 2011 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
+package codemirror.eclipse.ui.editors.forms;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.graphics.Image;
@@ -20,33 +23,13 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
-import org.osgi.framework.Bundle;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
+import codemirror.eclipse.ui.editors.ICMEditorPart;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 
 public abstract class CMFormPage extends FormPage implements ICMEditorPart {
-
-	static {
-		Bundle bundle = Platform
-				.getBundle("org.mozilla.xulrunner.win32.win32.x86"); //$NON-NLS-1$
-		if (bundle != null) {
-			URL resourceUrl = bundle.getResource("xulrunner"); //$NON-NLS-1$
-			if (resourceUrl != null) {
-				try {
-					URL fileUrl = FileLocator.toFileURL(resourceUrl);
-					File file = new File(fileUrl.toURI());
-					System.setProperty(
-							"org.eclipse.swt.browser.XULRunnerPath", file.getAbsolutePath()); //$NON-NLS-1$
-				} catch (IOException e) {
-					// log the exception
-				} catch (URISyntaxException e) {
-					// log the exception
-				}
-			}
-		}
-	}
 
 	private CMControl cm;
 

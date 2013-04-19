@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2002, 2011 Innoopract Informationssysteme GmbH.
+ * Copyright (c) 2011 Angelo ZERR.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
- * Contributors:
- *    Innoopract Informationssysteme GmbH - initial API and implementation
- *    EclipseSource - ongoing development
- ******************************************************************************/
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 package codemirror.eclipse.swt;
 
 import java.io.File;
@@ -22,10 +21,14 @@ import org.eclipse.swt.widgets.Display;
 
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 
+/**
+ * CodeMirror control.
+ * 
+ */
 public class CMControl extends AbstractCMControl {
 
 	private boolean dirty = false;
-	private List<DirtyListener> listeners = new ArrayList<DirtyListener>();
+	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 
 	private IValidator validator;
 
@@ -71,7 +74,7 @@ public class CMControl extends AbstractCMControl {
 			public Object function(Object[] arguments) {
 
 				dirty = true;
-				notifyListeners();
+				notifyDirtyListeners();
 				return null;
 			}
 		};
@@ -99,14 +102,14 @@ public class CMControl extends AbstractCMControl {
 		return null;
 	}
 
-	public void addDirtyListener(DirtyListener l) {
+	public void addDirtyListener(IDirtyListener l) {
 		listeners.add(l);
 	}
 
-	private void notifyListeners() {
+	private void notifyDirtyListeners() {
 		Display.getCurrent().asyncExec(new Runnable() {
 			public void run() {
-				for (DirtyListener l : listeners) {
+				for (IDirtyListener l : listeners) {
 					l.dirtyChanged(isDirty());
 				}
 			}
@@ -114,17 +117,10 @@ public class CMControl extends AbstractCMControl {
 
 	}
 
-	// public static String getHostUrl() {
-	// return hostUrl;
-	// }
-	//
-	// public static void setHostUrl(String hostUrl) {
-	// CMControl.hostUrl = hostUrl;
-	// }
-
 	public void setDirty(boolean b) {
 		dirty = b;
 		browser.evaluate(" cmIsDirtyFired=false");
+		notifyDirtyListeners();
 	}
 
 	public void setValidator(IValidator validator) {

@@ -8,24 +8,12 @@
  * Contributors:      
  *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
  *******************************************************************************/
-package codemirror.eclipse.ui.editors;
+package codemirror.eclipse.swt;
 
-import org.eclipse.core.resources.IFile;
+/**
+ * Listener to observer dirty changed.
+ */
+public interface IDirtyListener {
 
-import codemirror.eclipse.swt.CMControl;
-import codemirror.eclipse.swt.IValidator;
-
-
-public interface ICMEditorPart {
-
-	String getURL();
-
-	IFile getFile();
-
-	IValidator getValidator();
-
-	void editorDirtyStateChanged();
-
-	CMControl getCMControl();
-
+	void dirtyChanged(boolean dirty);
 }
