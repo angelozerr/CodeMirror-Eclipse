@@ -23,4 +23,6 @@ public interface IValidator {
 	 * @return
 	 */
 	String validate(String code);
+	
+	boolean isAsync();
 }

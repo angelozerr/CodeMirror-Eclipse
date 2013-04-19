@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
+import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
 
 /**
  * CodeMirror control.
@@ -81,25 +82,41 @@ public class CMControl extends AbstractCMControl {
 
 		new BrowserFunction(browser, "cm_validate") {
 			public Object function(Object[] arguments) {
-				try {
-					String json = validate(getText());
-					String js = "f(" + json + ")";
-					browser.evaluate(js);
-				} catch (Throwable e) {
-					e.printStackTrace();
+				final IValidator validator = getValidator();
+				if (validator != null) {
+					final String code = getText();
+					if (validator.isAsync()) {
+						final Display display = getShell().getDisplay();
+						try {
+							new Thread() {
+								public void run() {
+									String json = validator.validate(code);
+									if (StringUtils.isNotEmpty(json)) {
+										final String js = "f(" + json + ")";
+										display.asyncExec(new Runnable() {
+											public void run() {
+												browser.evaluate(js);
+											}
+										});
+									}
+
+								};
+							}.start();
+						} catch (Throwable e) {
+							e.printStackTrace();
+						}
+					} else {
+						String json = validator.validate(code);
+						if (StringUtils.isNotEmpty(json)) {
+							String js = "f(" + json + ")";
+							browser.evaluate(js);
+						}
+					}
 				}
 				return null;
 			}
 		};
 
-	}
-
-	public String validate(String code) {
-		IValidator validator = getValidator();
-		if (validator != null) {
-			return validator.validate(code);
-		}
-		return null;
 	}
 
 	public void addDirtyListener(IDirtyListener l) {
