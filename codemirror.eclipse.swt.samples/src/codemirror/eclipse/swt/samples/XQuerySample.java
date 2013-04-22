@@ -6,7 +6,7 @@ import codemirror.eclipse.resources.CMResources;
 
 public class XQuerySample extends AbstractCMSample {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		new XQuerySample().createUI();
 	}
 

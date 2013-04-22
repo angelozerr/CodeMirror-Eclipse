@@ -11,6 +11,7 @@
 package codemirror.eclipse.swt;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -50,7 +51,11 @@ public abstract class AbstractCMControl extends Composite {
 	}
 
 	public static String toURL(File file) {
-		return new StringBuilder("file://").append(file.getPath()).toString();
+		try {
+			return new StringBuilder("file://").append(file.getCanonicalPath()).toString();
+		} catch (IOException e) {
+			return new StringBuilder("file://").append(file.getPath()).toString();
+		}
 	}
 
 	public AbstractCMControl(String url, Composite parent, int style,
@@ -67,18 +72,22 @@ public abstract class AbstractCMControl extends Composite {
 		browser.addProgressListener(new ProgressListener() {
 
 			public void completed(ProgressEvent event) {
-				loaded = true;
-				if (textToBeSet != null) {
-					setText(textToBeSet);
-					textToBeSet = null;
-				}
-				createBrowserFunctions();
+				onLoad();
 			}
 
 			public void changed(ProgressEvent event) {
 				// not needed
 			}
 		});
+	}
+
+	protected void onLoad() {
+		loaded = true;
+		if (textToBeSet != null) {
+			setText(textToBeSet);
+			textToBeSet = null;
+		}
+		createBrowserFunctions();
 	}
 
 	protected void createBrowserFunctions() {
@@ -111,7 +120,7 @@ public abstract class AbstractCMControl extends Composite {
 			text = "";
 		}
 
-		if (loaded || force) {
+		if (isLoaded() || force) {
 			doSetText(text);
 		} else {
 			textToBeSet = text;
@@ -120,7 +129,7 @@ public abstract class AbstractCMControl extends Composite {
 	}
 
 	public String getText() {
-		if (!loaded) {
+		if (!isLoaded()) {
 			if (textToBeSet != null) {
 				return textToBeSet;
 			} else {
@@ -144,6 +153,10 @@ public abstract class AbstractCMControl extends Composite {
 		return browser.setFocus();
 	}
 
+	public boolean isLoaded() {
+		return loaded;
+	}
+	
 	protected abstract String doGetText();
 
 	protected abstract void doSetText(String text);

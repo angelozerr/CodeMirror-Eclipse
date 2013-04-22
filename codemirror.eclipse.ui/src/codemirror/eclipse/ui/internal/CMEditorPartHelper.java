@@ -65,7 +65,7 @@ public class CMEditorPartHelper {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		cm.setDirty(false);
+		cm.setDirty(false);		
 	}
 
 }

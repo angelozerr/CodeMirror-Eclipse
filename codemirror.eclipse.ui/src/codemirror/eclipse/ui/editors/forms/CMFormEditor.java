@@ -16,6 +16,7 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
+import org.eclipse.ui.forms.editor.IFormPage;
 
 public abstract class CMFormEditor extends FormEditor {
 
@@ -31,5 +32,14 @@ public abstract class CMFormEditor extends FormEditor {
 					"Invalid Input: Must be IFileEditorInput");
 		super.init(site, editorInput);
 		super.setPartName(((IFileEditorInput) editorInput).getFile().getName());
+	}
+
+	@Override
+	public void setFocus() {
+		super.setFocus();
+		IFormPage page = getActivePageInstance();
+		if (page != null) {
+			page.setFocus();
+		}
 	}
 }

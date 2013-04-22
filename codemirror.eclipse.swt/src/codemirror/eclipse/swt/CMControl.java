@@ -28,25 +28,40 @@ import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
  */
 public class CMControl extends AbstractCMControl {
 
+	private static final String CM_REFOCUS_JS = "editor.focus();";
 	private boolean dirty = false;
 	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 
 	private IValidator validator;
+	private boolean focusToBeSet;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style, SWT.NONE);
+		this.focusToBeSet = false;
 	}
 
 	public CMControl(String url, Composite parent, int style) {
 		super(url, parent, style, SWT.NONE);
+		this.focusToBeSet = false;
 	}
 
 	public CMControl(File file, Composite parent, int style, int browserStyle) {
 		super(file, parent, style, browserStyle);
+		this.focusToBeSet = false;
 	}
 
 	public CMControl(String url, Composite parent, int style, int browserStyle) {
 		super(url, parent, style, browserStyle);
+		this.focusToBeSet = false;
+	}
+
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		if (focusToBeSet) {
+			browser.evaluate(CM_REFOCUS_JS);
+			focusToBeSet = false;
+		}
 	}
 
 	protected void doSetText(String text) {
@@ -57,6 +72,19 @@ public class CMControl extends AbstractCMControl {
 				.toString();
 		browser.evaluate(js);
 		dirty = false;
+	}
+
+	@Override
+	public boolean setFocus() {
+		boolean result = super.setFocus();
+		if (result) {
+			if (isLoaded()) {
+				browser.evaluate(CM_REFOCUS_JS);
+			} else {
+				focusToBeSet = true;
+			}
+		}
+		return result;
 	}
 
 	public boolean isDirty() {

@@ -4,11 +4,25 @@ import java.io.File;
 
 public class CMResources {
 
-	public static File getXQueryResource() {
-		return new File("D:/_Projets/Personal/workspace_MongoDBWebApps/codemirror.eclipse.resources/html/xquery.html");
+	private static File baseDir;
+
+	public static void setBaseDir(File baseDir) {
+		CMResources.baseDir = baseDir;
 	}
-	
+
+	public static File getXQueryResource() {
+		return getResource("html/xquery.html");
+	}
+
 	public static File getVelocityResource() {
-		return new File("D:/_Projets/Personal/workspace_MongoDBWebApps/codemirror.eclipse.resources/html/velocity.html");
+		return getResource("html/velocity.html");
+	}
+
+	private static File getResource(String path) {
+		if (baseDir == null) {
+			throw new RuntimeException(
+					"CMResources#setBaseDir(File baseDir) should be initialized.");
+		}
+		return new File(baseDir, path);
 	}
 }
