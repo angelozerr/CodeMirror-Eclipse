@@ -95,4 +95,8 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 	public CMControl getCMControl() {
 		return cm;
 	}
+
+	public CMControl createCM(String url, Composite parent, int style) {
+		return new CMControl(url, parent, style);
+	}
 }

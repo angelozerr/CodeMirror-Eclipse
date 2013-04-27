@@ -11,6 +11,7 @@
 package codemirror.eclipse.ui.editors;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
@@ -27,5 +28,7 @@ public interface ICMEditorPart {
 	void editorDirtyStateChanged();
 
 	CMControl getCMControl();
+
+	CMControl createCM(String url, Composite parent, int none);
 
 }

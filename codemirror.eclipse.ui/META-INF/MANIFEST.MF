@@ -18,4 +18,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.ui.editors,
- codemirror.eclipse.ui.editors.forms
+ codemirror.eclipse.ui.editors.forms,
+ codemirror.eclipse.ui.editors.forms.xquery,
+ codemirror.eclipse.ui.viewers.query

@@ -32,7 +32,7 @@ import codemirror.eclipse.ui.internal.org.apache.commons.io.IOUtils;
 public class CMEditorPartHelper {
 
 	public static CMControl createCM(final ICMEditorPart part, Composite parent) {
-		CMControl cm = new CMControl(part.getURL(), parent, SWT.NONE);
+		CMControl cm = part.createCM(part.getURL(), parent, SWT.NONE);
 		try {
 			String text = IOUtils.toString(part.getFile().getContents());
 			cm.setText(text);
