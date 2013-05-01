@@ -1,4 +1,4 @@
-package codemirror.eclipse.ui.editors.forms.xquery;
+package codemirror.eclipse.ui.xquery.editors.forms;
 
 import java.util.Collection;
 
