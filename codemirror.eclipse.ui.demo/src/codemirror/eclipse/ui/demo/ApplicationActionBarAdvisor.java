@@ -27,15 +27,16 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	protected void makeActions(IWorkbenchWindow window) {
 		// Creates the actions and registers them. Registering also 
 		// provides automatic disposal of the actions when the window is closed.
-		exitAction = ActionFactory.QUIT.create(window);
-		register(exitAction);
+		register(ActionFactory.SAVE.create(window));
+		/*exitAction = ActionFactory.QUIT.create(window);
+		register(exitAction);*/
 	}
-
+	
 	protected void fillMenuBar(IMenuManager menuBar) {
-		MenuManager fileMenu 
+		/*MenuManager fileMenu 
 		= new MenuManager("&File",IWorkbenchActionConstants.M_FILE);
 		menuBar.add(fileMenu);
-		fileMenu.add(exitAction);
+		fileMenu.add(exitAction);*/
 	}
 
 }

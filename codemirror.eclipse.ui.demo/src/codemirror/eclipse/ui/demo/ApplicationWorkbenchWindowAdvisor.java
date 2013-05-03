@@ -1,6 +1,5 @@
 package codemirror.eclipse.ui.demo;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -23,9 +22,9 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	public void preWindowOpen() {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
 		configurer.setInitialSize(new Point(900, 700));
-		//configurer.setShowCoolBar(false);
-		//configurer.setShowStatusLine(false);
-		configurer.setTitle("CodeMirro-Eclipse demo");
-		configurer.setShellStyle(SWT.TITLE | SWT.RESIZE);
+		configurer.setShowCoolBar(true);
+		configurer.setShowStatusLine(true);
+		configurer.setTitle("CodeMirro Eclipse Demo");
+		//configurer.setShellStyle(SWT.TITLE | SWT.RESIZE);
 	}
 }

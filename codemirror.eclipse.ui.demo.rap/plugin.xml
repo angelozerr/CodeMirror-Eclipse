@@ -7,7 +7,7 @@
          point="org.eclipse.rap.ui.entrypoint">
       <entrypoint            
             path="/codemirror"
-            brandingId="org.eclipse.rap.demo.teaBranding"
+            brandingId="org.eclipse.rap.design.example.business.branding"
             applicationId="codemirror.eclipse.ui.demo.viewapp"
             id="viewapp.entrypoint">
       </entrypoint>

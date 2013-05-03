@@ -24,6 +24,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import codemirror.eclipse.ui.demo.internal.ImageResources;
 import codemirror.eclipse.ui.editors.SimpleFileEditorInput;
 
 public class FileExplorer extends ViewPart implements IDoubleClickListener {
@@ -82,7 +83,9 @@ public class FileExplorer extends ViewPart implements IDoubleClickListener {
 
 		public Image getImage(Object obj) {
 			File file = (File) obj;
-			if (!file.isDirectory()) {
+			if (file.isDirectory()) {
+				return ImageResources.getImage(ImageResources.IMG_OBJ_FOLDER);
+			} else {
 				IEditorDescriptor descriptor = getDescriptor(file);
 				if (descriptor != null) {
 					return descriptor.getImageDescriptor().createImage();

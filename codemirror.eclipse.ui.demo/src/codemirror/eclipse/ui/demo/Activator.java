@@ -5,8 +5,11 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import codemirror.eclipse.ui.demo.internal.ImageResources;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -63,7 +66,15 @@ public class Activator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 	
+	@Override
+	protected void initializeImageRegistry(ImageRegistry reg) {
+		super.initializeImageRegistry(reg);
+		ImageResources.initialize(reg);
+	}
+	
 	public File getResourceBaseDir() throws IOException {
 		return new File(FileLocator.getBundleFile(getBundle()), "resources");
 	}
+	
+	
 }
