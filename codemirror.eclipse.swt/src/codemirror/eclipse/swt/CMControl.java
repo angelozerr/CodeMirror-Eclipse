@@ -19,6 +19,7 @@ import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
+import codemirror.eclipse.swt.internal.SingleSourcingHelper;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
 
@@ -113,14 +114,15 @@ public class CMControl extends AbstractCMControl {
 				final IValidator validator = getValidator();
 				if (validator != null) {
 					final String code = getText();
-					if (validator.isAsync()) {
+					if (!SingleSourcingHelper.isRAP() && validator.isAsync()) {
 						final Display display = getShell().getDisplay();
 						try {
 							new Thread() {
 								public void run() {
 									String json = validator.validate(code);
 									if (StringUtils.isNotEmpty(json)) {
-										final String js = "CMEclipse.onValidationResult(editor, " + json + ")";
+										final String js = "CMEclipse.onValidationResult(editor, "
+												+ json + ")";
 										display.asyncExec(new Runnable() {
 											public void run() {
 												browser.evaluate(js);
@@ -136,8 +138,7 @@ public class CMControl extends AbstractCMControl {
 					} else {
 						String json = validator.validate(code);
 						if (StringUtils.isNotEmpty(json)) {
-							String js = "f(" + json + ")";
-							browser.evaluate(js);
+							return json;
 						}
 					}
 				}

@@ -26,15 +26,25 @@
 		
 	</head>
 		
-	<body onload="CMEclipse.loaded()" >	
+	<body onload="CMEclipse.loaded()" >
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
 		<script>
-		    function velocityValidator() {
-		    
-		    }
 		
+		function cm_validate(code) {
+		window.alert(code);
+		var found=[];
+		found.push( {
+			startLine:0,
+			startChar:1,
+			endLine:0,
+			endChar:3,
+			message :'eee'
+		});
+		return found;
+		}
+				    
 			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 		        mode: "velocity",
 				lineNumbers: true,	        

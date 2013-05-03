@@ -26,7 +26,7 @@ import org.eclipse.ui.part.ViewPart;
 
 import codemirror.eclipse.ui.editors.SimpleFileEditorInput;
 
-public class View extends ViewPart implements IDoubleClickListener {
+public class FileExplorer extends ViewPart implements IDoubleClickListener {
 	public static final String ID = "codemirror.eclipse.ui.demo.view";
 
 	private TreeViewer viewer;
@@ -81,10 +81,13 @@ public class View extends ViewPart implements IDoubleClickListener {
 		}
 
 		public Image getImage(Object obj) {
-			IEditorDescriptor descriptor = getDescriptor((File)obj);
-			if (descriptor != null) {
-				return descriptor.getImageDescriptor().createImage();
-			}			
+			File file = (File) obj;
+			if (!file.isDirectory()) {
+				IEditorDescriptor descriptor = getDescriptor(file);
+				if (descriptor != null) {
+					return descriptor.getImageDescriptor().createImage();
+				}
+			}
 			return PlatformUI.getWorkbench().getSharedImages()
 					.getImage(ISharedImages.IMG_OBJ_ELEMENT);
 		}

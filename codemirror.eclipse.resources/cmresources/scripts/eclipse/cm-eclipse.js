@@ -14,6 +14,24 @@ var CMEclipse = (function() {
     });
   }
 
+  function refresh(cm, data) {  
+    if (data) {
+      var found = [];
+      if (data.annotations) {
+        data = data.annotations;
+      }
+      if (data.length && data.length > 0) {
+        for ( var i = 0; i < data.length; i++) {
+          var error = data[i];
+          addAnnotation(error, found);
+        }
+      } else {
+        addAnnotation(data, found);
+      }
+    } 
+    cm._updateLinting(cm, found);
+  }
+
   return {
     loaded : function() {
       editor.on('change', function() {
@@ -31,26 +49,16 @@ var CMEclipse = (function() {
         var code = cm.getValue();
         if (code != '') {
           cm._updateLinting = updateLinting;
-          cm_validate(code);
+          var data = cm_validate(code);
+          if (data != null) {
+            var json= eval(data);          
+            refresh(cm, json);
+          }
         }
       }
     },
     onValidationResult : function(cm, data) {
-      if (data) {
-        var found = [];
-        if (data.annotations) {
-          data = data.annotations;
-        }
-        if (data.length || data.length == 0) {
-          for ( var i = 0; i < data.length; i++) {
-            var error = data[i];
-            addAnnotation(error, found);
-          }
-        } else {
-          addAnnotation(data, found);
-        }
-      }
-      cm._updateLinting(cm, found);
+      refresh(cm, data);
     }
   };
 })();
