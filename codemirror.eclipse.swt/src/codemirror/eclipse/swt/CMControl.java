@@ -120,7 +120,7 @@ public class CMControl extends AbstractCMControl {
 								public void run() {
 									String json = validator.validate(code);
 									if (StringUtils.isNotEmpty(json)) {
-										final String js = "f(" + json + ")";
+										final String js = "CMEclipse.onValidationResult(editor, " + json + ")";
 										display.asyncExec(new Runnable() {
 											public void run() {
 												browser.evaluate(js);

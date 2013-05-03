@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            name="%jsonEdior.name"
+            name="%jsonEditor.name"
             extensions="json"
             icon="icons/obj16/json.png"            
             class="codemirror.eclipse.ui.json.editors.JsonEditor"

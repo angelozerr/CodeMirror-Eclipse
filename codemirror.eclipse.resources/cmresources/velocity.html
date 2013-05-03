@@ -9,13 +9,21 @@
 		<script src="scripts/codemirror/addon/selection/active-line.js"></script>
 		<script src="scripts/codemirror/mode/velocity/velocity.js"></script>
 		    
+		<script src="scripts/codemirror/addon/lint/lint.js"></script>
+	    <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
+	    		    
 		<!-- CodeMirror-XQuery -->		    
 		<script src="scripts/codemirror-xquery/addon/selection/fullscreen.js"></script>
 		<link rel="stylesheet" href="scripts/codemirror-xquery/addon/selection/fullscreen.css">
 		    
 		<!-- SWT Browser - CodeMirror -->
 		<script src="scripts/eclipse/cm-eclipse.js"></script>
-				
+			
+		<style>
+			.CodeMirror-activeline-background {background: #e8f2ff !important;}
+			div.CodeMirror span.CodeMirror-matchingbracket{color:black;font-weight:bold;}
+		</style>
+		
 	</head>
 		
 	<body onload="CMEclipse.loaded()" >	
@@ -23,13 +31,21 @@
 			<textarea id="code" name="code" ></textarea>
 		</form>	
 		<script>
+		    function velocityValidator() {
+		    
+		    }
+		
 			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 		        mode: "velocity",
 				lineNumbers: true,	        
 		        styleActiveLine: true,
 		        lineNumbers: true,
 		        lineWrapping: true,
-		        gutters: ["CodeMirror-linenumbers"]
+		        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
+		        lintWith : {
+					"getAnnotations" : CMEclipse.validate,			
+					"async" : true
+				}
 		    });			 
 		</script>
 	</body>	

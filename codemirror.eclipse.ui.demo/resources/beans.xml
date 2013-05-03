@@ -1,0 +1,10 @@
+<bean id="testBean" class="org.springframework.beans.TestBean"
+	scope="prototype">
+ 
+	<property name="age" value="10" />
+	<property name="spouse">
+		<bean class="org.springframework.beans.TestBean">
+			<property name="age" value="11" />
+		</bean>
+	</property>
+</bean>
