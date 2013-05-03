@@ -6,6 +6,7 @@ Bundle-Localization: plugin
 Bundle-SymbolicName: codemirror.eclipse.swt
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.swt
+Require-Bundle: org.eclipse.swt;resolution:=optional,
+ org.eclipse.rap.rwt;resolution:=optional
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt

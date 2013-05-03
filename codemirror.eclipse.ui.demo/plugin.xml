@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   
+   <extension
+         id="viewapp"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            thread="main"
+            cardinality="singleton-global"
+            visible="true">
+         <run
+               class="codemirror.eclipse.ui.demo.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RAP Perspective"
+            class="codemirror.eclipse.ui.demo.Perspective"
+            id="codemirror.eclipse.ui.demo.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="View"
+            class="codemirror.eclipse.ui.demo.View"
+            id="codemirror.eclipse.ui.demo.view">
+      </view>
+   </extension>
+
+</plugin>

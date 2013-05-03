@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="viewapp.entrypoints"
+         point="org.eclipse.rap.ui.entrypoint">
+      <entrypoint            
+            path="/codemirror"
+            brandingId="org.eclipse.rap.demo.teaBranding"
+            applicationId="codemirror.eclipse.ui.demo.viewapp"
+            id="viewapp.entrypoint">
+      </entrypoint>
+   </extension>
+   
+</plugin>

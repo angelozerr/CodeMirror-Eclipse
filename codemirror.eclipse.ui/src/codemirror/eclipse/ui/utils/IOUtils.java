@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package codemirror.eclipse.ui.internal.org.apache.commons.io;
+package codemirror.eclipse.ui.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

@@ -10,13 +10,15 @@
  *******************************************************************************/
 package codemirror.eclipse.ui.editors;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
@@ -26,6 +28,15 @@ import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
 	private CMControl cm;
+	private final String url;
+
+	public CMEditorPart(File file) {
+		this(CMControl.toURL(file));
+	}
+
+	public CMEditorPart(String url) {
+		this.url = url;
+	}
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
@@ -45,9 +56,6 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
-		if (!(input instanceof IFileEditorInput))
-			throw new PartInitException(
-					"Invalid Input: Must be IFileEditorInput");
 		setSite(site);
 		setInput(input);
 		setPartName(input.getName());
@@ -98,5 +106,20 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
 	public CMControl createCM(String url, Composite parent, int style) {
 		return new CMControl(url, parent, style);
+	}
+
+	public String getURL() {
+		return url;
+	}
+
+	public String loadCM() throws IOException, CoreException {
+		return CMEditorPartHelper.getOperation(getEditorInput()).loadCM(
+				getEditorInput());
+	}
+
+	public void saveCM(String text, IProgressMonitor monitor)
+			throws IOException, CoreException {
+		CMEditorPartHelper.getOperation(getEditorInput()).saveCM(text,
+				getEditorInput(), monitor);
 	}
 }

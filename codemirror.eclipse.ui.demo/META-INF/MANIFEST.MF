@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Demo
+Bundle-SymbolicName: codemirror.eclipse.ui.demo; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: codemirror.eclipse.ui.demo.Activator
+Require-Bundle: org.eclipse.rap.ui;resolution:=optional,
+ org.eclipse.ui;resolution:=optional,
+ org.eclipse.core.runtime,
+ codemirror.eclipse.ui;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

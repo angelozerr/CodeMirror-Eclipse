@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%jsonEdior.name"
+            extensions="json"
+            icon="icons/obj16/json.png"            
+            class="codemirror.eclipse.ui.json.editors.JsonEditor"
+            id="codemirror.eclipse.ui.json.editors.JsonEditor">
+      </editor>
+   </extension>
+   
+</plugin>

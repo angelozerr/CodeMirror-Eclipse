@@ -10,7 +10,9 @@
  *******************************************************************************/
 package codemirror.eclipse.ui.editors.forms;
 
-import org.eclipse.core.resources.IFile;
+import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.IToolBarManager;
@@ -18,7 +20,6 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -32,9 +33,15 @@ import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
 	private CMControl cm;
+	private final String url;
 
-	public CMFormPage(CMFormEditor editor, String id, String title) {
+	public CMFormPage(CMFormEditor editor, String id, String title, File file) {
+		this(editor, id, title, CMControl.toURL(file));
+	}
+
+	public CMFormPage(CMFormEditor editor, String id, String title, String url) {
 		super(editor, id, title);
+		this.url = url;
 	}
 
 	@Override
@@ -87,10 +94,6 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		this.cm = CMEditorPartHelper.createCM(this, body);
 	}
 
-	public IFile getFile() {
-		return ((IFileEditorInput) getEditorInput()).getFile();
-	}
-
 	@Override
 	public boolean isDirty() {
 		return cm.isDirty();
@@ -134,5 +137,20 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
 	public CMControl createCM(String url, Composite parent, int style) {
 		return new CMControl(url, parent, style);
+	}
+
+	public String getURL() {
+		return url;
+	}
+	
+	public String loadCM() throws IOException, CoreException {
+		return CMEditorPartHelper.getOperation(getEditorInput()).loadCM(
+				getEditorInput());
+	}
+
+	public void saveCM(String text, IProgressMonitor monitor)
+			throws IOException, CoreException {
+		CMEditorPartHelper.getOperation(getEditorInput()).saveCM(text,
+				getEditorInput(), monitor);
 	}
 }

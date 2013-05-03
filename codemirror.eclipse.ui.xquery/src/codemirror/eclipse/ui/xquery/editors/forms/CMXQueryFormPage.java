@@ -1,20 +1,29 @@
 package codemirror.eclipse.ui.xquery.editors.forms;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.xquery.CMXQueryControl;
+import codemirror.eclipse.swt.xquery.IVariablesAware;
 import codemirror.eclipse.swt.xquery.IVariablesListener;
 import codemirror.eclipse.swt.xquery.Variable;
 import codemirror.eclipse.ui.editors.forms.CMFormEditor;
 import codemirror.eclipse.ui.editors.forms.CMFormPage;
 
-public abstract class CMXQueryFormPage extends CMFormPage {
+public abstract class CMXQueryFormPage extends CMFormPage implements
+		IVariablesAware {
 
-	public CMXQueryFormPage(CMFormEditor editor, String id, String title) {
-		super(editor, id, title);
+	public CMXQueryFormPage(CMFormEditor editor, String id, String title,
+			File file) {
+		super(editor, id, title, file);
+	}
+
+	public CMXQueryFormPage(CMFormEditor editor, String id, String title,
+			String url) {
+		super(editor, id, title, url);
 	}
 
 	@Override
@@ -26,11 +35,16 @@ public abstract class CMXQueryFormPage extends CMFormPage {
 		((CMXQueryControl) getCMControl()).addVariablesListener(l);
 	}
 
+	public void removeVariablesListener(IVariablesListener l) {
+		((CMXQueryControl) getCMControl()).removeVariablesListener(l);
+	}
+
 	public Variable findVar(String varName) {
 		return ((CMXQueryControl) getCMControl()).findVar(varName);
 	}
-	
+
 	public Collection<Variable> getVars() {
 		return ((CMXQueryControl) getCMControl()).getVars();
 	}
+
 }

@@ -10,7 +10,10 @@
  *******************************************************************************/
 package codemirror.eclipse.ui.editors;
 
-import org.eclipse.core.resources.IFile;
+import java.io.IOException;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
@@ -21,7 +24,7 @@ public interface ICMEditorPart {
 
 	String getURL();
 
-	IFile getFile();
+	//IFile getFile();
 
 	IValidator getValidator();
 
@@ -30,5 +33,9 @@ public interface ICMEditorPart {
 	CMControl getCMControl();
 
 	CMControl createCM(String url, Composite parent, int none);
+
+	void saveCM(String text, IProgressMonitor monitor) throws IOException, CoreException;
+
+	String loadCM() throws IOException, CoreException;
 
 }

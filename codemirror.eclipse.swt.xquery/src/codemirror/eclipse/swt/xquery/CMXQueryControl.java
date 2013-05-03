@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Display;
 
 import codemirror.eclipse.swt.CMControl;
 
-public class CMXQueryControl extends CMControl {
+public class CMXQueryControl extends CMControl implements IVariablesAware {
 
 	private Map<String, Variable> vars = new LinkedHashMap<String, Variable>();
 

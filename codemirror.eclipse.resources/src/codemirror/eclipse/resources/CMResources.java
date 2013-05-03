@@ -14,6 +14,14 @@ public class CMResources {
 		return getResource("html/xquery.html");
 	}
 
+	public static File getXQueryRunModeResource() {
+		return getResource("html/xquery-runmode.html");
+	}
+	
+	public static File getJsonResource() {
+		return getResource("html/json.html");
+	}
+	
 	public static File getVelocityResource() {
 		return getResource("html/velocity.html");
 	}

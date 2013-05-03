@@ -13,7 +13,6 @@ package codemirror.eclipse.ui.editors.forms;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.IFormPage;
@@ -25,13 +24,10 @@ public abstract class CMFormEditor extends FormEditor {
 	}
 
 	@Override
-	public void init(IEditorSite site, IEditorInput editorInput)
+	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
-		if (!(editorInput instanceof IFileEditorInput))
-			throw new PartInitException(
-					"Invalid Input: Must be IFileEditorInput");
-		super.init(site, editorInput);
-		super.setPartName(((IFileEditorInput) editorInput).getFile().getName());
+		super.init(site, input);
+		super.setPartName(input.getName());
 	}
 
 	@Override

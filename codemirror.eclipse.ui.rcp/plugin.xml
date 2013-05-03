@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+ <extension
+       point="codemirror.eclipse.ui.cmOperations">
+    <operation
+          class="codemirror.eclipse.ui.rcp.operations.CMFileOperation"
+          id="codemirror.eclipse.ui.rcp.operations.CMFileOperation">
+    </operation>
+ </extension>
+ 
+</plugin>

@@ -22,6 +22,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
+import codemirror.eclipse.ui.internal.extensions.CMOperationsRegistry;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -46,6 +48,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		CMOperationsRegistry.getRegistry().initialize();
 		
 		// Try to configure SWT Browser with MOZILLA by setting the path of XULRunner.
 		Bundle bundle = Platform
@@ -72,6 +75,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		CMOperationsRegistry.getRegistry().destroy();
 		plugin = null;
 		super.stop(context);
 	}

@@ -12,18 +12,19 @@ package codemirror.eclipse.ui.internal;
 
 import java.io.IOException;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorInput;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IDirtyListener;
 import codemirror.eclipse.swt.IValidator;
 import codemirror.eclipse.ui.editors.ICMEditorPart;
-import codemirror.eclipse.ui.internal.org.apache.commons.io.IOUtils;
+import codemirror.eclipse.ui.internal.extensions.CMOperationsRegistry;
+import codemirror.eclipse.ui.operations.ICMOperation;
 
 /**
  * Helper to load and save content with {@link CMControl}.
@@ -33,8 +34,10 @@ public class CMEditorPartHelper {
 
 	public static CMControl createCM(final ICMEditorPart part, Composite parent) {
 		CMControl cm = part.createCM(part.getURL(), parent, SWT.NONE);
+
 		try {
-			String text = IOUtils.toString(part.getFile().getContents());
+			String text = part.loadCM();
+			// IOUtils.toString(part.getFile().getContents());
 			cm.setText(text);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -58,14 +61,32 @@ public class CMEditorPartHelper {
 
 	public static void saveCM(ICMEditorPart part, IProgressMonitor monitor) {
 		CMControl cm = part.getCMControl();
-		IFile file = part.getFile();
 		try {
-			file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
-					monitor);
+			part.saveCM(cm.getText(), monitor);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (CoreException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/*
+		 * IFile file = part.getFile(); try {
+		 * file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
+		 * monitor); } catch (CoreException e) { e.printStackTrace(); }
+		 */
 		cm.setDirty(false);
 	}
 
+	public static ICMOperation getOperation(IEditorInput editorInput) {
+		ICMOperation operation = CMOperationsRegistry.getRegistry()
+				.getOperation(editorInput);
+		if (operation == null) {
+			throw new RuntimeException(
+					"Imposible to load/save CM Editor. Cannot find CM operation");
+		}
+		return operation;
+	}
+
+	
 }

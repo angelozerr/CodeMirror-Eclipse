@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="CodeMirror-Eclipse RCP" sequenceNumber="1">
+<locations>
+<location id="org.eclipse.rcp" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.rcp.source" path="${eclipse_home}" type="Feature"/>
+</locations>
+</target>
