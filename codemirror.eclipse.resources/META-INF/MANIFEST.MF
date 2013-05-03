@@ -3,11 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-SymbolicName: codemirror.eclipse.resources
+Bundle-SymbolicName: codemirror.eclipse.resources;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: codemirror.eclipse.resources.internal.Activator
 Import-Package: org.eclipse.core.runtime,
  org.osgi.framework
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: codemirror.eclipse.resources
+Require-Bundle: codemirror.eclipse.swt;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy

@@ -3,20 +3,20 @@ package codemirror.eclipse.swt.samples;
 import codemirror.eclipse.resources.CMResourcesConstants;
 import codemirror.eclipse.swt.resources.CMResourcesManager;
 
-public class XQuerySample extends AbstractCMSample {
+public class JsonSample extends AbstractCMSample {
 
 	public static void main(String[] args) throws Exception {
-		new XQuerySample().createUI();
+		new JsonSample().createUI();
 	}
 
 	@Override
 	protected String getURL() {
 		return CMResourcesManager.getInstance().getURL(
-				CMResourcesConstants.XQUERY_HTML);
+				CMResourcesConstants.JSON_HTML);
 	}
 
 	@Override
 	protected String getInitialText() {
-		return "let $a := 1\nreturn $a";
+		return "{}";
 	}
 }

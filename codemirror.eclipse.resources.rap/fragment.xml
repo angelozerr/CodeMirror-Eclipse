@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+   
+   <extension
+         point="org.eclipse.equinox.http.registry.resources">
+      <resource
+            alias="/cmresources"
+            base-name="cmresources">
+      </resource>
+   </extension>
+   
+   
+</fragment>

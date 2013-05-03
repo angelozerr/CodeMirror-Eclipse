@@ -1,10 +1,7 @@
 package codemirror.eclipse.resources.internal;
 
-import org.eclipse.core.runtime.FileLocator;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
-import codemirror.eclipse.resources.CMResources;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -26,8 +23,6 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		CMResources.setBaseDir(FileLocator.getBundleFile(bundleContext
-				.getBundle()));
 	}
 
 	/*
@@ -38,7 +33,6 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
-		CMResources.setBaseDir(null);
 	}
 
 }

@@ -1,8 +1,7 @@
 package codemirror.eclipse.swt.samples;
 
-import java.io.File;
-
-import codemirror.eclipse.resources.CMResources;
+import codemirror.eclipse.resources.CMResourcesConstants;
+import codemirror.eclipse.swt.resources.CMResourcesManager;
 
 public class VelocitySample extends AbstractCMSample {
 
@@ -11,8 +10,9 @@ public class VelocitySample extends AbstractCMSample {
 	}
 
 	@Override
-	protected File getCMFile() {
-		return CMResources.getVelocityResource();
+	protected String getURL() {
+		return CMResourcesManager.getInstance().getURL(
+				CMResourcesConstants.VELOCITY_HTML);
 	}
 
 	@Override

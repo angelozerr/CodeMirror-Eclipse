@@ -2,7 +2,6 @@ package codemirror.eclipse.swt.samples;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -13,22 +12,26 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import codemirror.eclipse.resources.CMResources;
+import codemirror.eclipse.resources.CMResourcesInitializer;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IDirtyListener;
 
 public abstract class AbstractCMSample {
 
 	protected void createUI() throws FileNotFoundException {
-		CMResources.setBaseDir(new File("../codemirror.eclipse.resources"));
-		createUI(getCMFile());
+		CMResourcesInitializer.getInstance()
+				.initialize(
+						new File("../"
+								+ CMResourcesInitializer.getInstance()
+										.getResourceId()));
+		createUI(getURL());
 	}
 
-	private void createUI(File cmFile) throws FileNotFoundException {
-		if (!cmFile.exists()) {
+	private void createUI(String url) throws FileNotFoundException {
+		/*if (!cmFile.exists()) {
 			throw new FileNotFoundException(cmFile.getPath());
-		}
-		
+		}*/
+
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setSize(300, 200);
@@ -38,7 +41,7 @@ public abstract class AbstractCMSample {
 		final Button button = new Button(shell, SWT.PUSH);
 		button.setText("Click Me");
 
-		final CMControl editor = new CMControl(cmFile, shell, SWT.BORDER);
+		final CMControl editor = new CMControl(url, shell, SWT.BORDER);
 		editor.setText(getInitialText());
 		editor.addDirtyListener(new IDirtyListener() {
 			public void dirtyChanged(boolean dirty) {
@@ -46,7 +49,7 @@ public abstract class AbstractCMSample {
 			}
 		});
 		editor.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		//
 		// final Text text = new Text(shell, SWT.SHADOW_IN);
 		//
@@ -70,7 +73,7 @@ public abstract class AbstractCMSample {
 		display.dispose();
 	}
 
-	protected abstract File getCMFile();
+	protected abstract String getURL();
 
 	protected abstract String getInitialText();
 }

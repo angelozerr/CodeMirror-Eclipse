@@ -1,17 +1,19 @@
 package codemirror.eclipse.ui.json.editors;
 
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.PartInitException;
+import codemirror.eclipse.resources.CMResourcesConstants;
+import codemirror.eclipse.swt.IValidator;
+import codemirror.eclipse.ui.editors.CMEditorPart;
+import codemirror.eclipse.ui.resources.CMResourcesRegistry;
 
-public class JsonEditor extends AbstractJsonEditor {
+public class JsonEditor extends CMEditorPart {
 
-	@Override
-	public void init(IEditorSite site, IEditorInput editorInput)
-			throws PartInitException {
-		/*if (!(editorInput instanceof IFileEditorInput))
-			throw new PartInitException(
-					"Invalid Input: Must be IFileEditorInput");*/
-		super.init(site, editorInput);	
+	public JsonEditor() {		
+		super(CMResourcesRegistry.getRegistry().getURL(
+				CMResourcesConstants.JSON_HTML));
 	}
+
+	public IValidator getValidator() {
+		return null;
+	}
+
 }

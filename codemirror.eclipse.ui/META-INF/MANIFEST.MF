@@ -18,4 +18,5 @@ Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.ui.editors,
  codemirror.eclipse.ui.editors.forms,
  codemirror.eclipse.ui.operations,
+ codemirror.eclipse.ui.resources,
  codemirror.eclipse.ui.utils
