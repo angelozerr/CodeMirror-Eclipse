@@ -50,17 +50,14 @@ public class FileExplorer extends ViewPart implements IDoubleClickListener {
 			return ((File) parent).listFiles();
 		}
 
-		@Override
 		public Object[] getChildren(Object parentElement) {
 			return ((File) parentElement).listFiles();
 		}
 
-		@Override
 		public Object getParent(Object element) {
 			return ((File) element).getParentFile();
 		}
 
-		@Override
 		public boolean hasChildren(Object element) {
 			return ((File) element).isDirectory();
 		}
@@ -122,7 +119,6 @@ public class FileExplorer extends ViewPart implements IDoubleClickListener {
 		viewer.getControl().setFocus();
 	}
 
-	@Override
 	public void doubleClick(DoubleClickEvent event) {
 		ISelection selection = event.getSelection();
 		if (selection != null && selection instanceof IStructuredSelection) {

@@ -13,7 +13,6 @@ public class StreamLintHandler implements LintHandler {
 		this.nbAnnotations = 0;
 	}
 
-	@Override
 	public void startAnnotations() {
 		try {
 			JsonUtils.beginJsonArray(writer);
@@ -22,7 +21,6 @@ public class StreamLintHandler implements LintHandler {
 		}
 	}
 
-	@Override
 	public void endAnnotations() {
 		try {
 			JsonUtils.endJsonArray(writer);
