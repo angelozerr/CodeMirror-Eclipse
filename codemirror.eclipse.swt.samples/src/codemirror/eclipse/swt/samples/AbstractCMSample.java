@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -28,40 +29,30 @@ public abstract class AbstractCMSample {
 	}
 
 	private void createUI(String url) throws FileNotFoundException {
-		/*if (!cmFile.exists()) {
-			throw new FileNotFoundException(cmFile.getPath());
-		}*/
-
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setSize(300, 200);
-		shell.setText("Button Example");
+		shell.setText("CodeMirror SWT Eclipse");
 		shell.setLayout(new GridLayout());
 
-		final Button button = new Button(shell, SWT.PUSH);
-		button.setText("Click Me");
-
+		final Button saveButton = new Button(shell, SWT.PUSH);
+		saveButton.setText("Save");
+		saveButton.setEnabled(false);
+		saveButton.setLayoutData(new GridData());
+		
 		final CMControl editor = new CMControl(url, shell, SWT.BORDER);
 		editor.setText(getInitialText());
 		editor.addDirtyListener(new IDirtyListener() {
 			public void dirtyChanged(boolean dirty) {
-				System.err.println("dirty=" + dirty);
+				saveButton.setEnabled(dirty);
 			}
 		});
 		editor.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		//
-		// final Text text = new Text(shell, SWT.SHADOW_IN);
-		//
-		button.addSelectionListener(new SelectionListener() {
-
-			public void widgetSelected(SelectionEvent event) {
-				// editor.setText("No worries!");
-				System.err.println(editor.getText());
-			}
-
-			public void widgetDefaultSelected(SelectionEvent event) {
-				editor.setText("No worries!");
+		saveButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				editor.setDirty(false);
 			}
 		});
 		shell.open();
