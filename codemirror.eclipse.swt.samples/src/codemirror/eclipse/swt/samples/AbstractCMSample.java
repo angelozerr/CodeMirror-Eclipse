@@ -31,7 +31,7 @@ public abstract class AbstractCMSample {
 	private void createUI(String url) throws FileNotFoundException {
 		Display display = new Display();
 		Shell shell = new Shell(display);
-		shell.setSize(300, 200);
+		shell.setSize(500, 500);
 		shell.setText("CodeMirror SWT Eclipse");
 		shell.setLayout(new GridLayout());
 
