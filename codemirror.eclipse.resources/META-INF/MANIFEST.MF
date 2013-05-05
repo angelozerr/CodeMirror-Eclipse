@@ -12,3 +12,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: codemirror.eclipse.resources
 Require-Bundle: codemirror.eclipse.swt;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
+Eclipse-BundleShape: dir

@@ -10,3 +10,4 @@ Require-Bundle: org.eclipse.rap.ui;resolution:=optional,
  codemirror.eclipse.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Eclipse-BundleShape: dir
