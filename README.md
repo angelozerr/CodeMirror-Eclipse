@@ -23,6 +23,11 @@ editor in a SWT Browser. It provides several features :
 
 You can see the Eclipse RAP demo at http://cmeclipse.opensagres.cloudbees.net/codemirror
 
+# License 
+
+ * for CodeMirror Javascript the license is http://codemirror.net/LICENSE
+ * for the rest the license is [EPL](http://www.eclipse.org/legal/epl-v10.html)
+
 # Similar project
 
  * [codemirror-eclipse-rcp](https://github.com/eiswind/codemirror-eclipse-rcp)
