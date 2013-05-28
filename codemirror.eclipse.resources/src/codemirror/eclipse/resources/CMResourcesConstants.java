@@ -6,6 +6,7 @@ public class CMResourcesConstants {
 	public static final String XML_HTML = "xml.html";
 	public static final String JSON_HTML = "json.html";
 	public static final String JAVASCRIPT_HTML = "javascript.html";
+	public static final String JAVASCRIPT_JAVATERN_HTML = "javascript-javatern.html";	
 	public static final String CSS_HTML = "css.html";
 	
 	public static final String VELOCITY_HTML = "velocity.html";

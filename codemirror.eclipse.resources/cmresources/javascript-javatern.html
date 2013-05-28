@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Javascript</title>
+    
+	    <!-- CodeMirror -->
+	    <link rel="stylesheet" href="scripts/codemirror/lib/codemirror.css">
+	    <script src="scripts/codemirror/lib/codemirror.js"></script>	
+		<script src="scripts/codemirror/addon/selection/active-line.js"></script>
+		<script src="scripts/codemirror/addon/edit/closebrackets.js"></script>
+	    <script src="scripts/codemirror/addon/edit/matchbrackets.js"></script>
+	    
+		<script src="scripts/codemirror/addon/dialog/dialog.js"></script>
+    	<link rel="stylesheet" href="scripts/codemirror/addon/dialog/dialog.css">
+    	<script src="scripts/codemirror/addon/search/searchcursor.js"></script>
+    	<script src="scripts/codemirror/addon/search/search.js"></script>
+    		    
+		<script src="scripts/codemirror/addon/lint/lint.js"></script>
+	    <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
+	    <script src="scripts/codemirror/addon/lint/javascript-lint.js"></script>
+	    
+	    <script src="scripts/jshint/jshint-r12-80277ef.js"></script>
+		
+	    <script src="scripts/codemirror/mode/javascript/javascript.js"></script>
+	        		    
+		<!-- CodeMirror-XQuery -->		    
+		<script src="scripts/codemirror-xquery/addon/selection/fullscreen.js"></script>
+		<link rel="stylesheet" href="scripts/codemirror-xquery/addon/selection/fullscreen.css">
+		    
+		<!-- SWT Browser - Tern -->
+		<script src="scripts/eclipse/tern-eclipse.js"></script>
+				    
+		<!-- SWT Browser - CodeMirror -->
+		<script src="scripts/eclipse/cm-eclipse.js"></script>
+			
+		<style>
+			 .CodeMirror-activeline-background {background: #e8f2ff !important;}
+			 div.CodeMirror span.CodeMirror-matchingbracket{color:black;font-weight:bold;}
+		</style>	
+	</head>
+		
+	<body onload="CMEclipse.loaded()" >	
+		<form>
+			<textarea id="code" name="code" ></textarea>
+		</form>	
+		<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		        mode: "javascript",		    
+				lineNumbers: true,	        
+		        styleActiveLine: true,
+		        lineWrapping: true,
+		        autoCloseBrackets: true,
+        		matchBrackets: true,
+		        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
+		        lintWith : CodeMirror.javascriptValidator
+		    });			 
+		</script>
+	</body>	
+</html>

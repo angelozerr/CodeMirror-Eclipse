@@ -39,7 +39,7 @@ public class VariableHelper {
 				result.append(")");
 			}
 		} else {
-			result.append(variable.getValue());
+			addValue(variable.getValue(), false, result);
 		}
 		return hasValue;
 	}
