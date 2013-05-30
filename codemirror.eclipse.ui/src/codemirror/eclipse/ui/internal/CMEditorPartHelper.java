@@ -14,9 +14,13 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 
 import codemirror.eclipse.swt.CMControl;
@@ -32,20 +36,10 @@ import codemirror.eclipse.ui.operations.ICMOperation;
  */
 public class CMEditorPartHelper {
 
-	public static CMControl createCM(final ICMEditorPart part, Composite parent) {
+	public static CMControl createCM(final ICMEditorPart part, String text,
+			Composite parent) {
 		CMControl cm = part.createCM(part.getURL(), parent, SWT.NONE);
-
-		try {
-			String text = part.loadCM();
-			// IOUtils.toString(part.getFile().getContents());
-			cm.setText(text);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cm.setText(text);
 		IValidator validator = part.getValidator();
 		if (validator != null) {
 			cm.setValidator(validator);
@@ -59,22 +53,10 @@ public class CMEditorPartHelper {
 		return cm;
 	}
 
-	public static void saveCM(ICMEditorPart part, IProgressMonitor monitor) {
+	public static void saveCM(ICMEditorPart part, IProgressMonitor monitor)
+			throws IOException, CoreException {
 		CMControl cm = part.getCMControl();
-		try {
-			part.saveCM(cm.getText(), monitor);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/*
-		 * IFile file = part.getFile(); try {
-		 * file.setContents(IOUtils.toInputStream(cm.getText()), true, false,
-		 * monitor); } catch (CoreException e) { e.printStackTrace(); }
-		 */
+		part.saveCM(cm.getText(), monitor);
 		cm.setDirty(false);
 	}
 
@@ -88,5 +70,27 @@ public class CMEditorPartHelper {
 		return operation;
 	}
 
-	
+	/**
+	 * Presents an error dialog to the user when a problem happens during save.
+	 */
+	public static void openSaveErrorDialog(Shell shell, String title,
+			String message, CoreException exception) {
+		ErrorDialog.openError(shell, title, message, exception.getStatus());
+	}
+
+	/**
+	 * Presents an error dialog to the user when a problem happens during save.
+	 */
+	public static void openSaveErrorDialog(Shell shell, Exception e) {
+		CoreException coreException = null;
+		if (e instanceof CoreException) {
+			coreException = (CoreException) e;
+		} else {
+			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, Messages.saveErrorMessage,
+					e);
+			coreException = new CoreException(status);
+		}
+		openSaveErrorDialog(shell, Messages.saveErrorTitle, Messages.saveErrorMessage, coreException);
+	}
+
 }

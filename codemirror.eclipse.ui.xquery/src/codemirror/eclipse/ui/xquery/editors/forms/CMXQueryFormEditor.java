@@ -16,9 +16,9 @@ public abstract class CMXQueryFormEditor extends CMFormEditor {
 
 	@Override
 	public Object getAdapter(Class adapter) {
-		if (IContentOutlinePage.class == adapter) {
+		/*if (IContentOutlinePage.class == adapter) {
 			return XQueryVariablesOutlinePage.getInstance();
-		}
+		}*/
 		if (IVariablesAware.class == adapter) {
 			if (variablesAware == null) {
 				Object page = null;

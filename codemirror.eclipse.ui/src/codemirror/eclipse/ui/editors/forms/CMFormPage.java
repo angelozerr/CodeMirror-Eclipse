@@ -12,14 +12,19 @@ package codemirror.eclipse.ui.editors.forms;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -34,6 +39,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
 	private CMControl cm;
 	private final String url;
+	private Control statusError;
 
 	public CMFormPage(CMFormEditor editor, String id, String title, File file) {
 		this(editor, id, title, CMControl.toURL(file));
@@ -46,7 +52,15 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-		CMEditorPartHelper.saveCM(this, monitor);
+		try {
+			CMEditorPartHelper.saveCM(this, monitor);
+		} catch (Exception e) {
+			handleSaveError(e);
+		}
+	}
+	
+	protected void handleSaveError(Exception e) {
+		CMEditorPartHelper.openSaveErrorDialog(getSite().getShell(), e);
 	}
 
 	@Override
@@ -91,17 +105,50 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	private void createUI(IManagedForm managedForm, FormToolkit toolkit) {
 		Composite body = managedForm.getForm().getBody();
 		body.setLayout(new GridLayout());
-		this.cm = CMEditorPartHelper.createCM(this, body);
+		try {
+			String text = loadCM();
+			this.cm = CMEditorPartHelper.createCM(this, text, body);
+		} catch (IOException e) {
+			handleLoadError(e, body, toolkit);
+		} catch (CoreException e) {
+			handleLoadError(e, body, toolkit);
+		}
+	}
+
+	private void handleLoadError(Exception e, Composite parent, FormToolkit toolkit) {
+		displayError(e, parent, toolkit);
+	}
+
+	protected void displayError(Exception e, Composite parent,
+			FormToolkit toolkit) {
+		this.statusError = createStatusError(e, parent, toolkit);
+	}
+
+	protected Text createStatusError(Exception e, Composite parent,
+			FormToolkit toolkit) {
+		StringWriter s = new StringWriter();
+		PrintWriter writer = new PrintWriter(s);
+		e.printStackTrace(writer);
+		Text statusError = toolkit.createText(parent, s.toString(),
+				SWT.READ_ONLY);
+		return statusError;
 	}
 
 	@Override
 	public boolean isDirty() {
-		return cm.isDirty();
+		if (cm != null) {
+			return cm.isDirty();
+		}
+		return false;
 	}
 
 	@Override
 	public void setFocus() {
-		cm.setFocus();
+		if (cm != null) {
+			cm.setFocus();
+		} else if (statusError != null) {
+			statusError.setFocus();
+		}
 	}
 
 	public IValidator getValidator() {
@@ -142,7 +189,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	public String getURL() {
 		return url;
 	}
-	
+
 	public String loadCM() throws IOException, CoreException {
 		return CMEditorPartHelper.getOperation(getEditorInput()).loadCM(
 				getEditorInput());

@@ -1,6 +1,7 @@
 package codemirror.eclipse.ui.rcp.operations;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -35,7 +36,15 @@ public class CMFileOperation implements ICMOperation {
 	}
 
 	public String loadCM(IFile file) throws IOException, CoreException {
-		return  IOUtils.toString(file.getContents());
+		InputStream in = file.getContents();
+		try {
+			return IOUtils.toString(in);
+
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
 	}
 
 }
