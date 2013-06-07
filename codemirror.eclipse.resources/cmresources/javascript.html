@@ -1,56 +1,100 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Javascript</title>
+  <head>
+    <meta charset="utf-8">
+    <title>CodeMirror: Javascript - Lint + Hint with Tern demo</title>
     
-	    <!-- CodeMirror -->
-	    <link rel="stylesheet" href="scripts/codemirror/lib/codemirror.css">
-	    <script src="scripts/codemirror/lib/codemirror.js"></script>	
-		<script src="scripts/codemirror/addon/selection/active-line.js"></script>
-		<script src="scripts/codemirror/addon/edit/closebrackets.js"></script>
-	    <script src="scripts/codemirror/addon/edit/matchbrackets.js"></script>
-	    
-		<script src="scripts/codemirror/addon/dialog/dialog.js"></script>
-    	<link rel="stylesheet" href="scripts/codemirror/addon/dialog/dialog.css">
-    	<script src="scripts/codemirror/addon/search/searchcursor.js"></script>
-    	<script src="scripts/codemirror/addon/search/search.js"></script>
-    		    
-		<script src="scripts/codemirror/addon/lint/lint.js"></script>
-	    <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
-	    <script src="scripts/codemirror/addon/lint/javascript-lint.js"></script>
-	    
-	    <script src="scripts/jshint/jshint-r12-80277ef.js"></script>
-		
-	    <script src="scripts/codemirror/mode/javascript/javascript.js"></script>
-	        		    
-		<!-- CodeMirror-XQuery -->		    
-		<script src="scripts/codemirror-xquery/addon/selection/fullscreen.js"></script>
-		<link rel="stylesheet" href="scripts/codemirror-xquery/addon/selection/fullscreen.css">
-		    
-		<!-- SWT Browser - CodeMirror -->
-		<script src="scripts/eclipse/cm-eclipse.js"></script>
-			
-		<style>
-			 .CodeMirror-activeline-background {background: #e8f2ff !important;}
-			 div.CodeMirror span.CodeMirror-matchingbracket{color:black;font-weight:bold;}
-		</style>	
-	</head>
-		
-	<body onload="CMEclipse.loaded()" >	
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="scripts/codemirror/lib/codemirror.css">
+    <script src="scripts/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="scripts/codemirror/theme/eclipse.css">
+    <script src="scripts/codemirror/addon/hint/show-hint.js"></script>
+    <script src="scripts/codemirror/addon/edit/closetag.js"></script>
+    <script src="scripts/codemirror/addon/edit/closebrackets.js"></script>    
+    <script src="scripts/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="scripts/codemirror/addon/selection/active-line.js"></script>
+    <script src="scripts/codemirror/addon/runmode/runmode.js"></script>
+        
+    <script src="scripts/codemirror/mode/javascript/javascript.js"></script>    
+	<script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
+	<script src="scripts/codemirror/addon/lint/lint.js"></script>
+    <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
+	<script src="scripts/codemirror/addon/lint/javascript-lint.js"></script>
+
+  <!-- Tern JS -->
+  <script src="scripts/ternjs/acorn/acorn.js"></script>
+  <script src="scripts/ternjs/acorn/acorn_loose.js"></script>
+  <script src="scripts/ternjs/acorn/util/walk.js"></script>
+  <script src="scripts/ternjs/tern/lib/signal.js"></script>
+  <script src="scripts/ternjs/tern/lib/tern.js"></script>
+  <script src="scripts/ternjs/tern/lib/def.js"></script>
+  <script src="scripts/ternjs/tern/lib/comment.js"></script>
+  <script src="scripts/ternjs/tern/lib/infer.js"></script>
+
+  <!-- CodeMirror addon with Tern JS -->
+  <link rel="stylesheet" href="scripts/codemirror-javascript/addon/hint/tern/tern-hint.css">
+  <script src="scripts/codemirror-javascript/addon/hint/tern/tern-hint.js"></script>    
+  <script src="scripts/codemirror-javascript/addon/hint/tern/defs/ecma5.json.js"></script>
+  <script src="scripts/codemirror-javascript/addon/hint/tern/defs/browser.json.js"></script>
+
+  <!-- CodeMirror Extension -->  
+  
+  <link rel="stylesheet" href="scripts/codemirror-extension/addon/hint/show-hint-eclipse.css">
+  <script src="scripts/codemirror-extension/addon/hint/show-context-info.js"></script>
+  <link rel="stylesheet" href="scripts/codemirror-extension/addon/hint/show-context-info.css">
+  
+  <link rel="stylesheet" href="scripts/codemirror-extension/addon/hint/templates-hint.css">
+  <script src="scripts/codemirror-extension/addon/hint/templates-hint.js"></script>
+  
+ 	<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
+	<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
+  
+  <!-- CodeMirror Javascript -->
+  <script src="scripts/codemirror-javascript/addon/hint/javascript/javascript-templates.js"></script>
+  		          
+    <link rel="stylesheet" href="scripts/codemirror/doc/docs.css">
+	<style type="text/css">
+		.cm-s-eclipse .CodeMirror-activeline-background {background: #e8f2ff !important;}
+    </style>
+  </head>
+  <body>
+    
+    <body onload="CMEclipse.loaded()" >	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
-		<script>
-			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-		        mode: "javascript",		    
-				lineNumbers: true,	        
-		        styleActiveLine: true,
-		        lineWrapping: true,
-		        autoCloseBrackets: true,
-        		matchBrackets: true,
-		        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
-		        lintWith : CodeMirror.javascriptValidator
-		    });			 
-		</script>
-	</body>	
+    <script type="text/javascript">
+       
+      function passAndHint(cm) {
+     	setTimeout(function() {cm.execCommand("autocomplete");}, 100);
+      	return CodeMirror.Pass;
+      }      
+      
+      function myHint(cm) {
+      	return CodeMirror.showHint(cm, CodeMirror.ternHints, {async: true}); 
+      }
+     
+      CodeMirror.commands.autocomplete = function(cm) {
+        CodeMirror.showHint(cm, myHint);
+      }
+        
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: 'application/javascript',
+        theme : "eclipse",
+        styleActiveLine: true,
+        lineNumbers: true,
+        lineWrapping: true,
+        autoCloseBrackets: true,
+        matchBrackets: true,
+        extraKeys: {
+         	"'.'": passAndHint,
+        	"Ctrl-Space": "autocomplete"
+        },
+        gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
+    	lintWith: CodeMirror.javascriptValidator,
+        ternWith : true
+      });
+    </script>
+    
+  </body>
 </html>

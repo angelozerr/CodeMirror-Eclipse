@@ -51,11 +51,11 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
       return state.tokenize(stream, state);
     } else if (ch == ".") {
       // .1 for 0.1
-      if (stream.match(/^[0-9eE]+/) && support.zerolessFloat == true) {
+      if (support.zerolessFloat == true && stream.match(/^(?:\d+(?:e\d*)?|\d*e\d+)/i)) {
         return "number";
       }
       // .table_name (ODBC)
-      if (stream.match(/^[a-zA-Z_]+/) && support.ODBCdotTable == true) {
+      if (support.ODBCdotTable == true && stream.match(/^[a-zA-Z_]+/)) {
         return "variable-2";
       }
     } else if (operatorChars.test(ch)) {
@@ -166,10 +166,9 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
 
   // `identifier`
   function hookIdentifier(stream) {
-    var escaped = false, ch;
+    var ch;
     while ((ch = stream.next()) != null) {
-      if (ch == "`" && !escaped) return "variable-2";
-      escaped = !escaped && ch == "`";
+      if (ch == "`" && !stream.eat("`")) return "variable-2";
     }
     return null;
   }
