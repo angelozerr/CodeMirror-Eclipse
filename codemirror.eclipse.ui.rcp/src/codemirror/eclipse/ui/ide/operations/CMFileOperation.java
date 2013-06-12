@@ -1,4 +1,4 @@
-package codemirror.eclipse.ui.rcp.operations;
+package codemirror.eclipse.ui.ide.operations;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +26,8 @@ public class CMFileOperation implements ICMOperation {
 
 	public void saveCM(String text, IFile file, IProgressMonitor monitor)
 			throws IOException, CoreException {
-		file.setContents(IOUtils.toInputStream(text), true, false, monitor);
+		file.setContents(IOUtils.toInputStream(text, file.getCharset()), true,
+				false, monitor);
 	}
 
 	public String loadCM(IEditorInput editorInput) throws IOException,
@@ -38,13 +39,11 @@ public class CMFileOperation implements ICMOperation {
 	public String loadCM(IFile file) throws IOException, CoreException {
 		InputStream in = file.getContents();
 		try {
-			return IOUtils.toString(in);
-
+			return IOUtils.toString(in, file.getCharset());
 		} finally {
 			if (in != null) {
 				in.close();
 			}
 		}
 	}
-
 }
