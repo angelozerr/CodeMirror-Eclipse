@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Angelo ZERR.
+ * Copyright (c) 2013 Angelo ZERR.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -52,9 +52,11 @@ public abstract class AbstractCMControl extends Composite {
 
 	public static String toURL(File file) {
 		try {
-			return new StringBuilder("file://").append(file.getCanonicalPath()).toString();
+			return new StringBuilder("file://").append(file.getCanonicalPath())
+					.toString();
 		} catch (IOException e) {
-			return new StringBuilder("file://").append(file.getPath()).toString();
+			return new StringBuilder("file://").append(file.getPath())
+					.toString();
 		}
 	}
 
@@ -67,7 +69,6 @@ public abstract class AbstractCMControl extends Composite {
 		browser = BrowserFactory.create(this, browserStyle);
 		// String url = hostUrl + URL;
 		browser.setUrl(url);
-		// createBrowserFunctions();
 		createBrowserFunctions();
 		browser.addProgressListener(new ProgressListener() {
 
@@ -156,7 +157,7 @@ public abstract class AbstractCMControl extends Composite {
 	public boolean isLoaded() {
 		return loaded;
 	}
-	
+
 	protected abstract String doGetText();
 
 	protected abstract void doSetText(String text);

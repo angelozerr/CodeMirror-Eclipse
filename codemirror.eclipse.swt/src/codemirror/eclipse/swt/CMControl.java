@@ -30,7 +30,6 @@ import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
 public class CMControl extends AbstractCMControl {
 
 	private static final String CM_REFOCUS_JS = "editor.focus();";
-	private boolean dirty = false;
 	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 
 	private IValidator validator;
@@ -66,13 +65,10 @@ public class CMControl extends AbstractCMControl {
 	}
 
 	protected void doSetText(String text) {
-		String js = new StringBuilder(
-				" cmIsDirtyFired=true; try { editor.setValue( \"")
+		String js = new StringBuilder(" try { editor.setValue( \"")
 				.append(StringEscapeUtils.escapeEcmaScript(text))
-				.append("\" ); } catch(e){alert(e)}; cmIsDirtyFired=false;return null;")
-				.toString();
+				.append("\" ); } catch(e){alert(e)};return null;").toString();
 		browser.evaluate(js);
-		dirty = false;
 	}
 
 	@Override
@@ -88,10 +84,6 @@ public class CMControl extends AbstractCMControl {
 		return result;
 	}
 
-	public boolean isDirty() {
-		return dirty;
-	}
-
 	@Override
 	protected String doGetText() {
 		return (String) browser.evaluate("return editor.getValue();");
@@ -102,8 +94,6 @@ public class CMControl extends AbstractCMControl {
 		super.createBrowserFunctions();
 		new BrowserFunction(browser, "cm_dirty") {
 			public Object function(Object[] arguments) {
-
-				dirty = true;
 				notifyDirtyListeners();
 				return null;
 			}
@@ -148,6 +138,18 @@ public class CMControl extends AbstractCMControl {
 
 	}
 
+	public boolean isDirty() {
+		if (!isLoaded()) {
+			return false;
+		}
+		return (Boolean) browser.evaluate("return CMEclipse.isDirty();");
+	}
+
+	public void setDirty(boolean dirty) {
+		browser.evaluate(" CMEclipse.setDirty(" + dirty + ");");
+		notifyDirtyListeners();
+	}
+
 	public void addDirtyListener(IDirtyListener l) {
 		listeners.add(l);
 	}
@@ -161,12 +163,6 @@ public class CMControl extends AbstractCMControl {
 			}
 		});
 
-	}
-
-	public void setDirty(boolean b) {
-		dirty = b;
-		browser.evaluate(" cmIsDirtyFired=false");
-		notifyDirtyListeners();
 	}
 
 	public void setValidator(IValidator validator) {

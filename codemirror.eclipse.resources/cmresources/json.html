@@ -23,9 +23,11 @@
 		
 	    <script src="scripts/codemirror/mode/javascript/javascript.js"></script>
 	        		    
-		<!-- CodeMirror-Extesnion -->		    
+		<!-- CodeMirror-Extension -->		    
 		<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
 		<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
+
+		<script src="scripts/codemirror-extension/addon/format/formatting.js"></script>
 		    
 		<!-- SWT Browser - CodeMirror -->
 		<script src="scripts/eclipse/cm-eclipse.js"></script>
@@ -41,6 +43,14 @@
 			<textarea id="code" name="code" ></textarea>
 		</form>	
 		<script>
+		function getSelectedRange(cm) {
+	        return { from: cm.getCursor(true), to: cm.getCursor(false) };
+	      }
+	      
+	      CodeMirror.commands.autoFormatSelection = function(cm) {       		 
+	        var range = getSelectedRange(cm);
+	        cm.autoFormatRange(range.from, range.to);
+	      }
 			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 		        mode: "application/json",		    
 				lineNumbers: true,	        

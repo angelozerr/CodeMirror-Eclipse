@@ -16,7 +16,7 @@
     <script src="scripts/codemirror/addon/runmode/runmode.js"></script>
         
     <script src="scripts/codemirror/mode/javascript/javascript.js"></script>    
-	<script src="http://ajax.aspnetcdn.com/ajax/jshint/r07/jshint.js"></script>
+	<script src="scripts/jshint/jshint-r12-80277ef.js"></script>
 	<script src="scripts/codemirror/addon/lint/lint.js"></script>
     <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
 	<script src="scripts/codemirror/addon/lint/javascript-lint.js"></script>
@@ -46,8 +46,11 @@
   <link rel="stylesheet" href="scripts/codemirror-extension/addon/hint/templates-hint.css">
   <script src="scripts/codemirror-extension/addon/hint/templates-hint.js"></script>
   
- 	<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
-	<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
+  <script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
+  <link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
+  
+  <!-- SWT Browser - CodeMirror -->
+  <script src="scripts/eclipse/cm-eclipse.js"></script>
   
   <!-- CodeMirror Javascript -->
   <script src="scripts/codemirror-javascript/addon/hint/javascript/javascript-templates.js"></script>
@@ -91,8 +94,7 @@
         	"Ctrl-Space": "autocomplete"
         },
         gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers"],
-    	lintWith: CodeMirror.javascriptValidator,
-        ternWith : true
+    	lintWith: CodeMirror.javascriptValidator
       });
     </script>
     
