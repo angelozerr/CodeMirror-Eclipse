@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Angelo ZERR.
+ * Copyright (c) 2013 Angelo ZERR.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -30,10 +30,12 @@ import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
 public class CMControl extends AbstractCMControl {
 
 	private static final String CM_REFOCUS_JS = "editor.focus();";
-	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 
+	private boolean dirty = false;
+	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 	private IValidator validator;
 	private boolean focusToBeSet;
+	private String lineSeparator;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style, SWT.NONE);
@@ -65,10 +67,13 @@ public class CMControl extends AbstractCMControl {
 	}
 
 	protected void doSetText(String text) {
-		String js = new StringBuilder(" try { editor.setValue( \"")
+		String js = new StringBuilder(
+				" cmIsDirtyFired=true; try { editor.setValue( \"")
 				.append(StringEscapeUtils.escapeEcmaScript(text))
-				.append("\" ); } catch(e){alert(e)};return null;").toString();
+				.append("\" ); } catch(e){alert(e)}; cmIsDirtyFired=false;return null;")
+				.toString();
 		browser.evaluate(js);
+		dirty = false;
 	}
 
 	@Override
@@ -84,9 +89,21 @@ public class CMControl extends AbstractCMControl {
 		return result;
 	}
 
+	public boolean isDirty() {
+		return dirty;
+	}
+
 	@Override
 	protected String doGetText() {
-		return (String) browser.evaluate("return editor.getValue();");
+		String lineSeparator = getLineSeparator();
+		StringBuilder js = new StringBuilder("return editor.getValue(");
+		if (lineSeparator != null) {
+			js.append("\"");
+			js.append(lineSeparator);
+			js.append("\"");
+		}
+		js.append(");");
+		return (String) browser.evaluate(js.toString());
 	}
 
 	@Override
@@ -94,6 +111,8 @@ public class CMControl extends AbstractCMControl {
 		super.createBrowserFunctions();
 		new BrowserFunction(browser, "cm_dirty") {
 			public Object function(Object[] arguments) {
+
+				dirty = true;
 				notifyDirtyListeners();
 				return null;
 			}
@@ -138,18 +157,6 @@ public class CMControl extends AbstractCMControl {
 
 	}
 
-	public boolean isDirty() {
-		if (!isLoaded()) {
-			return false;
-		}
-		return (Boolean) browser.evaluate("return CMEclipse.isDirty();");
-	}
-
-	public void setDirty(boolean dirty) {
-		browser.evaluate(" CMEclipse.setDirty(" + dirty + ");");
-		notifyDirtyListeners();
-	}
-
 	public void addDirtyListener(IDirtyListener l) {
 		listeners.add(l);
 	}
@@ -165,6 +172,12 @@ public class CMControl extends AbstractCMControl {
 
 	}
 
+	public void setDirty(boolean dirty) {
+		this.dirty = dirty;
+		browser.evaluate(" cmIsDirtyFired=false");
+		notifyDirtyListeners();
+	}
+
 	public void setValidator(IValidator validator) {
 		this.validator = validator;
 	}
@@ -172,4 +185,17 @@ public class CMControl extends AbstractCMControl {
 	public IValidator getValidator() {
 		return validator;
 	}
+
+	public String getLineSeparator() {
+		return lineSeparator;
+	}
+
+	public void setLineSeparator(String lineSeparator) {
+		if (lineSeparator != null) {
+			lineSeparator = lineSeparator.replaceAll("\r", "\\\\r").replaceAll(
+					"\n", "\\\\n");
+		}
+		this.lineSeparator = lineSeparator;
+	}
+
 }

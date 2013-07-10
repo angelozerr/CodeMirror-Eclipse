@@ -58,7 +58,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 			handleSaveError(e);
 		}
 	}
-	
+
 	protected void handleSaveError(Exception e) {
 		CMEditorPartHelper.openSaveErrorDialog(getSite().getShell(), e);
 	}
@@ -115,7 +115,8 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		}
 	}
 
-	private void handleLoadError(Exception e, Composite parent, FormToolkit toolkit) {
+	private void handleLoadError(Exception e, Composite parent,
+			FormToolkit toolkit) {
 		displayError(e, parent, toolkit);
 	}
 
@@ -199,5 +200,11 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 			throws IOException, CoreException {
 		CMEditorPartHelper.getOperation(getEditorInput()).saveCM(text,
 				getEditorInput(), monitor);
+	}
+
+	@Override
+	public String getLineSeparator() {
+		return CMEditorPartHelper.getOperation(getEditorInput())
+				.getLineSeparator(getEditorInput());
 	}
 }

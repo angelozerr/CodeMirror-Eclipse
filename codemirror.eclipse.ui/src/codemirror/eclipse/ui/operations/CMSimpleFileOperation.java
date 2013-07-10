@@ -10,11 +10,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.IEditorInput;
 
-
 import codemirror.eclipse.ui.editors.ISimpleFileEditorInput;
 import codemirror.eclipse.ui.utils.IOUtils;
 
-public class CMSimpleFileOperation implements ICMOperation {
+public class CMSimpleFileOperation extends AbstractCMOperation {
 
 	public boolean isAvailable(IEditorInput editorInput) {
 		return editorInput instanceof ISimpleFileEditorInput;

@@ -19,12 +19,9 @@ import org.eclipse.swt.widgets.Composite;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
 
-
 public interface ICMEditorPart {
 
 	String getURL();
-
-	//IFile getFile();
 
 	IValidator getValidator();
 
@@ -34,8 +31,11 @@ public interface ICMEditorPart {
 
 	CMControl createCM(String url, Composite parent, int none);
 
-	void saveCM(String text, IProgressMonitor monitor) throws IOException, CoreException;
+	void saveCM(String text, IProgressMonitor monitor) throws IOException,
+			CoreException;
 
 	String loadCM() throws IOException, CoreException;
+
+	String getLineSeparator();
 
 }

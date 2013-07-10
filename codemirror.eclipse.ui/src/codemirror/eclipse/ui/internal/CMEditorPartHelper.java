@@ -40,6 +40,7 @@ public class CMEditorPartHelper {
 			Composite parent) {
 		CMControl cm = part.createCM(part.getURL(), parent, SWT.NONE);
 		cm.setText(text);
+		cm.setLineSeparator(part.getLineSeparator());
 		IValidator validator = part.getValidator();
 		if (validator != null) {
 			cm.setValidator(validator);

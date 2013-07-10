@@ -14,5 +14,7 @@ public interface ICMOperation {
 			throws IOException, CoreException;
 
 	String loadCM(IEditorInput editorInput) throws IOException, CoreException;
+	
+	String getLineSeparator(IEditorInput editorInput);
 
 }
