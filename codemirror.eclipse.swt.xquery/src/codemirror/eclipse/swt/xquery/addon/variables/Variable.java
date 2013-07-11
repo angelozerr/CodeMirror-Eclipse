@@ -1,4 +1,4 @@
-package codemirror.eclipse.swt.xquery;
+package codemirror.eclipse.swt.xquery.addon.variables;
 
 import java.util.ArrayList;
 import java.util.Collection;

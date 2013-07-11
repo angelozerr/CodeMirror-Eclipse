@@ -25,11 +25,11 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import codemirror.eclipse.resources.CMResourcesConstants;
 import codemirror.eclipse.swt.CMRunModeControl;
-import codemirror.eclipse.swt.xquery.IVariablesAware;
-import codemirror.eclipse.swt.xquery.IVariablesListener;
-import codemirror.eclipse.swt.xquery.ValueHolder;
-import codemirror.eclipse.swt.xquery.Variable;
-import codemirror.eclipse.swt.xquery.VariableHelper;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
+import codemirror.eclipse.swt.xquery.addon.variables.ValueHolder;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
+import codemirror.eclipse.swt.xquery.addon.variables.VariableHelper;
 import codemirror.eclipse.ui.resources.CMResourcesRegistry;
 import codemirror.eclipse.ui.xquery.viewers.VariableContentProvider;
 import codemirror.eclipse.ui.xquery.viewers.VariableValueEditingSupport;

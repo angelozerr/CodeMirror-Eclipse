@@ -11,4 +11,5 @@ Require-Bundle: org.eclipse.swt;resolution:=optional,
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt,
  codemirror.eclipse.swt.addon.lint,
- codemirror.eclipse.swt.resources
+ codemirror.eclipse.swt.resources,
+ codemirror.eclipse.swt.utils

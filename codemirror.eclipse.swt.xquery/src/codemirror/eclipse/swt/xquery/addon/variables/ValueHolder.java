@@ -1,4 +1,4 @@
-package codemirror.eclipse.swt.xquery;
+package codemirror.eclipse.swt.xquery.addon.variables;
 
 public class ValueHolder {
 

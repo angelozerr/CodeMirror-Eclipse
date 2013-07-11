@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 
-import codemirror.eclipse.swt.xquery.Variable;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 
 public class VariablesTreeViewer extends TreeViewer {
 

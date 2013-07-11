@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 
 public class CMXQueryControl extends CMControl implements IVariablesAware {
 

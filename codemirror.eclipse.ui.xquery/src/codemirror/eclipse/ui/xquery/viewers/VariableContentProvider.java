@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import codemirror.eclipse.swt.xquery.Variable;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 
 public class VariableContentProvider implements ITreeContentProvider {
 

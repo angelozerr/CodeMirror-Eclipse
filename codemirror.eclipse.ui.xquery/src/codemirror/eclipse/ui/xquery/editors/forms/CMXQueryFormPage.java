@@ -7,9 +7,9 @@ import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.xquery.CMXQueryControl;
-import codemirror.eclipse.swt.xquery.IVariablesAware;
-import codemirror.eclipse.swt.xquery.IVariablesListener;
-import codemirror.eclipse.swt.xquery.Variable;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
+import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 import codemirror.eclipse.ui.editors.forms.CMFormEditor;
 import codemirror.eclipse.ui.editors.forms.CMFormPage;
 

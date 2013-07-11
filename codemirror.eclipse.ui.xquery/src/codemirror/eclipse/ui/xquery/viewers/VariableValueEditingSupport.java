@@ -10,8 +10,8 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
-import codemirror.eclipse.swt.xquery.ValueHolder;
-import codemirror.eclipse.swt.xquery.Variable;
+import codemirror.eclipse.swt.xquery.addon.variables.ValueHolder;
+import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 
 public class VariableValueEditingSupport extends EditingSupport {
 

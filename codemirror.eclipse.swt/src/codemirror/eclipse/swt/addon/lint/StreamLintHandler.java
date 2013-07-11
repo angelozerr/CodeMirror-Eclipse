@@ -3,6 +3,8 @@ package codemirror.eclipse.swt.addon.lint;
 import java.io.IOException;
 import java.io.Writer;
 
+import codemirror.eclipse.swt.utils.JsonUtils;
+
 public class StreamLintHandler implements LintHandler {
 
 	private final Writer writer;

@@ -1,4 +1,4 @@
-package codemirror.eclipse.swt.addon.lint;
+package codemirror.eclipse.swt.utils;
 
 import java.io.IOException;
 import java.io.Writer;
