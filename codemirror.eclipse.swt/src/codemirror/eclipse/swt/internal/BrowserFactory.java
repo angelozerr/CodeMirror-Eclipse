@@ -25,24 +25,14 @@ public class BrowserFactory {
 
 	public static Browser create(Composite parent, int style) {
 		// RAP doesn't support MOZILLA
-		if (!SingleSourcingHelper.isRAP()) {
-			if (useMozilla == null) {
-				try {
-					// Try to use Mozilla because performance are better than
-					// IE.
-					Browser browser = new Browser(parent, style | SWT.MOZILLA);
-					useMozilla = true;
-					return browser;
-				} catch (Throwable e) {
-					useMozilla = false;
-				}
-			}
-			if (useMozilla) {
-				// Use FF
-				return new Browser(parent, style | SWT.MOZILLA);
-			}
-		}
-		// Use IE
+		/*
+		 * if (!SingleSourcingHelper.isRAP()) { if (useMozilla == null) { try {
+		 * // Try to use Mozilla because performance are better than // IE.
+		 * Browser browser = new Browser(parent, style | SWT.MOZILLA);
+		 * useMozilla = true; return browser; } catch (Throwable e) { useMozilla
+		 * = false; } } if (useMozilla) { // Use FF return new Browser(parent,
+		 * style | SWT.MOZILLA); } }
+		 */
 		return new Browser(parent, style);
 	}
 }
