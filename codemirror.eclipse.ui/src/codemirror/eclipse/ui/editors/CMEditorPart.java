@@ -148,7 +148,6 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 				getEditorInput(), monitor);
 	}
 
-	@Override
 	public String getLineSeparator() {
 		return CMEditorPartHelper.getOperation(getEditorInput())
 				.getLineSeparator(getEditorInput());

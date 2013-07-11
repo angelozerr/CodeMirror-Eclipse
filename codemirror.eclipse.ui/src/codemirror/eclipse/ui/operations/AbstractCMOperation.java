@@ -7,7 +7,6 @@ public abstract class AbstractCMOperation implements ICMOperation {
 	public static final String LINE_SEPARATOR = System
 			.getProperty("line.separator"); //$NON-NLS-1$
 
-	@Override
 	public String getLineSeparator(IEditorInput editorInput) {
 		return LINE_SEPARATOR;
 	}

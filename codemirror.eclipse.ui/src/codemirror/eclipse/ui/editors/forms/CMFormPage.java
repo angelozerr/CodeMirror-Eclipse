@@ -202,7 +202,6 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 				getEditorInput(), monitor);
 	}
 
-	@Override
 	public String getLineSeparator() {
 		return CMEditorPartHelper.getOperation(getEditorInput())
 				.getLineSeparator(getEditorInput());
