@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.opensagres.codemirror.eclipse</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tycho-version>0.18.1</tycho-version>
+	</properties>
+	<build>
+
+		<defaultGoal>clean install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<!-- <pomDependencies>consider</pomDependencies> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>codemirror.eclipse.swt</module>
+		<module>codemirror.eclipse.ui</module>
+		<module>codemirror.eclipse.ui.xml</module>
+		<module>codemirror.eclipse.ui.css</module>
+		<module>codemirror.eclipse.resources</module>
+		<module>codemirror.eclipse.resources.rap</module>
+		<module>codemirror.eclipse.swt.xquery</module>
+		<module>codemirror.eclipse.ui.xquery</module>
+		<module>codemirror.eclipse.xulrunner</module>
+		<module>codemirror.eclipse.ui.velocity</module>
+		<module>codemirror.eclipse.ui.json</module>
+		<module>codemirror.eclipse.swt.samples</module>
+		<module>codemirror.eclipse.ui.javascript</module>
+		<module>codemirror.eclipse.ui.ide</module>
+		<module>codemirror.eclipse.ui.html</module>
+		<module>codemirror.eclipse.ui.demo</module>
+		<module>codemirror.eclipse.ui.demo.rap</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>kepler</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/kepler/</url>
+		</repository>
+	</repositories>
+
+</project>
