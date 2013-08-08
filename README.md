@@ -28,6 +28,13 @@ You can see the Eclipse RAP demo at http://cmeclipse.opensagres.cloudbees.net/co
  * for CodeMirror Javascript the license is http://codemirror.net/LICENSE
  * for the rest the license is [EPL](http://www.eclipse.org/legal/epl-v10.html)
 
+https://opensagres.ci.cloudbees.com/job/CodeMirror-Eclipse/
+
+
+# Build
+
+See cloudbees job: [https://opensagres.ci.cloudbees.com/job/CodeMirror-Eclipse/](https://opensagres.ci.cloudbees.com/job/CodeMirror-Eclipse/)
+
 # Similar project
 
  * [codemirror-eclipse-rcp](https://github.com/eiswind/codemirror-eclipse-rcp)
