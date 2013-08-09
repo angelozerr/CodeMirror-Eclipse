@@ -38,7 +38,8 @@ public class CMEditorPartHelper {
 
 	public static CMControl createCM(final ICMEditorPart part, String text,
 			Composite parent) {
-		CMControl cm = part.createCM(part.getURL(), parent, SWT.NONE);
+		CMControl cm = part.createCM(part.getURL(), part.getBuilder(), parent,
+				SWT.NONE);
 		cm.setText(text);
 		cm.setLineSeparator(part.getLineSeparator());
 		IValidator validator = part.getValidator();
@@ -87,11 +88,12 @@ public class CMEditorPartHelper {
 		if (e instanceof CoreException) {
 			coreException = (CoreException) e;
 		} else {
-			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, Messages.saveErrorMessage,
-					e);
+			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					Messages.saveErrorMessage, e);
 			coreException = new CoreException(status);
 		}
-		openSaveErrorDialog(shell, Messages.saveErrorTitle, Messages.saveErrorMessage, coreException);
+		openSaveErrorDialog(shell, Messages.saveErrorTitle,
+				Messages.saveErrorMessage, coreException);
 	}
 
 }

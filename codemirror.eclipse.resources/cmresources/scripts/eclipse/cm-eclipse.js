@@ -65,6 +65,10 @@ var CMEclipse = (function() {
 		},
 		onValidationResult : function(cm, data) {
 			refresh(cm, data);
-		}
+		},
+		passAndHint : function(cm) {
+     		setTimeout(function() {cm.execCommand("autocomplete");}, 100);
+      		return CodeMirror.Pass;
+      	}
 	};
 })();

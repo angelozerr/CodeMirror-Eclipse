@@ -19,6 +19,7 @@ import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.internal.SingleSourcingHelper;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
@@ -43,7 +44,7 @@ public class CMControl extends AbstractCMControl {
 	}
 
 	public CMControl(String url, Composite parent, int style) {
-		super(url, parent, style, SWT.NONE);
+		super(url, null, parent, style, SWT.NONE);
 		this.focusToBeSet = false;
 	}
 
@@ -53,7 +54,17 @@ public class CMControl extends AbstractCMControl {
 	}
 
 	public CMControl(String url, Composite parent, int style, int browserStyle) {
-		super(url, parent, style, browserStyle);
+		super(url, null, parent, style, browserStyle);
+		this.focusToBeSet = false;
+	}
+
+	public CMControl(CMBuilder builder, Composite parent, int style) {
+		this(builder, parent, style, SWT.NONE);
+	}
+
+	public CMControl(CMBuilder builder, Composite parent, int style,
+			int browserStyle) {
+		super(null, builder, parent, style, browserStyle);
 		this.focusToBeSet = false;
 	}
 

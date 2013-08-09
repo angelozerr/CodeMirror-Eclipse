@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -16,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import codemirror.eclipse.resources.CMResourcesInitializer;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IDirtyListener;
+import codemirror.eclipse.swt.builder.CMBuilder;
 
 public abstract class AbstractCMSample {
 
@@ -25,10 +25,11 @@ public abstract class AbstractCMSample {
 						new File("../"
 								+ CMResourcesInitializer.getInstance()
 										.getResourceId()));
-		createUI(getURL());
+		createUI(getURL(), getBuilder());
 	}
 
-	private void createUI(String url) throws FileNotFoundException {
+	private void createUI(String url, CMBuilder builder)
+			throws FileNotFoundException {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setSize(500, 500);
@@ -39,8 +40,9 @@ public abstract class AbstractCMSample {
 		saveButton.setText("Save");
 		saveButton.setEnabled(false);
 		saveButton.setLayoutData(new GridData());
-		
-		final CMControl editor = new CMControl(url, shell, SWT.BORDER);
+
+		final CMControl editor = builder != null ? new CMControl(builder,
+				shell, SWT.BORDER) : new CMControl(url, shell, SWT.BORDER);
 		editor.setText(getInitialText());
 		editor.addDirtyListener(new IDirtyListener() {
 			public void dirtyChanged(boolean dirty) {
@@ -65,6 +67,8 @@ public abstract class AbstractCMSample {
 	}
 
 	protected abstract String getURL();
+
+	protected abstract CMBuilder getBuilder();
 
 	protected abstract String getInitialText();
 }

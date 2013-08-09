@@ -46,7 +46,7 @@
         state.addedToForeign.push(actual, path);
       curOrigin = origPos;
     }
-    if (actual.path && pathLen(actual.path) <= pathLen(path)) return;
+    if (path && actual.path && pathLen(actual.path) <= pathLen(path)) return;
     actual.setPath(path, state, curOrigin);
   }
 
@@ -73,7 +73,7 @@
 
   // FIXME maybe cut off output at a certain path length? the long
   // paths tend to be uninteresting internals
-  function desc(type, state) {
+  function desc(type, state, asStr) {
     var actual = type.getType(false);
     if (!actual) return "?";
 
@@ -82,17 +82,18 @@
 
     if (state.seen.indexOf(type) > -1) return type.path || "?";
     state.seen.push(type);
-    var d = actual.getDesc(state, getSpan(state, type));
+    var d = actual.getDesc(state, !asStr && getSpan(state, type), asStr);
     state.seen.pop();
     return d;
   }
 
-  infer.Prim.prototype.getDesc = function(_state, span) {
-    return addSpan(this.name, span);
+  infer.Prim.prototype.getDesc = function(_state, span, asStr) {
+    return asStr ? this.name : addSpan(this.name, span);
   };
 
-  infer.Arr.prototype.getDesc = function(state, span) {
-    return addSpan("[" + desc(this.getProp("<i>"), state) + "]", getSpan(state, this, span));
+  infer.Arr.prototype.getDesc = function(state, span, asStr) {
+    var str = "[" + desc(this.getProp("<i>"), state, true) + "]";
+    return asStr ? str : addSpan(str, getSpan(state, this, span));
   };
 
   infer.Fn.prototype.getDesc = function(state, span) {
@@ -103,14 +104,14 @@
       if (i) out += ", ";
       var name = this.argNames[i];
       if (name && name != "?") out += name + ": ";
-      out += desc(this.args[i], state);
+      out += desc(this.args[i], state, true);
     }
     out += ")";
     if (this.computeRetSource) {
       out += " -> " + this.computeRetSource;
     } else if (!this.retval.isEmpty()) {
       var rettype = this.retval.getType();
-      if (rettype) out += " -> " + desc(rettype, state);
+      if (rettype) out += " -> " + desc(rettype, state, true);
     }
 
     if (!hasProps(this)) return out;
@@ -185,7 +186,7 @@
     if (rec.mayCull == null && !proto && !hasProps(this)) rec.mayCull = true;
     if (proto) structure["!proto"] = proto;
     if (this.doc) structure["!doc"] = this.doc;
-    addSpan(this, getSpan(state, structure, span));
+    addSpan(structure, getSpan(state, structure, span));
     setProps(this, structure, state);
     return this.path;
   };

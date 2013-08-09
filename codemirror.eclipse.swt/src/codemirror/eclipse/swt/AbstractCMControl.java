@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.internal.BrowserFactory;
 
 /**
@@ -42,12 +43,21 @@ public abstract class AbstractCMControl extends Composite {
 	}
 
 	public AbstractCMControl(String url, Composite parent, int style) {
-		this(url, parent, style, SWT.NONE);
+		this(url, null, parent, style, SWT.NONE);
 	}
 
 	public AbstractCMControl(File file, Composite parent, int style,
 			int browserStyle) {
-		this(toURL(file), parent, style, browserStyle);
+		this(toURL(file), null, parent, style, browserStyle);
+	}
+
+	public AbstractCMControl(CMBuilder builder, Composite parent, int style) {
+		this(null, builder, parent, style, SWT.NONE);
+	}
+
+	public AbstractCMControl(CMBuilder builder, Composite parent, int style,
+			int browserStyle) {
+		this(null, builder, parent, style, browserStyle);
 	}
 
 	public static String toURL(File file) {
@@ -60,15 +70,17 @@ public abstract class AbstractCMControl extends Composite {
 		}
 	}
 
-	public AbstractCMControl(String url, Composite parent, int style,
-			int browserStyle) {
+	public AbstractCMControl(String url, CMBuilder builder, Composite parent,
+			int style, int browserStyle) {
 		super(parent, style);
 		super.setLayout(new FillLayout());
 		this.textToBeSet = null;
-		// registerServiceHandler();
 		browser = BrowserFactory.create(this, browserStyle);
-		// String url = hostUrl + URL;
-		browser.setUrl(url);
+		if (url != null) {
+			browser.setUrl(url);
+		} else {
+			browser.setText(builder.getText());
+		}
 		createBrowserFunctions();
 		browser.addProgressListener(new ProgressListener() {
 

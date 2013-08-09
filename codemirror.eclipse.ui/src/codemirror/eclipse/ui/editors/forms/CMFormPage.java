@@ -32,6 +32,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.ui.editors.ICMEditorPart;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 
@@ -39,6 +40,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
 	private CMControl cm;
 	private final String url;
+	private final CMBuilder builder;
 	private Control statusError;
 
 	public CMFormPage(CMFormEditor editor, String id, String title, File file) {
@@ -48,6 +50,14 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	public CMFormPage(CMFormEditor editor, String id, String title, String url) {
 		super(editor, id, title);
 		this.url = url;
+		this.builder = null;
+	}
+
+	public CMFormPage(CMFormEditor editor, String id, String title,
+			CMBuilder buider) {
+		super(editor, id, title);
+		this.url = null;
+		this.builder = buider;
 	}
 
 	@Override
@@ -183,7 +193,11 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		return cm;
 	}
 
-	public CMControl createCM(String url, Composite parent, int style) {
+	public CMControl createCM(String url, CMBuilder builder, Composite parent,
+			int style) {
+		if (builder != null) {
+			return new CMControl(builder, parent, style);
+		}
 		return new CMControl(url, parent, style);
 	}
 

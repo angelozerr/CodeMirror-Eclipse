@@ -1,10 +1,7 @@
 package codemirror.eclipse.ui.xquery.editors.forms;
 
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
 import codemirror.eclipse.ui.editors.forms.CMFormEditor;
-import codemirror.eclipse.ui.xquery.internal.editors.XQueryVariablesOutlinePage;
 
 public abstract class CMXQueryFormEditor extends CMFormEditor {
 

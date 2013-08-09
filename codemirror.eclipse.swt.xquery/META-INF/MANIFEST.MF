@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.swt;resolution:=optional,
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt.xquery,
  codemirror.eclipse.swt.xquery.addon.hint,
- codemirror.eclipse.swt.xquery.addon.variables
+ codemirror.eclipse.swt.xquery.addon.variables,
+ codemirror.eclipse.swt.xquery.builder

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: codemirror.eclipse.swt.json
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.swt;resolution:=optional,
+ org.eclipse.rap.rwt;resolution:=optional,
+ codemirror.eclipse.swt;bundle-version="1.0.0"
+Bundle-ClassPath: .
+Export-Package: codemirror.eclipse.swt.json.builder

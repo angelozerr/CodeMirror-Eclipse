@@ -27,12 +27,15 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 
 public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
 	private CMControl cm;
 	private final String url;
+	private final CMBuilder builder;
+
 	private Control statusError;
 
 	public CMEditorPart(File file) {
@@ -41,6 +44,12 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
 	public CMEditorPart(String url) {
 		this.url = url;
+		this.builder = null;
+	}
+
+	public CMEditorPart(CMBuilder builder) {
+		this.url = null;
+		this.builder = builder;
 	}
 
 	@Override
@@ -129,12 +138,20 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 		return cm;
 	}
 
-	public CMControl createCM(String url, Composite parent, int style) {
+	public CMControl createCM(String url, CMBuilder builder, Composite parent,
+			int style) {
+		if (builder != null) {
+			return new CMControl(builder, parent, style);
+		}
 		return new CMControl(url, parent, style);
 	}
 
 	public String getURL() {
 		return url;
+	}
+
+	public CMBuilder getBuilder() {
+		return builder;
 	}
 
 	public String loadCM() throws IOException, CoreException {

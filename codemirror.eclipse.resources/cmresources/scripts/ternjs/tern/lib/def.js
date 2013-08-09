@@ -148,7 +148,7 @@
     var type = new TypeParser(spec, null, base, forceNew).parseType(name, true);
     if (/^fn\(/.test(spec)) for (var i = 0; i < type.args.length; ++i) (function(i) {
       var arg = type.args[i];
-      if (arg instanceof infer.Fn && arg.args.length) addEffect(type, function(_self, fArgs) {
+      if (arg instanceof infer.Fn && arg.args && arg.args.length) addEffect(type, function(_self, fArgs) {
         var fArg = fArgs[i];
         if (fArg) fArg.propagate(new infer.IsCallee(infer.cx().topScope, arg.args, null, infer.ANull));
       });
@@ -269,7 +269,7 @@
   function isSimpleAnnotation(spec) {
     if (!spec["!type"]) return false;
     for (var prop in spec)
-      if (prop != "!type" && prop != "!doc" && prop != "!url")
+      if (prop != "!type" && prop != "!doc" && prop != "!url" && prop != "!span")
         return false;
     return true;
   }

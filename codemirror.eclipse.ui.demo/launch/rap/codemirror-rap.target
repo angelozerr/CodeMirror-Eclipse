@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.6"?>
+<?pde version="3.8"?>
 
-<target name="CodeMirror-Eclipse RAP" sequenceNumber="7">
+<target name="CodeMirror-Eclipse RAP" sequenceNumber="8">
 <locations>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.rap.equinox.target.feature.feature.group" version="2.1.0.20130318-2137"/>
-<unit id="org.eclipse.rap.examples.feature.feature.group" version="2.1.0.20130318-2137"/>
-<unit id="org.eclipse.rap.feature.feature.group" version="2.1.0.20130318-2137"/>
-<unit id="org.eclipse.rap.sdk.feature.feature.group" version="2.1.0.20130318-2137"/>
+<location path="${project_loc}/launch\rap" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rap.sdk.feature.feature.group" version="2.1.0.20130611-2139"/>
+<unit id="org.eclipse.rap.equinox.target.feature.feature.group" version="2.1.0.20130610-1755"/>
+<unit id="org.eclipse.rap.feature.feature.group" version="2.1.0.20130611-2139"/>
 <repository location="http://download.eclipse.org/rt/rap/2.1"/>
 </location>
-<location path="${project_loc}/launch\rap" type="Directory"/>
 </locations>
 </target>
