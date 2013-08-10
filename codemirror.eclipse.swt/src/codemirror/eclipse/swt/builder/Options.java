@@ -9,6 +9,7 @@ import codemirror.eclipse.swt.builder.codemirror.ModeOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.edit.CloseBracketsOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.edit.MatchBracketsOptionUpdater;
+import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOption;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.selection.ActiveLineOptionUpdater;
@@ -72,8 +73,8 @@ public class Options extends BaseOptions {
 		return GuttersOptionUpdater.getInstance().getGutters(this);
 	}
 
-	public LintOption getLint() {
-		return LintOptionUpdater.getInstance().getLint(this);
+	public LintOption getLint(LintImpl lintImpl) {
+		return LintOptionUpdater.getInstance().getLint(this, lintImpl);
 	}
 
 	public ExtraKeysOption getExtraKeys() {

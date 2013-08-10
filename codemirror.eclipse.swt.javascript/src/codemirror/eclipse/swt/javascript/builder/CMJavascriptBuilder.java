@@ -15,6 +15,7 @@ import java.util.List;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
+import codemirror.eclipse.swt.javascript.builder.codemirror.addon.lint.JavascriptLint;
 
 /**
  * Javascript CodeMirror builder.
@@ -30,12 +31,9 @@ public class CMJavascriptBuilder extends CMBuilder {
 		// brackets
 		options.setAutoCloseBrackets(true);
 		options.setMatchBrackets(true);
-		
-		// CodeMirror Lint (JS+CSS)
-		options.getLint().setLint(true);
-		// JSON Lint
-		super.addScript("scripts/jshint/jshint-r12-80277ef.js");
-		super.addScript("scripts/codemirror/addon/lint/javascript-lint.js");
+
+		// CodeMirror Javascript Lint (JS+CSS)
+		options.getLint(JavascriptLint.INSTANCE).setLint(true);
 		gutters.add(GuttersOptionUpdater.LINT);
 
 		// Line numbers

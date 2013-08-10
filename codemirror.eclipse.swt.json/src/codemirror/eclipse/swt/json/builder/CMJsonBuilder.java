@@ -15,6 +15,7 @@ import java.util.List;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
+import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
 
 /**
  * JSON CodeMirror builder.
@@ -32,11 +33,8 @@ public class CMJsonBuilder extends CMBuilder {
 		options.setAutoCloseBrackets(true);
 		options.setMatchBrackets(true);
 
-		// CodeMirror Lint (JS+CSS)
-		options.getLint().setLint(true);
-		// JSON Lint
-		super.addScript("scripts/jsonlint/jsonlint.js");
-		super.addScript("scripts/codemirror/addon/lint/json-lint.js");
+		// CodeMirror JSON Lint (JS+CSS)
+		options.getLint(JsonLint.INSTANCE).setLint(true);
 		gutters.add(GuttersOptionUpdater.LINT);
 
 		// Line numbers

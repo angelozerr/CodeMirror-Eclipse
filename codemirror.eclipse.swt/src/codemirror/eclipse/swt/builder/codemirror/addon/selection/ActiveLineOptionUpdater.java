@@ -15,7 +15,7 @@ public class ActiveLineOptionUpdater extends AbstractOptionUpdater {
 
 	public void setStyleActiveLine(Options options, boolean styleActiveLine) {
 		// add active-line.js script
-		super.install(options, ACTIVE_LINE_JS, null);
+		super.install(options.getBuilder(), ACTIVE_LINE_JS, null);
 		// "styleActiveLine" : true
 		options.addOption("styleActiveLine", styleActiveLine);
 	}

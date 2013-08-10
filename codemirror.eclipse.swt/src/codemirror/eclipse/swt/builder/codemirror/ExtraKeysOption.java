@@ -5,7 +5,7 @@ import codemirror.eclipse.swt.builder.CMBuilder;
 
 public class ExtraKeysOption extends BaseOptions {
 
-	public static final String PASS_AND_HINT = "CMEclipse.passAndHint";
+	public static final String PASS_AND_HINT = "passAndHint";
 	public static final String AUTOCOMPLETE = "autocomplete";
 	public static final String FORMAT = "format";
 	

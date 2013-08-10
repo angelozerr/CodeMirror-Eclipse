@@ -14,11 +14,15 @@ public class LintOptionUpdater extends AbstractOptionUpdater {
 		return INSTANCE;
 	}
 
-	public LintOption getLint(Options options) {
+	public LintOption getLint(Options options, LintImpl lintImpl) {
 		LintOption lintWith = (LintOption) options.get("lintWith");
 		if (lintWith == null) {
 			// add lint.js + lint.css
-			super.install(options, LINT_JS, LINT_CSS);
+			super.install(options.getBuilder(), LINT_JS, LINT_CSS);
+			// add implementation of lint
+			if (lintImpl != null) {
+				lintImpl.install(options.getBuilder());
+			}
 			lintWith = new LintOption(options.getBuilder());
 			options.addOption("lintWith", lintWith);
 		}
