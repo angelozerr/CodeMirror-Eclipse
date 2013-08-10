@@ -48,6 +48,10 @@
 		<module>codemirror.eclipse.ui.html</module>
 		<module>codemirror.eclipse.ui.demo</module>
 		<module>codemirror.eclipse.ui.demo.rap</module>
+		<module>codemirror.eclipse.swt.velocity</module>
+		<module>codemirror.eclipse.swt.json</module>
+		<module>codemirror.eclipse.swt.javascript</module>
+		<module>codemirror.eclipse.swt.css</module>
 	</modules>
 
 	<repositories>
