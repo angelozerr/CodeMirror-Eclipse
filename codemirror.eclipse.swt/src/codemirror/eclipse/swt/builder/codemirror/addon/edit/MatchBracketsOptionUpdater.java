@@ -15,7 +15,7 @@ public class MatchBracketsOptionUpdater extends AbstractOptionUpdater {
 
 	public void setMatchBrackets(Options options, boolean matchBrackets) {
 		// add matchbrackets.js script
-		super.activate(options, CLOSEBRACKETS_JS, null);
+		super.install(options, CLOSEBRACKETS_JS, null);
 		// "matchBrackets" : true
 		options.addOption("matchBrackets", matchBrackets);
 	}

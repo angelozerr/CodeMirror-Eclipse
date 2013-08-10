@@ -14,7 +14,7 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOption;
+import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 
 /**
  * CSS CodeMirror builder.
@@ -25,11 +25,11 @@ public class CMCSSBuilder extends CMBuilder {
 	public CMCSSBuilder(String baseURL, boolean runMode) {
 		super(CSSMode.INSTANCE, baseURL, runMode);
 		Options options = super.getOptions();
-		List<String> gutters = options.getGutters().getGutters();
+		List<String> gutters = options.getGutters();
 
 		// Line numbers
 		options.setLineNumbers(true);
-		gutters.add(GuttersOption.LINENUMBERS);
+		gutters.add(GuttersOptionUpdater.LINENUMBERS);
 	}
 
 }

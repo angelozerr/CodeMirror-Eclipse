@@ -13,7 +13,7 @@ package codemirror.eclipse.swt.javascript.builder;
 import codemirror.eclipse.swt.builder.Mode;
 
 /**
- * JSON CodeMirror mode.
+ * Javascript CodeMirror mode.
  * 
  */
 public class JavascriptMode extends Mode {
@@ -22,7 +22,7 @@ public class JavascriptMode extends Mode {
 
 	private JavascriptMode() {
 		super(
-				"application/json",
+				"application/javascript",
 				new String[] { "scripts/codemirror/mode/javascript/javascript.js" });
 	}
 }

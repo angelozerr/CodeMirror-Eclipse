@@ -14,7 +14,7 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOption;
+import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 
 /**
  * JSON CodeMirror builder.
@@ -25,18 +25,11 @@ public class CMVelocityBuilder extends CMBuilder {
 	public CMVelocityBuilder(String baseURL, boolean runMode) {
 		super(VelocityMode.INSTANCE, baseURL, runMode);
 		Options options = super.getOptions();
-		List<String> gutters = options.getGutters().getGutters();
-
-		// CodeMirror Lint (JS+CSS)
-		options.getLint().setLint(true);
-		// JSON Lint
-		super.addScript("scripts/jsonlint/jsonlint.js");
-		super.addScript("scripts/codemirror/addon/lint/json-lint.js");
-		gutters.add(GuttersOption.LINT);
+		List<String> gutters = options.getGutters();
 
 		// Line numbers
 		options.setLineNumbers(true);
-		gutters.add(GuttersOption.LINENUMBERS);
+		gutters.add(GuttersOptionUpdater.LINENUMBERS);
 	}
 
 }

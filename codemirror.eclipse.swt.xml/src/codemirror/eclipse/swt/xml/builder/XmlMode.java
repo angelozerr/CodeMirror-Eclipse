@@ -13,7 +13,7 @@ package codemirror.eclipse.swt.xml.builder;
 import codemirror.eclipse.swt.builder.Mode;
 
 /**
- * JSON CodeMirror mode.
+ * XML CodeMirror mode.
  * 
  */
 public class XmlMode extends Mode {
@@ -21,8 +21,6 @@ public class XmlMode extends Mode {
 	public static final Mode INSTANCE = new XmlMode();
 
 	private XmlMode() {
-		super(
-				"application/json",
-				new String[] { "scripts/codemirror/mode/javascript/javascript.js" });
+		super("text/xml", new String[] { "scripts/codemirror/mode/xml/xml.js" });
 	}
 }

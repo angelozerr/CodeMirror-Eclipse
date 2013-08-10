@@ -14,7 +14,8 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOption;
+import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
+import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 
 /**
  * XQuery CodeMirror builder.
@@ -25,15 +26,37 @@ public class CMXQueryBuilder extends CMBuilder {
 	public CMXQueryBuilder(String baseURL, boolean runMode) {
 		super(XQueryMode.INSTANCE, baseURL, runMode);
 		Options options = super.getOptions();
-		List<String> gutters = options.getGutters().getGutters();
 
 		// brackets
 		options.setAutoCloseBrackets(true);
 		options.setMatchBrackets(true);
-		
+
 		// Line numbers
 		options.setLineNumbers(true);
-		gutters.add(GuttersOption.LINENUMBERS);
+		List<String> gutters = options.getGutters();
+		gutters.add(GuttersOptionUpdater.LINENUMBERS);
+
+		// Completion
+		ExtraKeysOption extraKeys = options.getExtraKeys();
+		extraKeys.addOption("':'", ExtraKeysOption.PASS_AND_HINT);
+		extraKeys.addOption("'$'", ExtraKeysOption.PASS_AND_HINT);
+		extraKeys.addOption("Ctrl-Space", ExtraKeysOption.AUTOCOMPLETE);
+		extraKeys.addOption("Ctrl-Q", ExtraKeysOption.FORMAT);
+
+		installHint();
+	}
+
+	@Override
+	protected void installHint() {
+		super.installHint();
+		installXQueryHint();
+	}
+
+	protected void installXQueryHint() {
+		// <!-- CodeMirror-XQuery -->
+		addScript("scripts/codemirror-xquery/addon/hint/xquery/xquery-hint.js");
+		addScript("scripts/codemirror-xquery/addon/hint/xquery/system-functions.xml.js");
+		addStyle("scripts/codemirror-extension/addon/hint/show-hint-eclipse.css");
 	}
 
 }

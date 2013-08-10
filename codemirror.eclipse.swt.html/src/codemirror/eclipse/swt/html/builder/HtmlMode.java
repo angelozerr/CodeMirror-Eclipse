@@ -13,7 +13,7 @@ package codemirror.eclipse.swt.html.builder;
 import codemirror.eclipse.swt.builder.Mode;
 
 /**
- * JSON CodeMirror mode.
+ * HTML CodeMirror mode.
  * 
  */
 public class HtmlMode extends Mode {
@@ -21,8 +21,10 @@ public class HtmlMode extends Mode {
 	public static final Mode INSTANCE = new HtmlMode();
 
 	private HtmlMode() {
-		super(
-				"application/json",
-				new String[] { "scripts/codemirror/mode/javascript/javascript.js" });
+		super("text/html", new String[] {
+				"scripts/codemirror/mode/xml/xml.js",
+				"scripts/codemirror/mode/javascript/javascript.js",
+				"scripts/codemirror/mode/css/css.js",
+				"scripts/codemirror/mode/htmlmixed/htmlmixed.js" });
 	}
 }

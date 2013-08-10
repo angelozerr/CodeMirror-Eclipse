@@ -23,22 +23,42 @@ public class CMBuilder {
 		this.scripts = new ArrayList<String>();
 
 		// <!-- CodeMirror -->
-		addScript("scripts/codemirror/lib/codemirror.js");
-		addStyle("scripts/codemirror/lib/codemirror.css");
-		
+		installCodeMirror();
+		installSearchAddon();
+
 		// <!-- CodeMirror-Extension -->
 		addScript("scripts/codemirror-extension/addon/selection/fullscreen.js");
 		addStyle("scripts/codemirror-extension/addon/selection/fullscreen.css");
-		
+
 		// <!-- SWT Browser - CodeMirror -->
 		addScript("scripts/eclipse/cm-eclipse.js");
-		
+
 		getOptions().setMode(mode);
 		getOptions().setStyleActiveLine(true);
 		getOptions().setLineWrapping(true);
 		getOptions().setShowCursorWhenSelecting(true);
 
+	}
 
+	private void installCodeMirror() {
+		addScript("scripts/codemirror/lib/codemirror.js");
+		addStyle("scripts/codemirror/lib/codemirror.css");
+	}
+
+	protected void installSearchAddon() {
+		addScript("scripts/codemirror/addon/dialog/dialog.js");
+		addScript("scripts/codemirror/addon/search/searchcursor.js");
+		addScript("scripts/codemirror/addon/search/search.js");
+		addStyle("scripts/codemirror/addon/dialog/dialog.css");
+	}
+
+	protected void installHint() {
+		// <!-- CodeMirror -->
+		addScript("scripts/codemirror/addon/hint/show-hint.js");
+		addStyle("scripts/codemirror-extension/addon/hint/show-hint-eclipse.css");
+		// <!-- CodeMirror-Extension -->
+		addScript("scripts/codemirror-extension/addon/hint/show-context-info.js");
+		addStyle("scripts/codemirror-extension/addon/hint/show-context-info.css");
 	}
 
 	protected Options createOptions() {
@@ -54,15 +74,16 @@ public class CMBuilder {
 	private void writeScript(Writer writer) throws IOException {
 		write(writer, "<script type=\"text/javascript\" >");
 		write(writer,
-				"var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), {");
+				"var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), ");
 		options.write(writer);
-		write(writer, "});");
+		write(writer, ");");
 		write(writer, "</script>");
 	}
 
 	protected void writeBefore(Writer writer) throws IOException {
 		write(writer, "<!doctype html>", false);
-		//write(writer, "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 401 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
+		// write(writer,
+		// "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 401 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
 		write(writer, "<html>");
 		writeHtmlHead(writer);
 		write(writer, "<body onload=\"CMEclipse.loaded()\" >");
@@ -77,8 +98,10 @@ public class CMBuilder {
 
 	private void writeHtmlHead(Writer writer) throws IOException {
 		write(writer, "<head>");
-		//  tells Internet Explorer to display a webpage in IE9 mode, if possible.
-		write(writer, "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=EDGE\" />");
+		// tells Internet Explorer to display a webpage in IE9 mode, if
+		// possible.
+		write(writer,
+				"<meta http-equiv=\"X-UA-Compatible\" content=\"IE=EDGE\" />");
 		// <base href="http://www.myhomeurl.com/"/>
 		/*
 		 * write(writer, "<base href=\"", false); write(writer, baseURL, false);
@@ -131,7 +154,7 @@ public class CMBuilder {
 	public void write(Writer writer, String content, boolean lineBreak)
 			throws IOException {
 		if (lineBreak) {
-			writer.write("\n");			
+			writer.write("\n");
 		}
 		writer.write(content);
 	}

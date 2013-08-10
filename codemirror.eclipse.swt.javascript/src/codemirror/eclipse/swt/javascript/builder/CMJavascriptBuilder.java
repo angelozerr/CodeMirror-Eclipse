@@ -14,10 +14,10 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOption;
+import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 
 /**
- * JSON CodeMirror builder.
+ * Javascript CodeMirror builder.
  * 
  */
 public class CMJavascriptBuilder extends CMBuilder {
@@ -25,18 +25,22 @@ public class CMJavascriptBuilder extends CMBuilder {
 	public CMJavascriptBuilder(String baseURL, boolean runMode) {
 		super(JavascriptMode.INSTANCE, baseURL, runMode);
 		Options options = super.getOptions();
-		List<String> gutters = options.getGutters().getGutters();
+		List<String> gutters = options.getGutters();
 
+		// brackets
+		options.setAutoCloseBrackets(true);
+		options.setMatchBrackets(true);
+		
 		// CodeMirror Lint (JS+CSS)
 		options.getLint().setLint(true);
 		// JSON Lint
-		super.addScript("scripts/jsonlint/jsonlint.js");
-		super.addScript("scripts/codemirror/addon/lint/json-lint.js");
-		gutters.add(GuttersOption.LINT);
+		super.addScript("scripts/jshint/jshint-r12-80277ef.js");
+		super.addScript("scripts/codemirror/addon/lint/javascript-lint.js");
+		gutters.add(GuttersOptionUpdater.LINT);
 
 		// Line numbers
 		options.setLineNumbers(true);
-		gutters.add(GuttersOption.LINENUMBERS);
+		gutters.add(GuttersOptionUpdater.LINENUMBERS);
 	}
 
 }

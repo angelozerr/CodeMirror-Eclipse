@@ -13,7 +13,7 @@ package codemirror.eclipse.swt.velocity.builder;
 import codemirror.eclipse.swt.builder.Mode;
 
 /**
- * JSON CodeMirror mode.
+ * Velocity CodeMirror mode.
  * 
  */
 public class VelocityMode extends Mode {
@@ -21,8 +21,7 @@ public class VelocityMode extends Mode {
 	public static final Mode INSTANCE = new VelocityMode();
 
 	private VelocityMode() {
-		super(
-				"application/json",
-				new String[] { "scripts/codemirror/mode/javascript/javascript.js" });
+		super("velocity",
+				new String[] { "scripts/codemirror/mode/velocity/velocity.js" });
 	}
 }

@@ -12,7 +12,7 @@ public class ModeOptionUpdater extends AbstractOptionUpdater {
 	}
 
 	public void setMode(Options options, Mode mode) {
-		super.activate(options, mode.getScripts(), null);
+		super.install(options, mode.getScripts(), null);
 		options.addOption("mode", mode.getMimeType());
 	}
 

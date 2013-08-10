@@ -15,7 +15,7 @@ public class CloseBracketsOptionUpdater extends AbstractOptionUpdater {
 
 	public void setAutoCloseBrackets(Options options, boolean autoCloseBrackets) {
 		// add closebrackets.js script
-		super.activate(options, CLOSEBRACKETS_JS, null);
+		super.install(options, CLOSEBRACKETS_JS, null);
 		// "autoCloseBrackets" : true
 		options.addOption("autoCloseBrackets", autoCloseBrackets);
 	}

@@ -67,6 +67,7 @@ var CMEclipse = (function() {
 			refresh(cm, data);
 		},
 		passAndHint : function(cm) {
+		alert('e');
      		setTimeout(function() {cm.execCommand("autocomplete");}, 100);
       		return CodeMirror.Pass;
       	}

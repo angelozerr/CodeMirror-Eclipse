@@ -18,8 +18,8 @@ public class LintOptionUpdater extends AbstractOptionUpdater {
 		LintOption lintWith = (LintOption) options.get("lintWith");
 		if (lintWith == null) {
 			// add lint.js + lint.css
-			super.activate(options, LINT_JS, LINT_CSS);
-			lintWith = new LintOption();
+			super.install(options, LINT_JS, LINT_CSS);
+			lintWith = new LintOption(options.getBuilder());
 			options.addOption("lintWith", lintWith);
 		}
 		return lintWith;

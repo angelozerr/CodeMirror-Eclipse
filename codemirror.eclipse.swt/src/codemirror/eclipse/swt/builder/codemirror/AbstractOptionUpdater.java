@@ -4,7 +4,7 @@ import codemirror.eclipse.swt.builder.Options;
 
 public class AbstractOptionUpdater {
 
-	protected void activate(Options options, String[] scripts, String[] styles) {
+	protected void install(Options options, String[] scripts, String[] styles) {
 		if (scripts != null) {
 			for (int i = 0; i < scripts.length; i++) {
 				options.getBuilder().addScript(scripts[i]);
