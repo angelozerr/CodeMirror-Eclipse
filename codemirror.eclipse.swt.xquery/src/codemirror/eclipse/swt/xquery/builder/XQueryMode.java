@@ -23,6 +23,6 @@ public class XQueryMode extends Mode {
 	private XQueryMode() {
 		super(
 				"xquery",
-				new String[] { "scripts/codemirror/mode/xquery/xquery.js" });
+				new String[] { "scripts/codemirror-xquery/mode/xquery/xquery.js" });
 	}
 }

@@ -1,20 +1,11 @@
 var CMEclipse = (function() {
 		
 	// CodeMirror commands
-
-	CodeMirror.commands.autocomplete = function(cm) {
-		
-	}
-
 	CodeMirror.commands.passAndHint = function(cm) {
 		setTimeout(function() {cm.execCommand("autocomplete");}, 100);
       	return CodeMirror.Pass;
 	}
-		
-	CodeMirror.commands.format = function(cm) {
-		
-	}
-	
+			
 	var dirty = false;
 
 	function addAnnotation(error, found) {

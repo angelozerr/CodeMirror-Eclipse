@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
 import codemirror.eclipse.swt.xquery.addon.variables.Variable;
@@ -39,6 +40,15 @@ public class CMXQueryControl extends CMControl implements IVariablesAware {
 	public CMXQueryControl(String url, Composite parent, int style,
 			int browserStyle) {
 		super(url, parent, style, browserStyle);
+	}
+
+	public CMXQueryControl(CMBuilder builder, Composite parent, int style) {
+		super(builder, parent, style);
+	}
+
+	public CMXQueryControl(CMBuilder builder, Composite parent, int style,
+			int browserStyle) {
+		super(builder, parent, style, browserStyle);
 	}
 
 	@Override

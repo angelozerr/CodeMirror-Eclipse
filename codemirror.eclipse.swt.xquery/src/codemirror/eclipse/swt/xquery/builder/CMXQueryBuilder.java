@@ -13,6 +13,7 @@ package codemirror.eclipse.swt.xquery.builder;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.Function;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
@@ -41,22 +42,40 @@ public class CMXQueryBuilder extends CMBuilder {
 		extraKeys.addOption("':'", ExtraKeysOption.PASS_AND_HINT);
 		extraKeys.addOption("'$'", ExtraKeysOption.PASS_AND_HINT);
 		extraKeys.addOption("Ctrl-Space", ExtraKeysOption.AUTOCOMPLETE);
-		extraKeys.addOption("Ctrl-Q", ExtraKeysOption.FORMAT);
+		// extraKeys.addOption("Ctrl-Q", ExtraKeysOption.FORMAT);
 
-		installHint();
+		super.setCommand(ExtraKeysOption.AUTOCOMPLETE,
+				"CodeMirror.showHint(cm, CodeMirror.xqueryHint);");
+
+		installHint(true, true);
+		installTrackVars(options);
+	}
+
+	private void installTrackVars(Options options) {
+		// <!-- CodeMirror-XQuery -->
+		addScript("scripts/codemirror-xquery/addon/execute/xquery/track-vars.js");
+		getOptions()
+				.addOption(
+						"trackVars",
+						new Function("function(globalVars, changed) {\n"
+								+ "if (changed) {\n"
+								+ "cm_refreshVars(globalVars);\n}\n"
+								+ "}"));
 	}
 
 	@Override
-	protected void installHint() {
-		super.installHint();
+	protected void installHint(boolean withContextInfo, boolean withTemplates) {
+		super.installHint(withContextInfo, withTemplates);
 		installXQueryHint();
 	}
 
 	protected void installXQueryHint() {
 		// <!-- CodeMirror-XQuery -->
 		addScript("scripts/codemirror-xquery/addon/hint/xquery/xquery-hint.js");
+		addStyle("scripts/codemirror-xquery/addon/hint/xquery/xquery-hint.css");
 		addScript("scripts/codemirror-xquery/addon/hint/xquery/system-functions.xml.js");
-		addStyle("scripts/codemirror-extension/addon/hint/show-hint-eclipse.css");
+		// XQuery Templates
+		addScript("scripts/codemirror-xquery/addon/hint/xquery/xquery-templates.js");
 	}
 
 }

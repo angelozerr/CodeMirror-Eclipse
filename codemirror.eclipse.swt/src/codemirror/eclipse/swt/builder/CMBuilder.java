@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CMBuilder {
 
@@ -14,6 +16,7 @@ public class CMBuilder {
 	private List<String> styles;
 
 	private final Options options;
+	private Map<String, String> commands;
 
 	public CMBuilder(Mode mode, String baseURL, boolean runMode) {
 		this.baseURL = baseURL;
@@ -52,13 +55,29 @@ public class CMBuilder {
 		addStyle("scripts/codemirror/addon/dialog/dialog.css");
 	}
 
-	protected void installHint() {
+	protected void installHint(boolean withContextInfo, boolean withTemplates) {
 		// <!-- CodeMirror -->
 		addScript("scripts/codemirror/addon/hint/show-hint.js");
-		addStyle("scripts/codemirror-extension/addon/hint/show-hint-eclipse.css");
 		// <!-- CodeMirror-Extension -->
+		addStyle("scripts/codemirror-extension/addon/hint/show-hint-eclipse.css");
+		if (withContextInfo) {
+			installContextInfoHint();
+		}
+		if (withTemplates) {
+			installTemplatesHint();
+		}
+	}
+
+	protected void installContextInfoHint() {
 		addScript("scripts/codemirror-extension/addon/hint/show-context-info.js");
 		addStyle("scripts/codemirror-extension/addon/hint/show-context-info.css");
+	}
+
+	protected void installTemplatesHint() {
+		addScript("scripts/codemirror/addon/runmode/runmode.js");
+
+		addScript("scripts/codemirror-extension/addon/hint/templates-hint.js");
+		addStyle("scripts/codemirror-extension/addon/hint/templates-hint.css");
 	}
 
 	protected Options createOptions() {
@@ -73,11 +92,28 @@ public class CMBuilder {
 
 	private void writeScript(Writer writer) throws IOException {
 		write(writer, "<script type=\"text/javascript\" >");
+		writeCommands(writer);
 		write(writer,
 				"var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), ");
 		options.write(writer);
 		write(writer, ");");
 		write(writer, "</script>");
+	}
+
+	protected void writeCommands(Writer writer) throws IOException {
+		if (commands != null) {
+			String name = null;
+			String script = null;
+			for (Map.Entry<String, String> command : commands.entrySet()) {
+				name = command.getKey();
+				script = command.getValue();
+				write(writer, "CodeMirror.commands.", false);
+				write(writer, name, false);
+				write(writer, "= function(cm) {", false);
+				write(writer, script);
+				write(writer, "}");
+			}
+		}
 	}
 
 	protected void writeBefore(Writer writer) throws IOException {
@@ -184,5 +220,12 @@ public class CMBuilder {
 
 	public Options getOptions() {
 		return options;
+	}
+
+	public void setCommand(String command, String script) {
+		if (commands == null) {
+			commands = new LinkedHashMap<String, String>();
+		}
+		commands.put(command, script);
 	}
 }

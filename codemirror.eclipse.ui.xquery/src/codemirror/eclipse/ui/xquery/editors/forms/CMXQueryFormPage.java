@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.xquery.CMXQueryControl;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
@@ -27,7 +28,8 @@ public abstract class CMXQueryFormPage extends CMFormPage implements
 	}
 
 	@Override
-	public CMControl createCM(String url, Composite parent, int style) {
+	public CMControl createCM(String url, CMBuilder builder, Composite parent,
+			int style) {
 		return new CMXQueryControl(url, parent, style);
 	}
 

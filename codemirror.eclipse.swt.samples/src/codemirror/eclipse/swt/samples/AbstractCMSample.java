@@ -9,6 +9,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -41,8 +42,7 @@ public abstract class AbstractCMSample {
 		saveButton.setEnabled(false);
 		saveButton.setLayoutData(new GridData());
 
-		final CMControl editor = builder != null ? new CMControl(builder,
-				shell, SWT.BORDER) : new CMControl(url, shell, SWT.BORDER);
+		final CMControl editor = createCMControl(url, builder, shell);
 		editor.setText(getInitialText());
 		editor.addDirtyListener(new IDirtyListener() {
 			public void dirtyChanged(boolean dirty) {
@@ -64,6 +64,12 @@ public abstract class AbstractCMSample {
 				display.sleep();
 		}
 		display.dispose();
+	}
+
+	protected CMControl createCMControl(String url, CMBuilder builder,
+			Composite parent) {
+		return builder != null ? new CMControl(builder, parent, SWT.BORDER)
+				: new CMControl(url, parent, SWT.BORDER);
 	}
 
 	protected abstract String getURL();
