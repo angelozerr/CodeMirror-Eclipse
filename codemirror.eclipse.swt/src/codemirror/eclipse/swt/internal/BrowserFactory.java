@@ -21,9 +21,20 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class BrowserFactory {
 
-	private static Boolean useMozilla = null;
+	private static int dedaultBrowserStyle = SWT.NONE;
 
-	public static Browser create(Composite parent, int style) {
+	public static void setDedaultBrowserStyle(int dedaultBrowserStyle) {
+		BrowserFactory.dedaultBrowserStyle = dedaultBrowserStyle;
+	}
+
+	public static int getDedaultBrowserStyle() {
+		return dedaultBrowserStyle;
+	}
+
+	public static Browser create(Composite parent, Integer style) {
+		if (style == null) {
+			style = getDedaultBrowserStyle();
+		}
 		// RAP doesn't support MOZILLA
 		/*
 		 * if (!SingleSourcingHelper.isRAP()) { if (useMozilla == null) { try {

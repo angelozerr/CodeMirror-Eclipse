@@ -2,13 +2,13 @@ package codemirror.eclipse.swt.builder;
 
 public class Function {
 
-	private final String code;
+	private final String script;
 
-	public Function(String code) {
-		this.code = code;
+	public Function(String script) {
+		this.script = script;
 	}
 
-	public String getCode() {
-		return code;
+	public String getScript() {
+		return script;
 	}
 }

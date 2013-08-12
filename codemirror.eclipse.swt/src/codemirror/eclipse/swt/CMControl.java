@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -39,32 +38,17 @@ public class CMControl extends AbstractCMControl {
 	private String lineSeparator;
 
 	public CMControl(File file, Composite parent, int style) {
-		super(file, parent, style, SWT.NONE);
+		super(file, parent, style);
 		this.focusToBeSet = false;
 	}
 
 	public CMControl(String url, Composite parent, int style) {
-		super(url, null, parent, style, SWT.NONE);
-		this.focusToBeSet = false;
-	}
-
-	public CMControl(File file, Composite parent, int style, int browserStyle) {
-		super(file, parent, style, browserStyle);
-		this.focusToBeSet = false;
-	}
-
-	public CMControl(String url, Composite parent, int style, int browserStyle) {
-		super(url, null, parent, style, browserStyle);
+		super(url, parent, style);
 		this.focusToBeSet = false;
 	}
 
 	public CMControl(CMBuilder builder, Composite parent, int style) {
-		this(builder, parent, style, SWT.NONE);
-	}
-
-	public CMControl(CMBuilder builder, Composite parent, int style,
-			int browserStyle) {
-		super(null, builder, parent, style, browserStyle);
+		super(builder, parent, style);
 		this.focusToBeSet = false;
 	}
 

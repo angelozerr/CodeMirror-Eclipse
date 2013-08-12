@@ -17,6 +17,8 @@ import codemirror.eclipse.swt.builder.Function;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
+import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
+import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
 
 /**
  * XQuery CodeMirror builder.
@@ -24,8 +26,8 @@ import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
  */
 public class CMXQueryBuilder extends CMBuilder {
 
-	public CMXQueryBuilder(String baseURL, boolean runMode) {
-		super(XQueryMode.INSTANCE, baseURL, runMode);
+	public CMXQueryBuilder(String baseURL) {
+		super(XQueryMode.INSTANCE, baseURL);
 		Options options = super.getOptions();
 
 		// brackets
@@ -39,13 +41,9 @@ public class CMXQueryBuilder extends CMBuilder {
 
 		// Completion
 		ExtraKeysOption extraKeys = options.getExtraKeys();
-		extraKeys.addOption("':'", ExtraKeysOption.PASS_AND_HINT);
-		extraKeys.addOption("'$'", ExtraKeysOption.PASS_AND_HINT);
-		extraKeys.addOption("Ctrl-Space", ExtraKeysOption.AUTOCOMPLETE);
-		// extraKeys.addOption("Ctrl-Q", ExtraKeysOption.FORMAT);
-
-		super.setCommand(ExtraKeysOption.AUTOCOMPLETE,
-				"CodeMirror.showHint(cm, CodeMirror.xqueryHint);");
+		extraKeys.addOption("':'", PassAndHintCommand.INSTANCE);
+		extraKeys.addOption("'$'", PassAndHintCommand.INSTANCE);
+		extraKeys.addOption("Ctrl-Space", XQueryAutocompleteCommand.INSTANCE);
 
 		installHint(true, true);
 		installTrackVars(options);
@@ -54,13 +52,11 @@ public class CMXQueryBuilder extends CMBuilder {
 	private void installTrackVars(Options options) {
 		// <!-- CodeMirror-XQuery -->
 		addScript("scripts/codemirror-xquery/addon/execute/xquery/track-vars.js");
-		getOptions()
-				.addOption(
-						"trackVars",
-						new Function("function(globalVars, changed) {\n"
-								+ "if (changed) {\n"
-								+ "cm_refreshVars(globalVars);\n}\n"
-								+ "}"));
+		getOptions().addOption(
+				"trackVars",
+				new Function("function(globalVars, changed) {\n"
+						+ "if (changed) {\n"
+						+ "cm_refreshVars(globalVars);\n}\n" + "}"));
 	}
 
 	@Override

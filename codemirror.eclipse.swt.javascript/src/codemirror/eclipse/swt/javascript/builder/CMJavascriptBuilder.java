@@ -23,8 +23,8 @@ import codemirror.eclipse.swt.javascript.builder.codemirror.addon.lint.Javascrip
  */
 public class CMJavascriptBuilder extends CMBuilder {
 
-	public CMJavascriptBuilder(String baseURL, boolean runMode) {
-		super(JavascriptMode.INSTANCE, baseURL, runMode);
+	public CMJavascriptBuilder(String baseURL) {
+		super(JavascriptMode.INSTANCE, baseURL);
 		Options options = super.getOptions();
 		List<String> gutters = options.getGutters();
 

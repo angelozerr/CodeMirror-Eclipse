@@ -19,7 +19,7 @@ public class JavascriptSample extends AbstractCMSample {
 	@Override
 	protected CMBuilder getBuilder() {
 		CMBuilder builder = new CMJavascriptBuilder(CMResourcesManager
-				.getInstance().getURL(""), false);
+				.getInstance().getURL(""));
 		builder.getOptions().setTheme(Theme.ECLIPSE);
 		return builder;
 	}

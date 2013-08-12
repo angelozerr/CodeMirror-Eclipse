@@ -12,7 +12,6 @@ package codemirror.eclipse.swt;
 
 import java.io.File;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
@@ -25,30 +24,15 @@ import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtil
 public class CMRunModeControl extends AbstractCMControl {
 
 	public CMRunModeControl(File file, Composite parent, int style) {
-		super(file, parent, style, SWT.NONE);
+		super(file, parent, style);
 	}
 
 	public CMRunModeControl(String url, Composite parent, int style) {
-		super(url, null, parent, style, SWT.NONE);
-	}
-
-	public CMRunModeControl(File file, Composite parent, int style,
-			int browserStyle) {
-		super(file, parent, style, browserStyle);
-	}
-
-	public CMRunModeControl(String url, Composite parent, int style,
-			int browserStyle) {
-		super(url, null, parent, style, browserStyle);
+		super(url, parent, style);
 	}
 
 	public CMRunModeControl(CMBuilder builder, Composite parent, int style) {
-		this(builder, parent, style, SWT.NONE);
-	}
-
-	public CMRunModeControl(CMBuilder builder, Composite parent, int style,
-			int browserStyle) {
-		super(null, builder, parent, style, browserStyle);
+		super(builder, parent, style);
 	}
 
 	@Override

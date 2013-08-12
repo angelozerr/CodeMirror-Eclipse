@@ -22,8 +22,8 @@ import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
  */
 public class CMHtmlBuilder extends CMBuilder {
 
-	public CMHtmlBuilder(String baseURL, boolean runMode) {
-		super(HtmlMode.INSTANCE, baseURL, runMode);
+	public CMHtmlBuilder(String baseURL) {
+		super(HtmlMode.INSTANCE, baseURL);
 		Options options = super.getOptions();
 		List<String> gutters = options.getGutters();
 

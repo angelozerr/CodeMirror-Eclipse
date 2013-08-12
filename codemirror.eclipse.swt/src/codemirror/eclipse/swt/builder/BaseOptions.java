@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import codemirror.eclipse.swt.builder.commands.Command;
+
 public class BaseOptions {
 
 	private final Map<String, Object> options;
@@ -19,6 +21,9 @@ public class BaseOptions {
 	}
 
 	public void addOption(String key, Object value) {
+		if (value instanceof Command) {
+			builder.addCommand((Command) value);
+		}
 		options.put(key, value);
 	}
 
@@ -27,7 +32,7 @@ public class BaseOptions {
 	}
 
 	public void write(Writer writer) throws IOException {
-		boolean oneOption = (options.size() == 1);
+		boolean oneOption = isOneOption();
 		if (!oneOption) {
 			builder.write(writer, "{");
 		}
@@ -47,6 +52,10 @@ public class BaseOptions {
 		if (!oneOption) {
 			builder.write(writer, "}");
 		}
+	}
+
+	protected boolean isOneOption() {
+		return options.size() == 1;
 	}
 
 	public void writeOption(Writer writer, String key, Object value)
@@ -71,8 +80,12 @@ public class BaseOptions {
 			builder.write(writer, "]", false);
 		} else if (value instanceof Boolean) {
 			builder.write(writer, (Boolean) value ? "true" : "false", false);
+		} else if (value instanceof Command) {
+			builder.write(writer, "\"", false);
+			builder.write(writer, ((Command) value).getName(), false);
+			builder.write(writer, "\"", false);
 		} else if (value instanceof Function) {
-			builder.write(writer, ((Function) value).getCode(), false);
+			builder.write(writer, ((Function) value).getScript(), false);
 		} else {
 			builder.write(writer, "\"", false);
 			builder.write(writer, value.toString(), false);

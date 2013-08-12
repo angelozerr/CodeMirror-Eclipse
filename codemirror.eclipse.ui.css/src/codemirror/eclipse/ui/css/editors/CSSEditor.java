@@ -12,8 +12,7 @@ public class CSSEditor extends CMEditorPart {
 		 * super(CMResourcesRegistry.getRegistry().getURL(
 		 * CMResourcesConstants.CSS_HTML));
 		 */
-		super(new CMCSSBuilder(CMResourcesRegistry.getRegistry().getURL(""),
-				false));
+		super(new CMCSSBuilder(CMResourcesRegistry.getRegistry().getURL("")));
 	}
 
 	public IValidator getValidator() {

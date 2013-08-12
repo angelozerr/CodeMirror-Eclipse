@@ -17,8 +17,7 @@ public class CSSSample extends AbstractCMSample {
 
 	@Override
 	protected CMBuilder getBuilder() {
-		return new CMCSSBuilder(CMResourcesManager.getInstance().getURL(""),
-				false);
+		return new CMCSSBuilder(CMResourcesManager.getInstance().getURL(""));
 	}
 
 	@Override

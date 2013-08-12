@@ -19,7 +19,7 @@ public class JsonSample extends AbstractCMSample {
 	@Override
 	protected CMBuilder getBuilder() {
 		CMBuilder builder = new CMJsonBuilder(CMResourcesManager.getInstance()
-				.getURL(""), false);
+				.getURL(""));
 		builder.getOptions().setTheme(Theme.ECLIPSE);
 		return builder;
 	}

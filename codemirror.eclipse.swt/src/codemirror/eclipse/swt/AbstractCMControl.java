@@ -13,7 +13,6 @@ package codemirror.eclipse.swt;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.browser.ProgressEvent;
@@ -38,26 +37,16 @@ public abstract class AbstractCMControl extends Composite {
 
 	private String mode;
 
-	public AbstractCMControl(File file, Composite parent, int style) {
-		this(file, parent, style, SWT.NONE);
-	}
-
 	public AbstractCMControl(String url, Composite parent, int style) {
-		this(url, null, parent, style, SWT.NONE);
+		this(url, null, parent, style);
 	}
 
-	public AbstractCMControl(File file, Composite parent, int style,
-			int browserStyle) {
-		this(toURL(file), null, parent, style, browserStyle);
+	public AbstractCMControl(File file, Composite parent, int style) {
+		this(toURL(file), null, parent, style);
 	}
 
 	public AbstractCMControl(CMBuilder builder, Composite parent, int style) {
-		this(null, builder, parent, style, SWT.NONE);
-	}
-
-	public AbstractCMControl(CMBuilder builder, Composite parent, int style,
-			int browserStyle) {
-		this(null, builder, parent, style, browserStyle);
+		this(null, builder, parent, style);
 	}
 
 	public static String toURL(File file) {
@@ -70,12 +59,12 @@ public abstract class AbstractCMControl extends Composite {
 		}
 	}
 
-	public AbstractCMControl(String url, CMBuilder builder, Composite parent,
-			int style, int browserStyle) {
+	private AbstractCMControl(String url, CMBuilder builder, Composite parent,
+			int style) {
 		super(parent, style);
 		super.setLayout(new FillLayout());
 		this.textToBeSet = null;
-		browser = BrowserFactory.create(this, browserStyle);
+		browser = BrowserFactory.create(this, getBrowserStyle());
 		if (url != null) {
 			browser.setUrl(url);
 		} else {
@@ -92,6 +81,10 @@ public abstract class AbstractCMControl extends Composite {
 				// not needed
 			}
 		});
+	}
+
+	protected Integer getBrowserStyle() {
+		return null;
 	}
 
 	protected void onLoad() {

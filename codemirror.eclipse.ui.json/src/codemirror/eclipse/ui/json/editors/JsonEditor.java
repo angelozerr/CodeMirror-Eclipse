@@ -7,12 +7,11 @@ import codemirror.eclipse.ui.resources.CMResourcesRegistry;
 
 public class JsonEditor extends CMEditorPart {
 
-	public JsonEditor() {		
-		//super(CMResourcesRegistry.getRegistry().getURL(
-			//	CMResourcesConstants.JSON_HTML));
-		
-		super(new CMJsonBuilder(CMResourcesRegistry.getRegistry().getURL(""),
-				false));
+	public JsonEditor() {
+		// super(CMResourcesRegistry.getRegistry().getURL(
+		// CMResourcesConstants.JSON_HTML));
+
+		super(new CMJsonBuilder(CMResourcesRegistry.getRegistry().getURL("")));
 	}
 
 	public IValidator getValidator() {

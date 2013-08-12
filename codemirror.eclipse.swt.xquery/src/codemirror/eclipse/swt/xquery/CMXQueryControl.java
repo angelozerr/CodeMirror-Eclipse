@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -25,30 +24,15 @@ public class CMXQueryControl extends CMControl implements IVariablesAware {
 	private List<IVariablesListener> listeners = new ArrayList<IVariablesListener>();
 
 	public CMXQueryControl(File file, Composite parent, int style) {
-		super(file, parent, style, SWT.NONE);
+		super(file, parent, style);
 	}
 
 	public CMXQueryControl(String url, Composite parent, int style) {
-		super(url, parent, style, SWT.NONE);
-	}
-
-	public CMXQueryControl(File file, Composite parent, int style,
-			int browserStyle) {
-		super(file, parent, style, browserStyle);
-	}
-
-	public CMXQueryControl(String url, Composite parent, int style,
-			int browserStyle) {
-		super(url, parent, style, browserStyle);
+		super(url, parent, style);
 	}
 
 	public CMXQueryControl(CMBuilder builder, Composite parent, int style) {
 		super(builder, parent, style);
-	}
-
-	public CMXQueryControl(CMBuilder builder, Composite parent, int style,
-			int browserStyle) {
-		super(builder, parent, style, browserStyle);
 	}
 
 	@Override

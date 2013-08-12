@@ -22,8 +22,8 @@ import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
  */
 public class CMVelocityBuilder extends CMBuilder {
 
-	public CMVelocityBuilder(String baseURL, boolean runMode) {
-		super(VelocityMode.INSTANCE, baseURL, runMode);
+	public CMVelocityBuilder(String baseURL) {
+		super(VelocityMode.INSTANCE, baseURL);
 		Options options = super.getOptions();
 		List<String> gutters = options.getGutters();
 

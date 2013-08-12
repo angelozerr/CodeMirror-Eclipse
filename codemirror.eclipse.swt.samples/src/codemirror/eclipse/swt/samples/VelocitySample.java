@@ -18,12 +18,10 @@ public class VelocitySample extends AbstractCMSample {
 	@Override
 	protected CMBuilder getBuilder() {
 		CMBuilder builder = new CMVelocityBuilder(CMResourcesManager
-				.getInstance().getURL(""), false);
+				.getInstance().getURL(""));
 		return builder;
 	}
 
-
-	
 	@Override
 	protected String getInitialText() {
 		return "<HTML>\n<BODY>\nHello $customer.Name!\n<table>\n"

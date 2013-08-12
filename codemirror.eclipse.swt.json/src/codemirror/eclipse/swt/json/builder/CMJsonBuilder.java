@@ -14,8 +14,10 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
+import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
+import codemirror.eclipse.swt.json.builder.commands.JsonFormatCommand;
 
 /**
  * JSON CodeMirror builder.
@@ -23,8 +25,8 @@ import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
  */
 public class CMJsonBuilder extends CMBuilder {
 
-	public CMJsonBuilder(String baseURL, boolean runMode) {
-		super(JsonMode.INSTANCE, baseURL, runMode);
+	public CMJsonBuilder(String baseURL) {
+		super(JsonMode.INSTANCE, baseURL);
 
 		Options options = super.getOptions();
 		List<String> gutters = options.getGutters();
@@ -37,9 +39,20 @@ public class CMJsonBuilder extends CMBuilder {
 		options.getLint(JsonLint.INSTANCE).setLint(true);
 		gutters.add(GuttersOptionUpdater.LINT);
 
+		// Formatter
+		installFormat(options);
+
 		// Line numbers
 		options.setLineNumbers(true);
 		gutters.add(GuttersOptionUpdater.LINENUMBERS);
+	}
+
+	protected void installFormat(Options options) {
+		ExtraKeysOption extraKeys = options.getExtraKeys();
+		extraKeys.addOption("Ctrl-Q", JsonFormatCommand.INSTANCE);
+
+		options.getBuilder().addScript("scripts/jsonlint/formatter.js");
+
 	}
 
 }
