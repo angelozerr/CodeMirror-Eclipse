@@ -192,4 +192,10 @@ public class CMControl extends AbstractCMControl {
 		this.lineSeparator = lineSeparator;
 	}
 
+	public void execCommand(String command) {
+		StringBuilder script = new StringBuilder("editor.execCommand(\"");
+		script.append(command);
+		script.append("\");");
+		browser.evaluate(script.toString());
+	}
 }

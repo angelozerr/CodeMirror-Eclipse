@@ -12,6 +12,7 @@ package codemirror.eclipse.swt.xquery.builder;
 
 import java.util.List;
 
+import codemirror.eclipse.swt.builder.BaseOptions;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Function;
 import codemirror.eclipse.swt.builder.Options;
@@ -47,6 +48,22 @@ public class CMXQueryBuilder extends CMBuilder {
 
 		installHint(true, true);
 		installTrackVars(options);
+
+		// Fold
+		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
+		this.addScript("scripts/codemirror/addon/fold/foldcode.js");
+		this.addScript("scripts/codemirror/addon/fold/foldgutter.js");
+		this.addScript("scripts/codemirror/addon/fold/brace-fold.js");
+		this.addScript("scripts/codemirror/addon/fold/comment-fold.js");
+		this.addStyle("scripts/codemirror-extension/addon/fold/folding.css");
+		BaseOptions o = new BaseOptions(this) {
+			protected boolean isOneOption() {return false;};
+		};
+		o.addOption(
+				"rangeFinder",
+				new Function(
+						"new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)"));
+		options.addOption("foldGutter", o);
 	}
 
 	private void installTrackVars(Options options) {

@@ -31,7 +31,7 @@ public class XQuerySample extends AbstractCMSample {
 
 	@Override
 	protected String getInitialText() {
-		return "let $a := 1\nif (true) then \nelse \n()\nreturn $a";
+		return "(: here a simple \n XQuery \n:)\nlet $a := 1\nif (true) then \nelse \n()\nreturn $a";
 	}
 
 	protected CMControl createCMControl(String url, CMBuilder builder,

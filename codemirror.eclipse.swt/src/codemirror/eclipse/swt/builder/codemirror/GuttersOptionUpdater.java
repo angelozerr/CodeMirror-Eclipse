@@ -9,7 +9,7 @@ public class GuttersOptionUpdater extends AbstractOptionUpdater {
 
 	public static final String LINT = "CodeMirror-lint-markers";
 	public static final String LINENUMBERS = "CodeMirror-linenumbers";
-	public static final String FOLDING = "CodeMirror-folding-markers";
+	public static final String FOLDGUTTER = "CodeMirror-foldgutter";
 
 	private static final String GUTTERS_NAME = "gutters";
 

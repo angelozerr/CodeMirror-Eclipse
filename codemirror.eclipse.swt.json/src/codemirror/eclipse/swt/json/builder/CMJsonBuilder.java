@@ -49,8 +49,8 @@ public class CMJsonBuilder extends CMBuilder {
 
 	protected void installFormat(Options options) {
 		ExtraKeysOption extraKeys = options.getExtraKeys();
-		extraKeys.addOption("Ctrl-Q", JsonFormatCommand.INSTANCE);
-
+		extraKeys.addOption("Shift-Ctrl-F", JsonFormatCommand.INSTANCE);
+		extraKeys.addOption("Ctrl-R", "replace");
 		options.getBuilder().addScript("scripts/jsonlint/formatter.js");
 
 	}
