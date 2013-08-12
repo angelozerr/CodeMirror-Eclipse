@@ -1,5 +1,6 @@
 package codemirror.eclipse.swt.builder.codemirror;
 
+import codemirror.eclipse.swt.builder.AbstractCMBuilder;
 import codemirror.eclipse.swt.builder.Mode;
 import codemirror.eclipse.swt.builder.Options;
 
@@ -11,8 +12,12 @@ public class ModeOptionUpdater extends AbstractOptionUpdater {
 		return INSTANCE;
 	}
 
+	public void setMode(AbstractCMBuilder builder, Mode mode) {
+		super.install(builder, mode.getScripts(), null);
+	}
+
 	public void setMode(Options options, Mode mode) {
-		super.install(options.getBuilder(), mode.getScripts(), null);
+		setMode(options.getBuilder(), mode);
 		options.addOption("mode", mode.getMimeType());
 	}
 

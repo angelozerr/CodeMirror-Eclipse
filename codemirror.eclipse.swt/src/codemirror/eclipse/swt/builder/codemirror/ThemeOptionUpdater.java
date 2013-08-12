@@ -1,5 +1,6 @@
 package codemirror.eclipse.swt.builder.codemirror;
 
+import codemirror.eclipse.swt.builder.AbstractCMBuilder;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
 
@@ -13,9 +14,13 @@ public class ThemeOptionUpdater extends AbstractOptionUpdater {
 
 	public void setTheme(Options options, Theme theme) {
 		// add the CSS
-		options.getBuilder().addStyle(theme.getStyle());
+		setTheme(options.getBuilder(), theme);
 		// set theme to the options
 		options.addOption("theme", theme.getName());
 	}
 
+	public void setTheme(AbstractCMBuilder builder, Theme theme) {
+		// add the CSS
+		builder.addStyle(theme.getStyle());
+	}
 }

@@ -5,15 +5,17 @@ import org.eclipse.swt.widgets.Composite;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.CMRunModeBuilder;
+import codemirror.eclipse.swt.builder.Mode;
 import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.resources.CMResourcesManager;
 import codemirror.eclipse.swt.xquery.CMXQueryControl;
-import codemirror.eclipse.swt.xquery.builder.CMXQueryBuilder;
+import codemirror.eclipse.swt.xquery.builder.CMXQueryRunModeBuilder;
 
-public class XQuerySample extends AbstractCMSample {
+public class XQuerySampleRunMode extends AbstractCMSampleRunMode {
 
 	public static void main(String[] args) throws Exception {
-		new XQuerySample().createUI();
+		new XQuerySampleRunMode().createUI();
 	}
 
 	@Override
@@ -22,10 +24,15 @@ public class XQuerySample extends AbstractCMSample {
 	}
 
 	@Override
-	protected CMBuilder getBuilder() {
-		CMBuilder builder = new CMXQueryBuilder(CMResourcesManager
+	protected Mode getMode() {
+		return null;
+	}
+
+	@Override
+	protected CMRunModeBuilder getBuilder() {
+		CMRunModeBuilder builder = new CMXQueryRunModeBuilder(CMResourcesManager
 				.getInstance().getURL(""));
-		builder.getOptions().setTheme(Theme.XQ_LIGHT);
+		builder.setTheme(Theme.XQ_LIGHT);
 		return builder;
 	}
 
@@ -39,4 +46,5 @@ public class XQuerySample extends AbstractCMSample {
 		return builder != null ? new CMXQueryControl(builder, parent,
 				SWT.BORDER) : new CMXQueryControl(url, parent, SWT.BORDER);
 	}
+
 }

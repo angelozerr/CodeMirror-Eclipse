@@ -1,10 +1,10 @@
 package codemirror.eclipse.swt.builder.codemirror;
 
-import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.AbstractCMBuilder;
 
 public class AbstractOptionUpdater {
 
-	protected void install(CMBuilder builder, String[] scripts, String[] styles) {
+	protected void install(AbstractCMBuilder builder, String[] scripts, String[] styles) {
 		if (scripts != null) {
 			for (int i = 0; i < scripts.length; i++) {
 				builder.addScript(scripts[i]);

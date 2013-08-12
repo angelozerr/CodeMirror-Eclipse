@@ -18,7 +18,6 @@ import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
-import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.internal.SingleSourcingHelper;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
@@ -47,7 +46,7 @@ public class CMControl extends AbstractCMControl {
 		this.focusToBeSet = false;
 	}
 
-	public CMControl(CMBuilder builder, Composite parent, int style) {
+	public CMControl(ICMHtmlProvider builder, Composite parent, int style) {
 		super(builder, parent, style);
 		this.focusToBeSet = false;
 	}

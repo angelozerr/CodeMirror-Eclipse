@@ -10,10 +10,27 @@
  *******************************************************************************/
 package codemirror.eclipse.swt;
 
-/**
- * Listener to observer dirty changed.
- */
-public interface IDirtyListener {
+import codemirror.eclipse.swt.builder.Mode;
 
-	void dirtyChanged(boolean dirty);
+/**
+ * Provider for HTML CodeMirror.
+ * 
+ */
+public interface ICMHtmlProvider {
+
+	/**
+	 * Returns the Html content which contains a textarea wrapped with
+	 * CodeMirror.
+	 * 
+	 * @return
+	 */
+	String getHtml();
+
+	/**
+	 * Retrurns the mode of CodeMirror to use.
+	 * 
+	 * @return
+	 */
+	Mode getMode();
+
 }

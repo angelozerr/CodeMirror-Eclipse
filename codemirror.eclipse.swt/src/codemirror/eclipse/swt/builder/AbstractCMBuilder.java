@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 package codemirror.eclipse.swt.builder;
 
 import java.io.IOException;
@@ -6,16 +16,56 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractCMBuilder {
+import codemirror.eclipse.swt.ICMHtmlProvider;
+import codemirror.eclipse.swt.builder.codemirror.ModeOptionUpdater;
+import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 
+/**
+ * Abstract buider to create HTML content with CodeMirror.
+ * 
+ */
+public abstract class AbstractCMBuilder implements ICMHtmlProvider {
+
+	private final Mode mode;
 	private final String baseURL;
 	private final List<String> scripts;
 	private List<String> styles;
 
+	private Theme theme;
+
 	public AbstractCMBuilder(Mode mode, String baseURL) {
+		this.mode = mode;
 		this.baseURL = baseURL;
 		this.styles = new ArrayList<String>();
 		this.scripts = new ArrayList<String>();
+
+		// <!-- CodeMirror -->
+		installCodeMirror();
+	}
+
+	private void installCodeMirror() {
+		// codemirror js + css
+		addScript("scripts/codemirror/lib/codemirror.js");
+		addStyle("scripts/codemirror/lib/codemirror.css");
+		// mode
+		ModeOptionUpdater.getInstance().setMode(this, mode);
+	}
+
+	protected void installRunMode() {
+		addScript("scripts/codemirror/addon/runmode/runmode.js");
+	}
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+		ThemeOptionUpdater.getInstance().setTheme(this, theme);
+	}
+
+	public Theme getTheme() {
+		return theme;
+	}
+
+	public Mode getMode() {
+		return mode;
 	}
 
 	private void insertStyle(Writer writer, String href) throws IOException {
@@ -46,7 +96,7 @@ public abstract class AbstractCMBuilder {
 		writer.write(content);
 	}
 
-	public String getText() {
+	public String getHtml() {
 		StringWriter writer = new StringWriter();
 		try {
 			write(writer);
@@ -70,14 +120,12 @@ public abstract class AbstractCMBuilder {
 	}
 
 	public void write(Writer writer) throws IOException {
-		writeBefore(writer);
-		writeScript(writer);
-		writeAfter(writer);
+		writeBeforeCM(writer);
+		writeBodyCM(writer);
+		writeAfterCM(writer);
 	}
 
-	protected abstract void writeScript(Writer writer) throws IOException;
-
-	protected void writeBefore(Writer writer) throws IOException {
+	protected void writeBeforeCM(Writer writer) throws IOException {
 		write(writer, "<!doctype html>", false);
 		write(writer, "<html>");
 		write(writer, "<head>");
@@ -119,8 +167,15 @@ public abstract class AbstractCMBuilder {
 
 	}
 
-	protected void writeAfter(Writer writer) throws IOException {
+	protected void writeAfterCM(Writer writer) throws IOException {
 		write(writer, "</body>");
 		write(writer, "</html>");
 	}
+
+	@Override
+	public String toString() {
+		return getHtml();
+	}
+
+	protected abstract void writeBodyCM(Writer writer) throws IOException;
 }

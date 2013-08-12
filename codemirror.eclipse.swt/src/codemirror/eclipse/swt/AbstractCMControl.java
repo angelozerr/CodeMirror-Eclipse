@@ -21,7 +21,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
-import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.internal.BrowserFactory;
 
 /**
@@ -35,8 +34,6 @@ public abstract class AbstractCMControl extends Composite {
 	private boolean loaded;
 	private boolean isReady;
 
-	private String mode;
-
 	public AbstractCMControl(String url, Composite parent, int style) {
 		this(url, null, parent, style);
 	}
@@ -45,7 +42,8 @@ public abstract class AbstractCMControl extends Composite {
 		this(toURL(file), null, parent, style);
 	}
 
-	public AbstractCMControl(CMBuilder builder, Composite parent, int style) {
+	public AbstractCMControl(ICMHtmlProvider builder, Composite parent,
+			int style) {
 		this(null, builder, parent, style);
 	}
 
@@ -59,8 +57,8 @@ public abstract class AbstractCMControl extends Composite {
 		}
 	}
 
-	private AbstractCMControl(String url, CMBuilder builder, Composite parent,
-			int style) {
+	private AbstractCMControl(String url, ICMHtmlProvider builder,
+			Composite parent, int style) {
 		super(parent, style);
 		super.setLayout(new FillLayout());
 		this.textToBeSet = null;
@@ -68,7 +66,7 @@ public abstract class AbstractCMControl extends Composite {
 		if (url != null) {
 			browser.setUrl(url);
 		} else {
-			browser.setText(builder.getText());
+			browser.setText(builder.getHtml());
 		}
 		createBrowserFunctions();
 		browser.addProgressListener(new ProgressListener() {
@@ -144,14 +142,6 @@ public abstract class AbstractCMControl extends Composite {
 		}
 
 		return doGetText();
-	}
-
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
-
-	public String getMode() {
-		return mode;
 	}
 
 	@Override

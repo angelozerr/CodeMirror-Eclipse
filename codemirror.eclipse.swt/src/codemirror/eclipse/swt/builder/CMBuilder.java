@@ -2,11 +2,26 @@ package codemirror.eclipse.swt.builder;
 
 import java.io.IOException;
 import java.io.Writer;
+/*******************************************************************************
+ * Copyright (c) 2013 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 import codemirror.eclipse.swt.builder.commands.Command;
 
+/**
+ * Buider to create HTML content with CodeMirror with textarea.
+ * 
+ */
 public class CMBuilder extends AbstractCMBuilder {
 
 	private final Options options;
@@ -16,8 +31,6 @@ public class CMBuilder extends AbstractCMBuilder {
 		super(mode, baseURL);
 		this.options = createOptions();
 
-		// <!-- CodeMirror -->
-		installCodeMirror();
 		installSearchAddon();
 
 		// <!-- CodeMirror-Extension -->
@@ -32,11 +45,6 @@ public class CMBuilder extends AbstractCMBuilder {
 		getOptions().setLineWrapping(true);
 		getOptions().setShowCursorWhenSelecting(true);
 
-	}
-
-	private void installCodeMirror() {
-		addScript("scripts/codemirror/lib/codemirror.js");
-		addStyle("scripts/codemirror/lib/codemirror.css");
 	}
 
 	protected void installSearchAddon() {
@@ -65,7 +73,7 @@ public class CMBuilder extends AbstractCMBuilder {
 	}
 
 	protected void installTemplatesHint() {
-		addScript("scripts/codemirror/addon/runmode/runmode.js");
+		super.installRunMode();
 
 		addScript("scripts/codemirror-extension/addon/hint/templates-hint.js");
 		addStyle("scripts/codemirror-extension/addon/hint/templates-hint.css");
@@ -75,11 +83,11 @@ public class CMBuilder extends AbstractCMBuilder {
 		return new Options(this);
 	}
 
-	protected void writeScript(Writer writer) throws IOException {
+	protected void writeBodyCM(Writer writer) throws IOException {
 		write(writer, "<form>");
 		write(writer, "<textarea id=\"code\" name=\"code\" ></textarea>");
 		write(writer, "</form>");
-		
+
 		write(writer, "<script type=\"text/javascript\" >");
 		writeCommands(writer);
 		write(writer,
@@ -104,7 +112,7 @@ public class CMBuilder extends AbstractCMBuilder {
 			}
 		}
 	}
-	
+
 	@Override
 	protected String getOnLoadBody() {
 		return "CMEclipse.loaded()";
@@ -132,5 +140,11 @@ public class CMBuilder extends AbstractCMBuilder {
 			commands = new LinkedHashMap<String, Command>();
 		}
 		commands.put(command.getName(), command);
+	}
+
+	@Override
+	public void setTheme(Theme theme) {
+		super.setTheme(theme);
+		ThemeOptionUpdater.getInstance().setTheme(this.getOptions(), theme);
 	}
 }

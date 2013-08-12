@@ -23,14 +23,14 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-import codemirror.eclipse.resources.CMResourcesConstants;
 import codemirror.eclipse.swt.CMRunModeControl;
+import codemirror.eclipse.swt.resources.CMResourcesManager;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesAware;
 import codemirror.eclipse.swt.xquery.addon.variables.IVariablesListener;
 import codemirror.eclipse.swt.xquery.addon.variables.ValueHolder;
 import codemirror.eclipse.swt.xquery.addon.variables.Variable;
 import codemirror.eclipse.swt.xquery.addon.variables.VariableHelper;
-import codemirror.eclipse.ui.resources.CMResourcesRegistry;
+import codemirror.eclipse.swt.xquery.builder.CMXQueryBuilder;
 import codemirror.eclipse.ui.xquery.viewers.VariableContentProvider;
 import codemirror.eclipse.ui.xquery.viewers.VariableValueEditingSupport;
 
@@ -66,10 +66,9 @@ public class XQueryVariablesOutlinePage extends Page implements
 		// 3) Create Tree columns with sort of paginated list.
 		createColumns(viewer);
 
-		previewLabel = new CMRunModeControl(CMResourcesRegistry.getRegistry()
-				.getURL(CMResourcesConstants.XQUERY_RUNMODE_HTML), sashForm,
+		previewLabel = new CMRunModeControl(new CMXQueryBuilder(
+				CMResourcesManager.getInstance().getURL("")), sashForm,
 				SWT.NONE);
-		previewLabel.setMode("application/xquery");
 
 		sashForm.setWeights(new int[] { 2, 1 });
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 Angelo ZERR.
+ * Copyright (c) 2013 Angelo ZERR.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,7 +14,7 @@ import java.io.File;
 
 import org.eclipse.swt.widgets.Composite;
 
-import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.Mode;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -23,16 +23,21 @@ import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtil
  */
 public class CMRunModeControl extends AbstractCMControl {
 
-	public CMRunModeControl(File file, Composite parent, int style) {
+	private final Mode mode;
+
+	public CMRunModeControl(File file, Mode mode, Composite parent, int style) {
 		super(file, parent, style);
+		this.mode = mode;
 	}
 
-	public CMRunModeControl(String url, Composite parent, int style) {
+	public CMRunModeControl(String url, Mode mode, Composite parent, int style) {
 		super(url, parent, style);
+		this.mode = mode;
 	}
 
-	public CMRunModeControl(CMBuilder builder, Composite parent, int style) {
+	public CMRunModeControl(ICMHtmlProvider builder, Composite parent, int style) {
 		super(builder, parent, style);
+		this.mode = builder.getMode();
 	}
 
 	@Override
@@ -51,6 +56,10 @@ public class CMRunModeControl extends AbstractCMControl {
 		js.append(getMode());
 		js.append("', document.getElementById('code'));");
 		browser.evaluate(js.toString());
+	}
+
+	private String getMode() {
+		return mode.getMimeType();
 	}
 
 }
