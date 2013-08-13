@@ -19,5 +19,6 @@ Export-Package: codemirror.eclipse.swt,
  codemirror.eclipse.swt.builder.codemirror.addon.search,
  codemirror.eclipse.swt.builder.codemirror.addon.selection,
  codemirror.eclipse.swt.builder.commands,
+ codemirror.eclipse.swt.builder.extension.addon.hover,
  codemirror.eclipse.swt.resources,
  codemirror.eclipse.swt.utils

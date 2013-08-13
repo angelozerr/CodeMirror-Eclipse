@@ -19,9 +19,9 @@ import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOption;
-import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOption;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
+import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;
 
 /**
  * XQuery CodeMirror builder.
@@ -57,9 +57,12 @@ public class CMXQueryBuilder extends CMBuilder {
 		FoldGutterOption fold = options.getFoldGutter();
 		fold.setRangeFinder("new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)");
 
-		//MatchHighlighterOption matchHighlighter = options.getMatchHighlighter();
-		//matchHighlighter.setShowToken("/[\\w|-]/");
+		// MatchHighlighterOption matchHighlighter =
+		// options.getMatchHighlighter();
+		// matchHighlighter.setShowToken("/[\\w|-]/");
 
+		options.getTextHover(XQueryHover.INSTANCE).setTextHover(true);
+		
 		setTheme(Theme.XQ_LIGHT);
 	}
 

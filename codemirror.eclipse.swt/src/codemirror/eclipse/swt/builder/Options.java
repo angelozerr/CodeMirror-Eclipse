@@ -17,6 +17,9 @@ import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOption;
 import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.selection.ActiveLineOptionUpdater;
+import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverImpl;
+import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverOption;
+import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverOptionUpdater;
 
 public class Options extends BaseOptions {
 
@@ -92,6 +95,11 @@ public class Options extends BaseOptions {
 	public MatchHighlighterOption getMatchHighlighter() {
 		return MatchHighlighterOptionUpdater.getInstance().getMatchHighlighter(
 				this);
+	}
+
+	public TextHoverOption getTextHover(TextHoverImpl textHover) {
+		return TextHoverOptionUpdater.getInstance().getTextHover(this,
+				textHover);
 	}
 
 	// ----------------------------- Theme
