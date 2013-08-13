@@ -62,9 +62,9 @@ public class CMControl extends AbstractCMControl {
 
 	protected void doSetText(String text) {
 		String js = new StringBuilder(
-				" cmIsDirtyFired=true; try { editor.setValue( \"")
+				" try { editor.setValue( \"")
 				.append(StringEscapeUtils.escapeEcmaScript(text))
-				.append("\" ); } catch(e){alert(e)}; cmIsDirtyFired=false;return null;")
+				.append("\" ); } catch(e){alert(e)}; return null;")
 				.toString();
 		browser.evaluate(js);
 		dirty = false;

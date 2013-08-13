@@ -131,18 +131,7 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 		write(writer, "<head>");
 		writeHtmlHead(writer);
 		write(writer, "</head>");
-		write(writer, "<body");
-		String onload = getOnLoadBody();
-		if (onload != null) {
-			write(writer, " onload=\"");
-			write(writer, onload);
-			write(writer, "\"");
-		}
-		write(writer, ">");
-	}
-
-	protected String getOnLoadBody() {
-		return null;
+		write(writer, "<body>", false);
 	}
 
 	protected void writeHtmlHead(Writer writer) throws IOException {

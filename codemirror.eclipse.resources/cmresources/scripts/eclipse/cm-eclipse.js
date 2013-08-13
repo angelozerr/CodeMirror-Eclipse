@@ -34,15 +34,15 @@ var CMEclipse = (function() {
 	}
 
 	return {
-		loaded : function() {
-			editor.on('change', function() {
+		loaded : function(cm) {
+			cm.on('change', function() {
 				dirty = true;
 				if (typeof cm_dirty == 'function') {					
 					cm_dirty();
 				}				
 			});
-			setFullScreen(editor, true);
-			editor.clearHistory();
+			setFullScreen(cm, true);
+			cm.clearHistory();
 		},
 		setDirty : function(d) {
 			dirty = d;

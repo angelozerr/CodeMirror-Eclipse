@@ -14,6 +14,8 @@ import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOptionUpda
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOption;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOptionUpdater;
+import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOption;
+import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.selection.ActiveLineOptionUpdater;
 
 public class Options extends BaseOptions {
@@ -82,9 +84,14 @@ public class Options extends BaseOptions {
 	public ExtraKeysOption getExtraKeys() {
 		return ExtraKeysOptionUpdater.getInstance().getExtraKeys(this);
 	}
-	
+
 	public FoldGutterOption getFoldGutter() {
 		return FoldGutterOptionUpdater.getInstance().getFoldGutter(this);
+	}
+
+	public MatchHighlighterOption getMatchHighlighter() {
+		return MatchHighlighterOptionUpdater.getInstance().getMatchHighlighter(
+				this);
 	}
 
 	// ----------------------------- Theme

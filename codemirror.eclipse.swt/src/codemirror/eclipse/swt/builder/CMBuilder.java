@@ -94,6 +94,7 @@ public class CMBuilder extends AbstractCMBuilder {
 				"var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), ");
 		options.write(writer);
 		write(writer, ");");
+		write(writer, "CMEclipse.loaded(editor);");
 		write(writer, "</script>");
 	}
 
@@ -113,11 +114,6 @@ public class CMBuilder extends AbstractCMBuilder {
 		}
 	}
 
-	@Override
-	protected String getOnLoadBody() {
-		return "CMEclipse.loaded()";
-	}
-
 	protected void writeHtmlHead(Writer writer) throws IOException {
 		super.writeHtmlHead(writer);
 
@@ -126,11 +122,16 @@ public class CMBuilder extends AbstractCMBuilder {
 				" .CodeMirror-activeline-background {background: #e8f2ff !important;}\n");
 		write(writer,
 				" .CodeMirror-matchingbracket{outline:1px solid grey; color:black !important;}");
+
+		write(writer, " .CodeMirror-focused .cm-matchhighlight {");
+		write(writer, "background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);");
+		write(writer, "background-position: bottom;");
+		write(writer, "background-repeat: repeat-x;");
+		write(writer, "}");
+
 		write(writer, "</style>");
-
-		write(writer, "</head>");
 	}
-
+	
 	public Options getOptions() {
 		return options;
 	}
