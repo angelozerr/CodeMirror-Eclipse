@@ -9,6 +9,8 @@ import codemirror.eclipse.swt.builder.codemirror.ModeOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.edit.CloseBracketsOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.edit.MatchBracketsOptionUpdater;
+import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOptionUpdater;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOption;
 import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOptionUpdater;
@@ -79,6 +81,10 @@ public class Options extends BaseOptions {
 
 	public ExtraKeysOption getExtraKeys() {
 		return ExtraKeysOptionUpdater.getInstance().getExtraKeys(this);
+	}
+	
+	public FoldGutterOption getFoldGutter() {
+		return FoldGutterOptionUpdater.getInstance().getFoldGutter(this);
 	}
 
 	// ----------------------------- Theme

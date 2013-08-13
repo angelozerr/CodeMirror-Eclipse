@@ -21,8 +21,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
-import codemirror.eclipse.swt.internal.BrowserFactory;
-
 /**
  * Abstract class for CodeMirror control.
  * 

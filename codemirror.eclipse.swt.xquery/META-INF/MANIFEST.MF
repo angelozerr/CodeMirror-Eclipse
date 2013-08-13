@@ -13,4 +13,5 @@ Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt.xquery,
  codemirror.eclipse.swt.xquery.addon.hint,
  codemirror.eclipse.swt.xquery.addon.variables,
- codemirror.eclipse.swt.xquery.builder
+ codemirror.eclipse.swt.xquery.builder,
+ codemirror.eclipse.swt.xquery.builder.commands

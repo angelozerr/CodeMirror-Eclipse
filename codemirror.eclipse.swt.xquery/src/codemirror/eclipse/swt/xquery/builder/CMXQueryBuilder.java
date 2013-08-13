@@ -12,12 +12,13 @@ package codemirror.eclipse.swt.xquery.builder;
 
 import java.util.List;
 
-import codemirror.eclipse.swt.builder.BaseOptions;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Function;
 import codemirror.eclipse.swt.builder.Options;
+import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
+import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
 
@@ -51,19 +52,11 @@ public class CMXQueryBuilder extends CMBuilder {
 
 		// Fold
 		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
-		this.addScript("scripts/codemirror/addon/fold/foldcode.js");
-		this.addScript("scripts/codemirror/addon/fold/foldgutter.js");
-		this.addScript("scripts/codemirror/addon/fold/brace-fold.js");
-		this.addScript("scripts/codemirror/addon/fold/comment-fold.js");
-		this.addStyle("scripts/codemirror-extension/addon/fold/folding.css");
-		BaseOptions o = new BaseOptions(this) {
-			protected boolean isOneOption() {return false;};
-		};
-		o.addOption(
-				"rangeFinder",
-				new Function(
-						"new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)"));
-		options.addOption("foldGutter", o);
+
+		FoldGutterOption fold = options.getFoldGutter();
+		fold.setRangeFinder("new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)");
+
+		setTheme(Theme.XQ_LIGHT);
 	}
 
 	private void installTrackVars(Options options) {

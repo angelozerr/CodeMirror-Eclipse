@@ -14,6 +14,7 @@ import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.Options;
+import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
@@ -45,6 +46,8 @@ public class CMJsonBuilder extends CMBuilder {
 		// Line numbers
 		options.setLineNumbers(true);
 		gutters.add(GuttersOptionUpdater.LINENUMBERS);
+		
+		setTheme(Theme.ECLIPSE);
 	}
 
 	protected void installFormat(Options options) {

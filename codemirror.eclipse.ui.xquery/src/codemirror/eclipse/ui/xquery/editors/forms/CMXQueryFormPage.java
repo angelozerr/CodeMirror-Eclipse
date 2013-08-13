@@ -27,9 +27,17 @@ public abstract class CMXQueryFormPage extends CMFormPage implements
 		super(editor, id, title, url);
 	}
 
+	public CMXQueryFormPage(CMFormEditor editor, String id, String title,
+			CMBuilder builder) {
+		super(editor, id, title, builder);
+	}
+	
 	@Override
 	public CMControl createCM(String url, CMBuilder builder, Composite parent,
 			int style) {
+		if (builder != null) {
+			return new CMXQueryControl(builder, parent, style);
+		}
 		return new CMXQueryControl(url, parent, style);
 	}
 

@@ -204,6 +204,10 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	public String getURL() {
 		return url;
 	}
+	
+	public CMBuilder getBuilder() {
+		return builder;
+	}
 
 	public String loadCM() throws IOException, CoreException {
 		return CMEditorPartHelper.getOperation(getEditorInput()).loadCM(
