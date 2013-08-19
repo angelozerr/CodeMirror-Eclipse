@@ -35,20 +35,24 @@ public class CMControl extends AbstractCMControl {
 	private IValidator validator;
 	private boolean focusToBeSet;
 	private String lineSeparator;
+	private boolean initialized;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style);
 		this.focusToBeSet = false;
+		this.initialized = false;
 	}
 
 	public CMControl(String url, Composite parent, int style) {
 		super(url, parent, style);
 		this.focusToBeSet = false;
+		this.initialized = false;
 	}
 
 	public CMControl(ICMHtmlProvider builder, Composite parent, int style) {
 		super(builder, parent, style);
 		this.focusToBeSet = false;
+		this.initialized = false;
 	}
 
 	@Override
@@ -61,11 +65,19 @@ public class CMControl extends AbstractCMControl {
 	}
 
 	protected void doSetText(String text) {
-		String js = new StringBuilder(
-				" try { editor.setValue( \"")
-				.append(StringEscapeUtils.escapeEcmaScript(text))
-				.append("\" ); } catch(e){alert(e)}; return null;")
-				.toString();
+		String js = null;
+		if (!initialized) {
+			js = new StringBuilder(" try { CMEclipse.setValue(editor, \"")
+					.append(StringEscapeUtils.escapeEcmaScript(text))
+					.append("\" ); } catch(e){alert(e)}; return null;")
+					.toString();
+		} else {
+			js = new StringBuilder(" try { editor.setValue( \"")
+					.append(StringEscapeUtils.escapeEcmaScript(text))
+					.append("\" ); } catch(e){alert(e)}; return null;")
+					.toString();
+		}
+		initialized = true;
 		browser.evaluate(js);
 		dirty = false;
 	}
@@ -105,7 +117,6 @@ public class CMControl extends AbstractCMControl {
 		super.createBrowserFunctions();
 		new BrowserFunction(browser, "cm_dirty") {
 			public Object function(Object[] arguments) {
-
 				dirty = true;
 				notifyDirtyListeners();
 				return null;
@@ -168,7 +179,6 @@ public class CMControl extends AbstractCMControl {
 
 	public void setDirty(boolean dirty) {
 		this.dirty = dirty;
-		browser.evaluate(" cmIsDirtyFired=false");
 		notifyDirtyListeners();
 	}
 

@@ -44,6 +44,10 @@ var CMEclipse = (function() {
 			setFullScreen(cm, true);
 			cm.clearHistory();
 		},
+		setValue : function(cm, text) {
+			cm.setValue(text);
+			cm.clearHistory();
+		},
 		setDirty : function(d) {
 			dirty = d;
 		},

@@ -31,6 +31,9 @@ public class CMXQueryBuilder extends CMBuilder {
 
 	public CMXQueryBuilder(String baseURL) {
 		super(XQueryMode.INSTANCE, baseURL);
+		
+		addScript("scripts/codemirror-xquery/addon/xquery-commons.js");
+		
 		Options options = super.getOptions();
 
 		// brackets
@@ -84,11 +87,11 @@ public class CMXQueryBuilder extends CMBuilder {
 
 	protected void installXQueryHint() {
 		// <!-- CodeMirror-XQuery -->
-		addScript("scripts/codemirror-xquery/addon/hint/xquery/xquery-hint.js");
-		addStyle("scripts/codemirror-xquery/addon/hint/xquery/xquery-hint.css");
-		addScript("scripts/codemirror-xquery/addon/hint/xquery/system-functions.xml.js");
+		addScript("scripts/codemirror-xquery/addon/hint/xquery-hint.js");
+		addStyle("scripts/codemirror-xquery/addon/hint/xquery-hint.css");
+		addScript("scripts/codemirror-xquery/addon/hint/system-functions.xml.js");
 		// XQuery Templates
-		addScript("scripts/codemirror-xquery/addon/hint/xquery/xquery-templates.js");
+		addScript("scripts/codemirror-xquery/addon/hint/xquery-templates.js");
 	}
 
 }
