@@ -15,7 +15,6 @@ import java.io.Writer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 import codemirror.eclipse.swt.builder.commands.Command;
 
 /**

@@ -2,24 +2,22 @@ package codemirror.eclipse.swt.builder;
 
 import java.util.List;
 
-import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
-import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.ModeOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.edit.CloseBracketsOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.edit.MatchBracketsOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOption;
-import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
-import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOption;
-import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOption;
-import codemirror.eclipse.swt.builder.codemirror.addon.search.MatchHighlighterOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.selection.ActiveLineOptionUpdater;
-import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverImpl;
-import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverOption;
-import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.edit.CloseBracketsOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.edit.MatchBracketsOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.hover.TextHoverImpl;
+import codemirror.eclipse.swt.builder.addon.hover.TextHoverOption;
+import codemirror.eclipse.swt.builder.addon.hover.TextHoverOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.hyperlink.HyperlinkImpl;
+import codemirror.eclipse.swt.builder.addon.hyperlink.HyperlinkOption;
+import codemirror.eclipse.swt.builder.addon.hyperlink.HyperlinkOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.lint.LintImpl;
+import codemirror.eclipse.swt.builder.addon.lint.LintOption;
+import codemirror.eclipse.swt.builder.addon.lint.LintOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.search.MatchHighlighterOption;
+import codemirror.eclipse.swt.builder.addon.search.MatchHighlighterOptionUpdater;
+import codemirror.eclipse.swt.builder.addon.selection.ActiveLineOptionUpdater;
 
 public class Options extends BaseOptions {
 
@@ -100,6 +98,11 @@ public class Options extends BaseOptions {
 	public TextHoverOption getTextHover(TextHoverImpl textHover) {
 		return TextHoverOptionUpdater.getInstance().getTextHover(this,
 				textHover);
+	}
+
+	public HyperlinkOption getHyperlink(HyperlinkImpl hyperlink) {
+		return HyperlinkOptionUpdater.getInstance().getHyperlink(this,
+				hyperlink);
 	}
 
 	// ----------------------------- Theme

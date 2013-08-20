@@ -10,7 +10,7 @@
  *******************************************************************************/
 package codemirror.eclipse.swt.json.builder.codemirror.addon.lint;
 
-import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
+import codemirror.eclipse.swt.builder.addon.lint.LintImpl;
 
 /**
  * JSON Lint Implementation.

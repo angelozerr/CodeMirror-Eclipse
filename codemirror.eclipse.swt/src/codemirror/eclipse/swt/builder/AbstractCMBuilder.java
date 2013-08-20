@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import codemirror.eclipse.swt.ICMHtmlProvider;
-import codemirror.eclipse.swt.builder.codemirror.ModeOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.ThemeOptionUpdater;
 
 /**
  * Abstract buider to create HTML content with CodeMirror.

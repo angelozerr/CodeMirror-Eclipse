@@ -10,7 +10,7 @@
  *******************************************************************************/
 package codemirror.eclipse.swt.javascript.builder.codemirror.addon.lint;
 
-import codemirror.eclipse.swt.builder.codemirror.addon.lint.LintImpl;
+import codemirror.eclipse.swt.builder.addon.lint.LintImpl;
 
 /**
  * Javascript Lint Implementation.

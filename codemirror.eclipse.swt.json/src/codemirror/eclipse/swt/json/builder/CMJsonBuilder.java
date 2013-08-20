@@ -13,10 +13,10 @@ package codemirror.eclipse.swt.json.builder;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.ExtraKeysOption;
+import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
-import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
 import codemirror.eclipse.swt.json.builder.commands.JsonFormatCommand;
 

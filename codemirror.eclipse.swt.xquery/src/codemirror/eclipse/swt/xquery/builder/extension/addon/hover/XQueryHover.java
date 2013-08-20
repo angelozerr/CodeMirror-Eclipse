@@ -1,6 +1,6 @@
 package codemirror.eclipse.swt.xquery.builder.extension.addon.hover;
 
-import codemirror.eclipse.swt.builder.extension.addon.hover.TextHoverImpl;
+import codemirror.eclipse.swt.builder.addon.hover.TextHoverImpl;
 
 public class XQueryHover extends TextHoverImpl {
 

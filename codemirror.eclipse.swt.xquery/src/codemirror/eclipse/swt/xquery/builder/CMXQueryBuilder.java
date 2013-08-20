@@ -13,12 +13,12 @@ package codemirror.eclipse.swt.xquery.builder;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.Function;
+import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
-import codemirror.eclipse.swt.builder.codemirror.ExtraKeysOption;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
-import codemirror.eclipse.swt.builder.codemirror.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
 import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;

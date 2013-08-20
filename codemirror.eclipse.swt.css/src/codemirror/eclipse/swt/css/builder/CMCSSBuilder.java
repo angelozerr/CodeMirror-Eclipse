@@ -13,8 +13,8 @@ package codemirror.eclipse.swt.css.builder;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
-import codemirror.eclipse.swt.builder.codemirror.GuttersOptionUpdater;
 
 /**
  * CSS CodeMirror builder.
