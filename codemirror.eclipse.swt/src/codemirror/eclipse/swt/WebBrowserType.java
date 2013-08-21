@@ -10,27 +10,36 @@
  *******************************************************************************/
 package codemirror.eclipse.swt;
 
-import codemirror.eclipse.swt.builder.Mode;
+import org.eclipse.swt.SWT;
 
 /**
- * Provider for HTML CodeMirror.
+ * Web Browser type.
  * 
  */
-public interface ICMHtmlProvider {
+public enum WebBrowserType {
 
-	/**
-	 * Returns the Html content which contains a textarea wrapped with
-	 * CodeMirror.
-	 * 
-	 * @return
-	 */
-	String getHtml();
+	Mozilla(SWT.MOZILLA), WebKit(SWT.WEBKIT), Default(SWT.NONE);
 
-	/**
-	 * Returns the mode of CodeMirror to use.
-	 * 
-	 * @return
-	 */
-	Mode getMode();
+	private final int style;
 
+	private WebBrowserType(int style) {
+		this.style = style;
+	}
+
+	public int getStyle() {
+		return style;
+	}
+
+	public String getName() {
+		return name();
+	}
+
+	public static WebBrowserType getWebBrowserType(String name) {
+		for (WebBrowserType browserType : values()) {
+			if (browserType.getName().equals(name)) {
+				return browserType;
+			}
+		}
+		return WebBrowserType.Default;
+	}
 }

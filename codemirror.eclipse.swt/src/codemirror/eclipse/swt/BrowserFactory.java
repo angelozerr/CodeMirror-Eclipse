@@ -15,25 +15,24 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * SWT {@link Browser} factory which tries to create MOZILLA Browser at first
- * and after create a classic Browser (IE).
+ * SWT {@link Browser} factory.
  * 
  */
 public class BrowserFactory {
 
-	private static int dedaultBrowserStyle = SWT.NONE;
+	private static int defaultBrowserStyle = SWT.NONE;
 
-	public static void setDedaultBrowserStyle(int dedaultBrowserStyle) {
-		BrowserFactory.dedaultBrowserStyle = dedaultBrowserStyle;
+	public static void setDefaultBrowserStyle(int defaultBrowserStyle) {
+		BrowserFactory.defaultBrowserStyle = defaultBrowserStyle;
 	}
 
-	public static int getDedaultBrowserStyle() {
-		return dedaultBrowserStyle;
+	public static int getDefaultBrowserStyle() {
+		return defaultBrowserStyle;
 	}
 
 	public static Browser create(Composite parent, Integer style) {
 		if (style == null) {
-			style = getDedaultBrowserStyle();
+			style = getDefaultBrowserStyle();
 		}
 		// RAP doesn't support MOZILLA
 		/*

@@ -7,9 +7,7 @@ public class FoldGutterOptionUpdater extends AbstractOptionUpdater {
 
 	private static final String[] FOLD_JS = {
 			"scripts/codemirror/addon/fold/foldcode.js",
-			"scripts/codemirror/addon/fold/foldgutter.js",
-			"scripts/codemirror/addon/fold/brace-fold.js",
-			"scripts/codemirror/addon/fold/comment-fold.js" };
+			"scripts/codemirror/addon/fold/foldgutter.js" };
 	private static final String[] FOLD_CSS = { "scripts/codemirror-extension/addon/fold/folding-eclipse.css" };
 
 	private static final String FOLDGUTTER_NAME = "foldGutter";

@@ -15,5 +15,10 @@ package codemirror.eclipse.swt;
  */
 public interface IDirtyListener {
 
+	/**
+	 * call when dirty changed.
+	 * 
+	 * @param dirty
+	 */
 	void dirtyChanged(boolean dirty);
 }

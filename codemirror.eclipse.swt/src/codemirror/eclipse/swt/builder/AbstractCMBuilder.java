@@ -101,13 +101,33 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 		} catch (IOException e) {
 			// Should never thrown
 		}
-		//System.err.println(writer);
+		// System.err.println(writer);
 		return writer.toString();
+	}
+
+	public void addStyles(String[] styles) {
+		if (styles != null) {
+			for (int i = 0; i < styles.length; i++) {
+				this.addStyle(styles[i]);
+			}
+		}
 	}
 
 	public void addStyle(String style) {
 		if (!styles.contains(style)) {
 			styles.add(style);
+		}
+	}
+
+	public void removeStyle(String style) {
+		styles.remove(style);
+	}
+
+	public void addScripts(String[] scripts) {
+		if (scripts != null) {
+			for (int i = 0; i < scripts.length; i++) {
+				this.addScript(scripts[i]);
+			}
 		}
 	}
 
@@ -165,4 +185,5 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 	}
 
 	protected abstract void writeBodyCM(Writer writer) throws IOException;
+
 }

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 package codemirror.eclipse.swt.builder;
 
 import java.io.IOException;
@@ -15,6 +25,7 @@ import java.io.Writer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.commands.Command;
 
 /**
@@ -25,9 +36,11 @@ public class CMBuilder extends AbstractCMBuilder {
 
 	private final Options options;
 	private Map<String, Command> commands;
+	private FoldType[] supportedFoldTypes;
 
 	public CMBuilder(Mode mode, String baseURL) {
 		super(mode, baseURL);
+		this.supportedFoldTypes = FoldType.EMPTY;
 		this.options = createOptions();
 
 		installSearchAddon();
@@ -117,20 +130,17 @@ public class CMBuilder extends AbstractCMBuilder {
 		super.writeHtmlHead(writer);
 
 		write(writer, "<style type=\"text/css\" >");
-		write(writer,
-				" .CodeMirror-activeline-background {background: #e8f2ff !important;}\n");
-		write(writer,
-				" .CodeMirror-matchingbracket{outline:1px solid grey; color:black !important;}");
 
 		write(writer, " .CodeMirror-focused .cm-matchhighlight {");
-		write(writer, "background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);");
+		write(writer,
+				"background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);");
 		write(writer, "background-position: bottom;");
 		write(writer, "background-repeat: repeat-x;");
 		write(writer, "}");
 
 		write(writer, "</style>");
 	}
-	
+
 	public Options getOptions() {
 		return options;
 	}
@@ -147,4 +157,13 @@ public class CMBuilder extends AbstractCMBuilder {
 		super.setTheme(theme);
 		ThemeOptionUpdater.getInstance().setTheme(this.getOptions(), theme);
 	}
+
+	public FoldType[] getSupportedFoldTypes() {
+		return supportedFoldTypes;
+	}
+
+	public void setSupportedFoldTypes(FoldType[] supportedFoldTypes) {
+		this.supportedFoldTypes = supportedFoldTypes;
+	}
+
 }

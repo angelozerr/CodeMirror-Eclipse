@@ -23,6 +23,11 @@ public interface IValidator {
 	 * @return
 	 */
 	String validate(String code);
-	
+
+	/**
+	 * Returns true if validator is asynchronous and false otherwise.
+	 * 
+	 * @return
+	 */
 	boolean isAsync();
 }

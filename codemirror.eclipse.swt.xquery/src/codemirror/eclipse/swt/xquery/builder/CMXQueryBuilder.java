@@ -19,6 +19,7 @@ import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
 import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;
@@ -29,11 +30,13 @@ import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;
  */
 public class CMXQueryBuilder extends CMBuilder {
 
+	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] {
+			FoldType.COMMENT_FOLD, FoldType.BRACE_FOLD, FoldType.XML_FOLD };
+
 	public CMXQueryBuilder(String baseURL) {
 		super(XQueryMode.INSTANCE, baseURL);
-		
 		addScript("scripts/codemirror-xquery/addon/xquery-commons.js");
-		
+
 		Options options = super.getOptions();
 
 		// brackets
@@ -55,17 +58,17 @@ public class CMXQueryBuilder extends CMBuilder {
 		installTrackVars(options);
 
 		// Fold
+		super.setSupportedFoldTypes(SUPPORTED_FOLDTYPE);
 		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
-
 		FoldGutterOption fold = options.getFoldGutter();
-		fold.setRangeFinder("new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)");
+		fold.setRangeFinder(getSupportedFoldTypes());
 
 		// MatchHighlighterOption matchHighlighter =
 		// options.getMatchHighlighter();
 		// matchHighlighter.setShowToken("/[\\w|-]/");
 
 		options.getTextHover(XQueryHover.INSTANCE).setTextHover(true);
-		
+
 		setTheme(Theme.XQ_LIGHT);
 	}
 

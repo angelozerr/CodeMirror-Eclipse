@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 package codemirror.eclipse.swt.builder;
 
 import java.io.IOException;
@@ -10,6 +20,10 @@ import java.util.Set;
 
 import codemirror.eclipse.swt.builder.commands.Command;
 
+/**
+ * Base CodeMirror options.
+ * 
+ */
 public class BaseOptions {
 
 	private final Map<String, Object> options;
@@ -20,11 +34,28 @@ public class BaseOptions {
 		this.options = new LinkedHashMap<String, Object>();
 	}
 
+	/**
+	 * Add the given key/value option.
+	 * 
+	 * @param key
+	 *            the key option.
+	 * @param value
+	 *            the value option.
+	 */
 	public void addOption(String key, Object value) {
 		if (value instanceof Command) {
 			builder.addCommand((Command) value);
 		}
 		options.put(key, value);
+	}
+
+	/**
+	 * Remove the given key option.
+	 * 
+	 * @param key
+	 */
+	public void removeOption(String key) {
+		options.remove(key);
 	}
 
 	public CMBuilder getBuilder() {
@@ -70,7 +101,7 @@ public class BaseOptions {
 		} else if (value instanceof Collection) {
 			boolean first = true;
 			builder.write(writer, "[", false);
-			for (Object item : ((Collection) value)) {
+			for (Object item : ((Collection<?>) value)) {
 				if (!first) {
 					builder.write(writer, ",");
 				}
