@@ -19,6 +19,8 @@ public class Messages extends NLS {
 
 	public static String HoversPreferencePage_hoverEnabled_label;
 	
+	public static String MarkOccurrencesPreferencePage_description;
+	
 	static {
 		// load message values from bundle file
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

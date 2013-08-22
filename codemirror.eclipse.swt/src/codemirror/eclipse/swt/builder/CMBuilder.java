@@ -44,11 +44,8 @@ public class CMBuilder extends AbstractCMBuilder {
 		this.options = createOptions();
 
 		installSearchAddon();
-
-		// <!-- CodeMirror-Extension -->
-		addScript("scripts/codemirror-extension/addon/selection/fullscreen.js");
-		addStyle("scripts/codemirror-extension/addon/selection/fullscreen.css");
-
+		installFullScreenAddon(options);
+		
 		// <!-- SWT Browser - CodeMirror -->
 		addScript("scripts/eclipse/cm-eclipse.js");
 
@@ -66,6 +63,12 @@ public class CMBuilder extends AbstractCMBuilder {
 		addStyle("scripts/codemirror/addon/dialog/dialog.css");
 	}
 
+	protected void installFullScreenAddon(Options options) {
+		addScript("scripts/codemirror/addon/display/fullscreen.js");
+		addStyle("scripts/codemirror-extension/addon/display/fullscreen.css");
+		options.addOption("fullScreen", true);
+	}
+	
 	protected void installHint(boolean withContextInfo, boolean withTemplates) {
 		// <!-- CodeMirror -->
 		addScript("scripts/codemirror/addon/hint/show-hint.js");

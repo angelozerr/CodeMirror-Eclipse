@@ -12,11 +12,13 @@ import codemirror.eclipse.swt.builder.CMBuilderRegistry;
 import codemirror.eclipse.swt.builder.Mode;
 import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
+import codemirror.eclipse.swt.builder.addon.search.MatchHighlighterOption;
+import codemirror.eclipse.swt.builder.addon.search.ShowTokenType;
 
 public class PreferenceHelper {
 
 	public static final String THEME_PREFERENCE_NAME = "theme";
-	public static final String HOVER_ENABLED_PREFERENCE_NAME = "hoverEnabled";
+	public static final String HOVER_ENABLED_PREFERENCE_NAME = "markOc";
 	public static final String BROWSER_PREFERENCE_NAME = "browser";
 
 	public static void initialize(Mode mode, IPreferenceStore store) {
@@ -31,6 +33,8 @@ public class PreferenceHelper {
 		updateFold(builder, store);
 		// Initialize the hover builder from the store
 		updateHover(builder, store);
+		// Initialize the Mark Occurrences builder from the store
+		updateMarkOccurrences(builder, store);
 		// Initialize browser type
 		updateDefaultBrowserType(store);
 	}
@@ -74,7 +78,7 @@ public class PreferenceHelper {
 		builder.getOptions().setTheme(getTheme(store));
 	}
 
-	// ------------------------ Theme
+	// ------------------------ Folding
 
 	/**
 	 * 
@@ -138,5 +142,32 @@ public class PreferenceHelper {
 	public static void setDefaultWebBrowserType(IPreferenceStore store,
 			WebBrowserType browserType) {
 		store.setDefault(BROWSER_PREFERENCE_NAME, browserType.name());
+	}
+
+	// --------------- Match Highlighter
+
+	/**
+	 * 
+	 * @param store
+	 * @param enabled
+	 */
+	public static void setDefaultMarkOccurrences(IPreferenceStore store,
+			ShowTokenType showTokenTypes, boolean enabled) {
+		store.setDefault(showTokenTypes.getType(), enabled);
+	}
+
+	public static void updateMarkOccurrences(CMBuilder builder,
+			IPreferenceStore store) {
+		Collection<ShowTokenType> types = new ArrayList<ShowTokenType>();
+		for (ShowTokenType tokenType : ShowTokenType.getAll()) {
+			if (store.getBoolean(tokenType.getType())) {
+				types.add(tokenType);
+			}
+		}
+
+		MatchHighlighterOption matchHighlighter = builder.getOptions()
+				.getMatchHighlighter();
+		matchHighlighter.setShowTokenTypes(types);
+
 	}
 }

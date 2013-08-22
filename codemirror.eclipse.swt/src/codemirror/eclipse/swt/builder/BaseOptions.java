@@ -111,12 +111,8 @@ public class BaseOptions {
 			builder.write(writer, "]", false);
 		} else if (value instanceof Boolean) {
 			builder.write(writer, (Boolean) value ? "true" : "false", false);
-		} else if (value instanceof Command) {
-			builder.write(writer, "\"", false);
-			builder.write(writer, ((Command) value).getName(), false);
-			builder.write(writer, "\"", false);
-		} else if (value instanceof Function) {
-			builder.write(writer, ((Function) value).getScript(), false);
+		} else if (value instanceof Writable) {
+			((Writable) value).write(builder, writer);
 		} else {
 			builder.write(writer, "\"", false);
 			builder.write(writer, value.toString(), false);

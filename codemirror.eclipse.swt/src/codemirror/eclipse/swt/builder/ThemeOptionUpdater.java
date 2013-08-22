@@ -10,7 +10,7 @@ public class ThemeOptionUpdater extends AbstractOptionUpdater {
 
 	public void setTheme(Options options, Theme theme) {
 		if (theme == null) {
-			Theme oldTheme = (Theme) options.get("theme");
+			Theme oldTheme = Theme.getTheme((String) options.get("theme"));
 			if (oldTheme != null) {
 				removeTheme(options.getBuilder(), oldTheme);
 			}

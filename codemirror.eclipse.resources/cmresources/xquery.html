@@ -10,16 +10,15 @@
 		<script src="scripts/codemirror/mode/xquery/xquery.js"></script>
     	<link rel="stylesheet" href="scripts/codemirror/theme/xq-light.css">
     		    
-		<!-- CodeMirror-Extension -->		    
-		<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
-		<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
-		    
+		<script src="scripts/codemirror/addon/display/fullscreen.js"></script>
+		<link rel="stylesheet" href="scripts/codemirror/addon/display/fullscreen.css">
+			    
 		<!-- SWT Browser - CodeMirror -->
 		<script src="scripts/eclipse/cm-eclipse.js"></script>
 				
 	</head>
 		
-	<body onload="CMEclipse.loaded()" >	
+	<body onload="CMEclipse.loaded(editor)" >	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
@@ -30,6 +29,7 @@
 		        styleActiveLine: true,
 		        lineNumbers: true,
 		        lineWrapping: true,
+		        fullScreen : true,
 		        gutters: ["CodeMirror-linenumbers"],
 		        theme: "xq-light"
 		    });			 

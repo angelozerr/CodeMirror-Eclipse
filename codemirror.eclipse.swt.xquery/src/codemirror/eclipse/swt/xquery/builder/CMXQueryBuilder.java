@@ -10,6 +10,8 @@
  *******************************************************************************/
 package codemirror.eclipse.swt.xquery.builder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
@@ -20,6 +22,8 @@ import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
+import codemirror.eclipse.swt.builder.addon.search.MatchHighlighterOption;
+import codemirror.eclipse.swt.builder.addon.search.ShowTokenType;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
 import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;
@@ -63,9 +67,14 @@ public class CMXQueryBuilder extends CMBuilder {
 		FoldGutterOption fold = options.getFoldGutter();
 		fold.setRangeFinder(getSupportedFoldTypes());
 
-		// MatchHighlighterOption matchHighlighter =
-		// options.getMatchHighlighter();
-		// matchHighlighter.setShowToken("/[\\w|-]/");
+		/*
+		 * MatchHighlighterOption matchHighlighter =
+		 * options.getMatchHighlighter(); Collection<ShowTokenType> tokenTypes =
+		 * new ArrayList<ShowTokenType>();
+		 * tokenTypes.add(ShowTokenType.VARIABLE);
+		 * tokenTypes.add(ShowTokenType.VARIABLE_DEF);
+		 * matchHighlighter.setShowTokenTypes(tokenTypes);
+		 */
 
 		options.getTextHover(XQueryHover.INSTANCE).setTextHover(true);
 

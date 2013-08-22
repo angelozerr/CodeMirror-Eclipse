@@ -1,37 +1,0 @@
-9
-
-dir
-14509
-http://sidoc69d.crd.cnaf/svn/sidoc/trunk/sidoc-ide/codemirror.eclipse.ui.xquery/src/codemirror/eclipse/ui/xquery
-http://sidoc69d.crd.cnaf/svn/sidoc
-
-
-
-2013-05-29T08:50:38.396602Z
-14083
-anzer69n
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-a7d385bf-bc7e-714a-9707-c4acb6f32df4
-
-viewers
-dir
-
-editors
-dir
-
-internal
-dir
-

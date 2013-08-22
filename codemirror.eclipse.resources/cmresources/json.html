@@ -22,11 +22,11 @@
 	    <script src="scripts/jsonlint/jsonlint.js"></script>
 		
 	    <script src="scripts/codemirror/mode/javascript/javascript.js"></script>
-	        		    
-		<!-- CodeMirror-Extension -->		    
-		<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
-		<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
 
+	    <script src="scripts/codemirror/addon/display/fullscreen.js"></script>
+		<link rel="stylesheet" href="scripts/codemirror/addon/display/fullscreen.css">
+		    		    
+		<!-- CodeMirror-Extension -->		    		
 		<script src="scripts/codemirror-extension/addon/format/formatting.js"></script>
 		    
 		<!-- SWT Browser - CodeMirror -->
@@ -38,7 +38,7 @@
 		</style>	
 	</head>
 		
-	<body onload="CMEclipse.loaded()" >	
+	<body onload="CMEclipse.loaded(editor)" >	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
@@ -55,6 +55,7 @@
 		        mode: "application/json",		    
 				lineNumbers: true,	        
 		        styleActiveLine: true,
+		        fullScreen: true,
 		        lineWrapping: true,
 		        autoCloseBrackets: true,
         		matchBrackets: true,
