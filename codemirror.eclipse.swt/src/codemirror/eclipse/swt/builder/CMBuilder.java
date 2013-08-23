@@ -65,7 +65,7 @@ public class CMBuilder extends AbstractCMBuilder {
 
 	protected void installFullScreenAddon(Options options) {
 		addScript("scripts/codemirror/addon/display/fullscreen.js");
-		addStyle("scripts/codemirror-extension/addon/display/fullscreen.css");
+		addStyle("scripts/codemirror/addon/display/fullscreen.css");
 		options.addOption("fullScreen", true);
 	}
 	
