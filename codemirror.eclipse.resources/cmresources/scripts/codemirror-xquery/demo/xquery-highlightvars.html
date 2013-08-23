@@ -13,15 +13,23 @@
 
 	<!-- CodeMirror Extension -->    
   	<script src="../../codemirror-extension/addon/search/match-highlighter.js"></script>
-  	<link rel="stylesheet" href="../../codemirror-extension/addon/search/match-highlighter.css">
   
     <!-- CodeMirror-XQuery -->
     <script src="../addon/xquery-commons.js"></script>            
     <script src="../mode/xquery/xquery.js"></script>
+
+<style type="text/css">
+      .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+      .CodeMirror-focused .cm-matchhighlight {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+        background-position: bottom;
+        background-repeat: repeat-x;
+      }
+    </style>
     
   </head>
   <body>
-    <h1>CodeMirror: XQuery Highligter demo</h1>
+    <h1>CodeMirror: XQuery Autocomplete demo</h1>
 
     <form><textarea id="code" name="code">
 xquery version "1.0-ml";
@@ -256,12 +264,8 @@ declare function oauth2:loginAsMarkLogicUser($username)
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         theme: "xq-light",
-        highlightSelectionMatches: {
-        showTokenTypes: [
-        	{type:"variable",style:"matchhighlight-variable"}
-			,{type:"variable def",style:"matchhighlight-def"}
-		]
-      }});
+        highlightSelectionMatches: {showTokenTypes: ["variable", "variable def"]}
+      });
 		</script>
   </body>
 </html>
