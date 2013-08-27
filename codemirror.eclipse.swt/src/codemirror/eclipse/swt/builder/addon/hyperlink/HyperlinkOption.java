@@ -10,12 +10,13 @@ public class HyperlinkOption extends BaseOptions {
 		super(builder);
 	}
 
-	public void setProcessor(String processor) {
-		super.addOption("processor", processor);
-	}
-
 	public void setOpen(String open) {
 		super.addOption("open", new Function(open));
+	}
+	
+	@Override
+	protected boolean isOneOption() {
+		return false;
 	}
 
 }

@@ -2,7 +2,6 @@ package codemirror.eclipse.ui.xquery.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import codemirror.eclipse.swt.WebBrowserType;
 import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.addon.search.ShowTokenType;
@@ -31,10 +30,10 @@ public class XQueryPreferenceInitializer extends CMPreferenceInitializer {
 		PreferenceHelper.setDefaultHover(store, true);
 
 		// Mark Occurrences
-		PreferenceHelper.setDefaultMarkOccurrences(store,
-				ShowTokenType.VARIABLE, true);
-		PreferenceHelper.setDefaultMarkOccurrences(store,
-				ShowTokenType.VARIABLE_DEF, true);
+//		PreferenceHelper.setDefaultMarkOccurrences(store,
+//				ShowTokenType.VARIABLE, true);
+//		PreferenceHelper.setDefaultMarkOccurrences(store,
+//				ShowTokenType.VARIABLE_DEF, true);
 
 	}
 

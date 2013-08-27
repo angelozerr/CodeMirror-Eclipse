@@ -30,11 +30,13 @@
     setTimeout(function() { rm(tt); }, 600);
   }
 
-  function showTooltipFor(e, content, node) {
+  function showTooltipFor(e, content, node, state) {
     var tooltip = showTooltip(e, content);
     function hide() {
       CodeMirror.off(node, "mouseout", hide);
       CodeMirror.off(node, "click", hide);
+      node.className = node.className.substring(0, node.className.length
+          - ' CodeMirror-hover'.length);
       if (tooltip) { hideTooltip(tooltip); tooltip = null; }
     }
     var poll = setInterval(function() {
@@ -65,10 +67,13 @@
   function onMouseOver(cm, e) {
     var node = e.target || e.srcElement;
     if (node) {
-      var state = cm.state.textHover;      
-      var content = state.options.getTextHover(cm, node, e);
+      var state = cm.state.textHover;
+      var content = state.options.getTextHover(cm, e);
       if (content) {
-        showTooltipFor(e, content, node);
+        node.className += ' CodeMirror-hover'
+        //clearTimeout(state.timeout);
+        //state.timeout = setTimeout(function() {showTooltipFor(e, content, node, state);}, 300);
+        showTooltipFor(e, content, node, state);
       }
     }
   }
@@ -84,7 +89,32 @@
       CodeMirror.on(cm.getWrapperElement(), "mouseover", state.onMouseOver);
     }
   }
-  
+
+  function findTokenAt(cm, pos, text) {
+    var token = cm.getTokenAt(pos);
+    if (token && token.string === text) {
+      return token;
+    }
+    return null;
+  }
+
+  // When the mouseover fires, the cursor might not actually be over
+  // the character itself yet. These pairs of x,y offsets are used to
+  // probe a few nearby points when no suitable marked range is found.
+  var nearby = [ 0, 0, 0, 5, 0, -5, 5, 0, -5, 0 ];
+
+  CodeMirror.defineExtension("findTokenAt", function(e) {
+    var cm = this, node = e.target || e.srcElement, text = node.innerText || node.textContent;
+    for ( var i = 0; i < nearby.length; i += 2) {
+      var pos = cm.coordsChar({
+        left : e.clientX + nearby[i],
+        top : e.clientY + nearby[i + 1]
+      });
+      var token = findTokenAt(cm, pos, text);
+      if (token) return token;
+    }
+  });
+
   CodeMirror.defineOption("textHover", false, optionHandler); // deprecated
   
 })();
