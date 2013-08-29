@@ -19,10 +19,8 @@
     	<script src="scripts/codemirror/addon/search/searchcursor.js"></script>
     	<script src="scripts/codemirror/addon/search/search.js"></script>
     	    		    
-		<!-- CodeMirror-Extension -->		    
-					
-		<script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
-		<link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
+		<script src="scripts/codemirror/addon/display/fullscreen.js"></script>
+		<link rel="stylesheet" href="scripts/codemirror/addon/display/fullscreen.css">
 		    
 		<!-- SWT Browser - CodeMirror -->
 		<script src="scripts/eclipse/cm-eclipse.js"></script>
@@ -33,14 +31,15 @@
 		</style>	
 	</head>
 		
-	<body onload="CMEclipse.loaded()" >	
+	<body>	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
 		<script>
 
 			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-		        mode: "text/xml",		    
+		        mode: "text/xml",	
+		        fullScreen: true,	    
 				lineNumbers: true,	        
 		        styleActiveLine: true,
 		        lineWrapping: true,

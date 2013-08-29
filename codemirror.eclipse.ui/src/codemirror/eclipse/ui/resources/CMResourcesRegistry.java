@@ -54,7 +54,7 @@ public class CMResourcesRegistry extends AbstractRegistry {
 					File baseDir = FileLocator.getBundleFile(Platform
 							.getBundle(pluginID));
 					CMResourcesManager.getInstance().register(resourceId,
-							alias, new File(baseDir, alias));
+							"/" + alias, new File(baseDir, alias));
 				} catch (IOException e) {
 				}
 			}

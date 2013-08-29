@@ -7,7 +7,9 @@ Bundle-SymbolicName: codemirror.eclipse.swt
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.swt;resolution:=optional,
- org.eclipse.rap.rwt;resolution:=optional
+ org.eclipse.rap.rwt;resolution:=optional,
+ org.eclipse.jface;resolution:=optional,
+ org.eclipse.rap.jface;resolution:=optional
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt,
  codemirror.eclipse.swt.addon.lint,

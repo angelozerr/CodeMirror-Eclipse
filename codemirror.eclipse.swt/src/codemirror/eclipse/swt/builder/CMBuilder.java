@@ -109,7 +109,6 @@ public class CMBuilder extends AbstractCMBuilder {
 				"var editor = CodeMirror.fromTextArea(document.getElementById(\"code\"), ");
 		options.write(writer);
 		write(writer, ");");
-		write(writer, "CMEclipse.loaded(editor);");
 		write(writer, "</script>");
 	}
 

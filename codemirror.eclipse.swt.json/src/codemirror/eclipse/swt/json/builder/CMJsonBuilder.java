@@ -17,6 +17,8 @@ import codemirror.eclipse.swt.builder.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.Theme;
+import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.json.builder.codemirror.addon.lint.JsonLint;
 import codemirror.eclipse.swt.json.builder.commands.JsonFormatCommand;
 
@@ -25,6 +27,8 @@ import codemirror.eclipse.swt.json.builder.commands.JsonFormatCommand;
  * 
  */
 public class CMJsonBuilder extends CMBuilder {
+
+	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] { FoldType.BRACE_FOLD };
 
 	public CMJsonBuilder(String baseURL) {
 		super(JsonMode.INSTANCE, baseURL);
@@ -46,7 +50,13 @@ public class CMJsonBuilder extends CMBuilder {
 		// Line numbers
 		options.setLineNumbers(true);
 		gutters.add(GuttersOptionUpdater.LINENUMBERS);
-		
+
+		// Fold
+		super.setSupportedFoldTypes(SUPPORTED_FOLDTYPE);
+		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
+		FoldGutterOption fold = options.getFoldGutter();
+		fold.setRangeFinder(getSupportedFoldTypes());
+
 		setTheme(Theme.ECLIPSE);
 	}
 

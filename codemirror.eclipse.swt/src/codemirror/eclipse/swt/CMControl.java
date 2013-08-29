@@ -77,9 +77,9 @@ public class CMControl extends AbstractCMControl {
 					.append("\" ); } catch(e){alert(e)}; return null;")
 					.toString();
 		}
-		initialized = true;
 		browser.evaluate(js);
-		dirty = false;
+		initialized = true;
+		dirty = !initialized;
 	}
 
 	@Override

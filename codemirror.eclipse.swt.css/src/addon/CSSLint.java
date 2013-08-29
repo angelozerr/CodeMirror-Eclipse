@@ -8,21 +8,20 @@
  * Contributors:      
  *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
  *******************************************************************************/
-package codemirror.eclipse.swt.css.builder;
+package addon;
 
-import codemirror.eclipse.swt.builder.Mode;
+import codemirror.eclipse.swt.builder.addon.lint.LintImpl;
 
 /**
- * CSS CodeMirror mode.
+ * CSS Lint Implementation.
  * 
  */
-public class CSSMode extends Mode {
+public class CSSLint extends LintImpl {
 
-	public static final Mode INSTANCE = new CSSMode();
+	public static final LintImpl INSTANCE = new CSSLint();
 
-	private CSSMode() {
-		super(
-				"css",
-				new String[] { "scripts/codemirror/mode/css/css.js" });
+	public CSSLint() {
+		super(new String[] { "scripts/csslint/csslint.js",
+				"scripts/codemirror/addon/lint/css-lint.js" }, null);
 	}
 }

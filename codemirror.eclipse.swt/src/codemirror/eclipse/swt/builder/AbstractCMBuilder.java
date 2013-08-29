@@ -33,6 +33,9 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 
 	public AbstractCMBuilder(Mode mode, String baseURL) {
 		this.mode = mode;
+		if (!(baseURL.endsWith("/") || baseURL.endsWith("\\"))) {
+			baseURL += "/";
+		}
 		this.baseURL = baseURL;
 		this.styles = new ArrayList<String>();
 		this.scripts = new ArrayList<String>();
@@ -69,7 +72,6 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 	private void insertStyle(Writer writer, String href) throws IOException {
 		write(writer, "<link rel=\"stylesheet\" href=\"");
 		write(writer, baseURL, false);
-		write(writer, "/", false);
 		write(writer, href, false);
 		write(writer, "\">", false);
 	}
@@ -77,7 +79,6 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 	private void insertScript(Writer writer, String src) throws IOException {
 		write(writer, "<script src=\"");
 		write(writer, baseURL, false);
-		write(writer, "/", false);
 		write(writer, src, false);
 		write(writer, "\"> </script>", false);
 	}

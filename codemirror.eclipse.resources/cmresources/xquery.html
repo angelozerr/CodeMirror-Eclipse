@@ -18,13 +18,14 @@
 				
 	</head>
 		
-	<body onload="CMEclipse.loaded(editor)" >	
+	<body>	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
 		<script>
 			var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 		        mode: "xquery",
+		        fullScreen: true,
 				lineNumbers: true,	        
 		        styleActiveLine: true,
 		        lineNumbers: true,

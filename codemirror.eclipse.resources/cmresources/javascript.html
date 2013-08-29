@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="scripts/codemirror/addon/lint/lint.css">
 	<script src="scripts/codemirror/addon/lint/javascript-lint.js"></script>
 
+	<script src="scripts/codemirror/addon/display/fullscreen.js"></script>
+	<link rel="stylesheet" href="scripts/codemirror/addon/display/fullscreen.css">
+		
   <!-- Tern JS -->
   <script src="scripts/ternjs/acorn/acorn.js"></script>
   <script src="scripts/ternjs/acorn/acorn_loose.js"></script>
@@ -46,9 +49,6 @@
   <link rel="stylesheet" href="scripts/codemirror-extension/addon/hint/templates-hint.css">
   <script src="scripts/codemirror-extension/addon/hint/templates-hint.js"></script>
   
-  <script src="scripts/codemirror-extension/addon/selection/fullscreen.js"></script>
-  <link rel="stylesheet" href="scripts/codemirror-extension/addon/selection/fullscreen.css">
-  
   <!-- SWT Browser - CodeMirror -->
   <script src="scripts/eclipse/cm-eclipse.js"></script>
   
@@ -62,7 +62,7 @@
   </head>
   <body>
     
-    <body onload="CMEclipse.loaded()" >	
+    <body>	
 		<form>
 			<textarea id="code" name="code" ></textarea>
 		</form>	
@@ -83,6 +83,7 @@
         
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: 'application/javascript',
+        fullScreen: true,
         theme : "eclipse",
         styleActiveLine: true,
         lineNumbers: true,

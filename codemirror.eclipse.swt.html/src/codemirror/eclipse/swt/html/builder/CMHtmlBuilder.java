@@ -15,12 +15,17 @@ import java.util.List;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
+import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
+import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 
 /**
  * HTML CodeMirror builder.
  * 
  */
 public class CMHtmlBuilder extends CMBuilder {
+
+	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] {
+			FoldType.COMMENT_FOLD, FoldType.BRACE_FOLD, FoldType.XML_FOLD };
 
 	public CMHtmlBuilder(String baseURL) {
 		super(HtmlMode.INSTANCE, baseURL);
@@ -30,6 +35,12 @@ public class CMHtmlBuilder extends CMBuilder {
 		// Line numbers
 		options.setLineNumbers(true);
 		gutters.add(GuttersOptionUpdater.LINENUMBERS);
+
+		// Fold
+		super.setSupportedFoldTypes(SUPPORTED_FOLDTYPE);
+		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
+		FoldGutterOption fold = options.getFoldGutter();
+		fold.setRangeFinder(getSupportedFoldTypes());
 	}
 
 }

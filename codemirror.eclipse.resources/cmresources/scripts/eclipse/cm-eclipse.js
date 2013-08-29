@@ -1,7 +1,5 @@
 var CMEclipse = (function() {
 
-  var dirty = false;
-
   function addAnnotation(error, found) {
     var startLine = error.startLine;
     var startChar = error.startChar;
@@ -34,24 +32,15 @@ var CMEclipse = (function() {
   }
 
   return {
-    loaded : function(cm) {
-      cm.on('change', function() {
-        dirty = true;
-        if (typeof cm_dirty == 'function') {
-          cm_dirty();
-        }
-      });
-      cm.clearHistory();
-    },
     setValue : function(cm, text) {
-      cm.setValue(text);
-      cm.clearHistory();
-    },
-    setDirty : function(d) {
-      dirty = d;
-    },
-    isDirty : function() {
-      return dirty;
+	    cm.setValue(text);
+	    	    cm.clearHistory();
+	      cm.on('change', function() {
+	        if (typeof cm_dirty == 'function') {
+	          cm_dirty();
+	        }
+	      });
+	    
     },
     validate : function(cm, updateLinting, options) {
       if (typeof cm_validate == 'function') {
