@@ -25,8 +25,10 @@ import java.io.Writer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.commands.Command;
+import codemirror.eclipse.swt.builder.commands.SearchCommand;
 
 /**
  * Buider to create HTML content with CodeMirror with textarea.
@@ -43,24 +45,27 @@ public class CMBuilder extends AbstractCMBuilder {
 		this.supportedFoldTypes = FoldType.EMPTY;
 		this.options = createOptions();
 
-		installSearchAddon();
 		installFullScreenAddon(options);
 		
 		// <!-- SWT Browser - CodeMirror -->
 		addScript("scripts/eclipse/cm-eclipse.js");
-
+		installSearchAddon();
+		
 		getOptions().setMode(mode);
 		getOptions().setStyleActiveLine(true);
 		getOptions().setLineWrapping(true);
 		getOptions().setShowCursorWhenSelecting(true);
+		
+		ExtraKeysOption extraKeys = options.getExtraKeys();
+		extraKeys.addOption("Ctrl-F",SearchCommand.INSTANCE);
 
 	}
 
 	protected void installSearchAddon() {
-		addScript("scripts/codemirror/addon/dialog/dialog.js");
+		//addScript("scripts/codemirror/addon/dialog/dialog.js");
 		addScript("scripts/codemirror/addon/search/searchcursor.js");
-		addScript("scripts/codemirror/addon/search/search.js");
-		addStyle("scripts/codemirror/addon/dialog/dialog.css");
+		addScript("scripts/eclipse/cm-eclipse-search.js");
+		//addStyle("scripts/codemirror/addon/dialog/dialog.css");
 	}
 
 	protected void installFullScreenAddon(Options options) {
@@ -131,7 +136,7 @@ public class CMBuilder extends AbstractCMBuilder {
 	protected void writeHtmlHead(Writer writer) throws IOException {
 		super.writeHtmlHead(writer);
 
-		write(writer, "<style type=\"text/css\" >");
+		/*write(writer, "<style type=\"text/css\" >");
 
 		write(writer, " .CodeMirror-focused .cm-matchhighlight {");
 		write(writer,
@@ -140,7 +145,7 @@ public class CMBuilder extends AbstractCMBuilder {
 		write(writer, "background-repeat: repeat-x;");
 		write(writer, "}");
 
-		write(writer, "</style>");
+		write(writer, "</style>");*/
 	}
 
 	public Options getOptions() {

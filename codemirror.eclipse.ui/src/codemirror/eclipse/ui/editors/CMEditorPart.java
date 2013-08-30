@@ -23,12 +23,15 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.search.IFindReplaceTarget;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
+import codemirror.eclipse.ui.internal.search.WorkbenchFindReplaceAction;
 
 public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 
@@ -106,6 +109,7 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 		try {
 			String text = loadCM();
 			this.cm = CMEditorPartHelper.createCM(this, text, parent);
+			cm.setFindReplaceAction(new WorkbenchFindReplaceAction(this));
 		} catch (IOException e) {
 			handleError(e, parent);
 		} catch (CoreException e) {
@@ -170,4 +174,15 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 				.getLineSeparator(getEditorInput());
 	}
 
+	public IWorkbenchPart getWorkbenchPart() {
+		return this;
+	}
+
+	@Override
+	public Object getAdapter(Class adapter) {
+		if (adapter == IFindReplaceTarget.class) {
+			return getCMControl();
+		}
+		return super.getAdapter(adapter);
+	}
 }

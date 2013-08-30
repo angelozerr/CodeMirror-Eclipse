@@ -5,8 +5,8 @@ import java.util.Collection;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import codemirror.eclipse.swt.BrowserFactory;
-import codemirror.eclipse.swt.WebBrowserType;
+import codemirror.eclipse.swt.browser.BrowserFactory;
+import codemirror.eclipse.swt.browser.WebBrowserType;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.CMBuilderRegistry;
 import codemirror.eclipse.swt.builder.Mode;

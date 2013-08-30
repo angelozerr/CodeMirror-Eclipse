@@ -17,7 +17,11 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.IFormPage;
 
+import codemirror.eclipse.swt.search.IFindReplaceTarget;
+
 public abstract class CMFormEditor extends FormEditor {
+
+	private CMFormPage cmPage;
 
 	public void contributeToToolbar(IToolBarManager manager) {
 
@@ -37,5 +41,20 @@ public abstract class CMFormEditor extends FormEditor {
 		if (page != null) {
 			page.setFocus();
 		}
+	}
+
+	@Override
+	public Object getAdapter(Class adapter) {
+		if (adapter == IFindReplaceTarget.class) {
+			if (cmPage != null) {
+				return cmPage.getCMControl();
+			}
+		}
+		return super.getAdapter(adapter);
+	}
+
+	public int addPage(CMFormPage page) throws PartInitException {
+		this.cmPage = page;
+		return super.addPage(page);
 	}
 }

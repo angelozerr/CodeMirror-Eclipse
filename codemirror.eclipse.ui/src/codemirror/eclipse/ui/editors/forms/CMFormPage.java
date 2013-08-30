@@ -25,6 +25,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -33,8 +34,10 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.search.IFindReplaceTarget;
 import codemirror.eclipse.ui.editors.ICMEditorPart;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
+import codemirror.eclipse.ui.internal.search.WorkbenchFindReplaceAction;
 
 public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 
@@ -118,6 +121,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		try {
 			String text = loadCM();
 			this.cm = CMEditorPartHelper.createCM(this, text, body);
+			cm.setFindReplaceAction(new WorkbenchFindReplaceAction(this));
 		} catch (IOException e) {
 			handleLoadError(e, body, toolkit);
 		} catch (CoreException e) {
@@ -204,7 +208,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	public String getURL() {
 		return url;
 	}
-	
+
 	public CMBuilder getBuilder() {
 		return builder;
 	}
@@ -223,5 +227,17 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	public String getLineSeparator() {
 		return CMEditorPartHelper.getOperation(getEditorInput())
 				.getLineSeparator(getEditorInput());
+	}
+
+	public IWorkbenchPart getWorkbenchPart() {
+		return this;
+	}
+	
+	@Override
+	public Object getAdapter(Class adapter) {
+		if (adapter == IFindReplaceTarget.class) {
+			return getCMControl();
+		}
+		return super.getAdapter(adapter);
 	}
 }

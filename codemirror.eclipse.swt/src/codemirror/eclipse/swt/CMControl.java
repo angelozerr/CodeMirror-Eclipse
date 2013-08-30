@@ -17,16 +17,25 @@ import java.util.List;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import codemirror.eclipse.swt.internal.SingleSourcingHelper;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
+import codemirror.eclipse.swt.search.FindReplaceAction;
+import codemirror.eclipse.swt.search.IFindReplaceTarget;
 
 /**
  * CodeMirror control.
  * 
  */
-public class CMControl extends AbstractCMControl {
+public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
+
+	private static final String CM_VALIDATE = "cm_validate";
+
+	private static final String CM_DIRTY = "cm_dirty";
+
+	public static final String CM_OPEN_SEARCH = "cm_openSearch";
 
 	private static final String CM_REFOCUS_JS = "editor.focus();";
 
@@ -36,6 +45,8 @@ public class CMControl extends AbstractCMControl {
 	private boolean focusToBeSet;
 	private String lineSeparator;
 	private boolean initialized;
+
+	protected FindReplaceAction findReplaceAction;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style);
@@ -115,7 +126,7 @@ public class CMControl extends AbstractCMControl {
 	@Override
 	protected void createBrowserFunctions() {
 		super.createBrowserFunctions();
-		new BrowserFunction(browser, "cm_dirty") {
+		new BrowserFunction(browser, CM_DIRTY) {
 			public Object function(Object[] arguments) {
 				dirty = true;
 				notifyDirtyListeners();
@@ -123,7 +134,7 @@ public class CMControl extends AbstractCMControl {
 			}
 		};
 
-		new BrowserFunction(browser, "cm_validate") {
+		new BrowserFunction(browser, CM_VALIDATE) {
 			public Object function(Object[] arguments) {
 				final IValidator validator = getValidator();
 				if (validator != null) {
@@ -156,6 +167,25 @@ public class CMControl extends AbstractCMControl {
 						}
 					}
 				}
+				return null;
+			}
+		};
+
+		new BrowserFunction(browser, CM_OPEN_SEARCH) {
+
+			public Object function(Object[] arguments) {
+				if (findReplaceAction == null) {
+					Shell shell = getShell();
+					findReplaceAction = new FindReplaceAction(shell,
+							CMControl.this);
+				}
+				findReplaceAction.run();
+
+				/*
+				 * FindReplaceDialog fDialog = new FindReplaceDialog(shell);
+				 * fDialog.create(); fDialog.updateTarget(CMControl.this);
+				 * fDialog.open(); System.err.println("dede");
+				 */
 				return null;
 			}
 		};
@@ -207,5 +237,31 @@ public class CMControl extends AbstractCMControl {
 		script.append(command);
 		script.append("\");");
 		browser.evaluate(script.toString());
+	}
+
+	public void search(String query, boolean forwardSearch) {
+		StringBuilder script = new StringBuilder("CMEclipse.search(editor,\"");
+		script.append(query);
+		script.append("\",");
+		script.append(forwardSearch);
+		script.append(");");
+		browser.evaluate(script.toString());
+	}
+
+	public boolean isEditable() {
+		return true;
+	}
+
+	public FindReplaceAction getFindReplaceAction() {
+		return findReplaceAction;
+	}
+
+	public void setFindReplaceAction(FindReplaceAction findReplaceAction) {
+		this.findReplaceAction = findReplaceAction;
+	}
+	
+	@Override
+	public boolean canPerformFind() {
+		return true;
 	}
 }

@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.swt;resolution:=optional,
 Bundle-ClassPath: .
 Export-Package: codemirror.eclipse.swt,
  codemirror.eclipse.swt.addon.lint,
+ codemirror.eclipse.swt.browser,
  codemirror.eclipse.swt.builder,
  codemirror.eclipse.swt.builder.addon.edit,
  codemirror.eclipse.swt.builder.addon.fold,
@@ -23,4 +24,5 @@ Export-Package: codemirror.eclipse.swt,
  codemirror.eclipse.swt.builder.addon.selection,
  codemirror.eclipse.swt.builder.commands,
  codemirror.eclipse.swt.resources,
+ codemirror.eclipse.swt.search,
  codemirror.eclipse.swt.utils

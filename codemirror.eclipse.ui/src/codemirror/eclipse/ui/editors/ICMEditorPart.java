@@ -15,6 +15,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IWorkbenchPart;
 
 import codemirror.eclipse.swt.CMControl;
 import codemirror.eclipse.swt.IValidator;
@@ -40,5 +41,7 @@ public interface ICMEditorPart {
 	String loadCM() throws IOException, CoreException;
 
 	String getLineSeparator();
+
+	IWorkbenchPart getWorkbenchPart();
 
 }

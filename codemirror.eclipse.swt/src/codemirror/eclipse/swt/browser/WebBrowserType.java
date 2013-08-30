@@ -8,7 +8,7 @@
  * Contributors:      
  *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
  *******************************************************************************/
-package codemirror.eclipse.swt;
+package codemirror.eclipse.swt.browser;
 
 import org.eclipse.swt.SWT;
 

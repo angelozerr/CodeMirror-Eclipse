@@ -21,6 +21,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Layout;
 
+import codemirror.eclipse.swt.browser.BrowserFactory;
+
 /**
  * Abstract class for CodeMirror control.
  * 
@@ -30,7 +32,6 @@ public abstract class AbstractCMControl extends Composite {
 	protected final Browser browser;
 	private String textToBeSet;
 	private boolean loaded;
-	private boolean isReady;
 
 	public AbstractCMControl(String url, Composite parent, int style) {
 		this(url, null, parent, style);
@@ -93,18 +94,6 @@ public abstract class AbstractCMControl extends Composite {
 	}
 
 	protected void createBrowserFunctions() {
-		new BrowserFunction(browser, "ready") {
-
-			public Object function(Object[] arguments) {
-
-				isReady = true;
-				if (textToBeSet != null) {
-					doSetText(textToBeSet);
-					textToBeSet = null;
-				}
-				return null;
-			}
-		};
 	}
 
 	@Override
