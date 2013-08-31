@@ -25,7 +25,7 @@ public abstract class AbstractCMSample {
 	protected void createUI() throws FileNotFoundException {
 		CMResourcesInitializer.getInstance()
 				.initialize(
-						new File("../"
+						new File("../../core/"
 								+ CMResourcesInitializer.getInstance()
 										.getResourceId()));
 		createUI(getURL(), getBuilder());
