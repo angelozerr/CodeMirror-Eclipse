@@ -13,4 +13,33 @@
       </editor>
    </extension>
    
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="codemirror.eclipse.ui.json.preferences.JsonEditorPreferenceInitializer">
+         </initializer>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">      
+      <page
+            class="codemirror.eclipse.ui.json.preferences.JsonEditorPreferencePage"
+            id="codemirror.eclipse.ui.json.preferences.JsonEditorPreferencePage"
+            category="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%JsonEditorPreferencePage.name">
+      </page>                
+      <page
+            class="codemirror.eclipse.ui.json.preferences.JsonThemePreferencePage"
+            id="codemirror.eclipse.ui.json.preferences.JsonThemePreferencePage"
+            category="codemirror.eclipse.ui.json.preferences.JsonEditorPreferencePage"
+            name="%JsonThemePreferencePage.name">
+      </page>
+      <page
+            class="codemirror.eclipse.ui.json.preferences.JsonFoldingPreferencePage"
+            id="codemirror.eclipse.ui.json.preferences.JsonFoldingPreferencePage"
+            category="codemirror.eclipse.ui.json.preferences.JsonEditorPreferencePage"
+            name="%JsonFoldingPreferencePage.name">
+      </page>
+   </extension>
+      
 </plugin>

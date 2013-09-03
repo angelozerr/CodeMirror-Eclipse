@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -43,10 +44,10 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 	private IValidator validator;
 	private boolean focusToBeSet;
-	private String lineSeparator;
+	private String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$;
 	private boolean initialized;
 
-	protected FindReplaceAction findReplaceAction;
+	protected Action findReplaceAction;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style);
@@ -180,12 +181,6 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 							CMControl.this);
 				}
 				findReplaceAction.run();
-
-				/*
-				 * FindReplaceDialog fDialog = new FindReplaceDialog(shell);
-				 * fDialog.create(); fDialog.updateTarget(CMControl.this);
-				 * fDialog.open(); System.err.println("dede");
-				 */
 				return null;
 			}
 		};
@@ -239,29 +234,57 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 		browser.evaluate(script.toString());
 	}
 
-	public void search(String query, boolean forwardSearch) {
-		StringBuilder script = new StringBuilder("CMEclipse.search(editor,\"");
+	public boolean findNext(String query, boolean forwardSearch,
+			boolean withOverlay) {
+		StringBuilder script = new StringBuilder(
+				"return CMEclipse.search(editor,\"");
 		script.append(query);
 		script.append("\",");
-		script.append(forwardSearch);
+		script.append(!forwardSearch);
+		script.append(",");
+		script.append(withOverlay);
 		script.append(");");
-		browser.evaluate(script.toString());
+		return (Boolean) browser.evaluate(script.toString());
+	}
+
+	public int replaceAll(String query, String text) {
+		StringBuilder script = new StringBuilder(
+				"return CMEclipse.replaceAll(editor,\"");
+		script.append(query);
+		script.append("\",\"");
+		script.append(text);
+		script.append("\");");
+		return ((Double) browser.evaluate(script.toString())).intValue();
 	}
 
 	public boolean isEditable() {
 		return true;
 	}
 
-	public FindReplaceAction getFindReplaceAction() {
+	public Action getFindReplaceAction() {
 		return findReplaceAction;
 	}
 
-	public void setFindReplaceAction(FindReplaceAction findReplaceAction) {
+	public void setFindReplaceAction(Action findReplaceAction) {
 		this.findReplaceAction = findReplaceAction;
 	}
-	
-	@Override
+
 	public boolean canPerformFind() {
 		return true;
+	}
+
+	public String getSelectionText() {
+		if (isLoaded()) {
+			return (String) browser.evaluate("return editor.getSelection();");
+		} else {
+			return "";
+		}
+	}
+
+	public void replaceSelection(String replaceString) {
+		StringBuilder script = new StringBuilder("editor.replaceSelection(\"");
+		script.append(replaceString);
+		script.append("\");");
+		browser.evaluate(script.toString());
 	}
 }

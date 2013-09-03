@@ -15,4 +15,13 @@
     </operation>
  </extension>
  
+	<extension
+         point="org.eclipse.ui.preferencePages">
+	  <page
+            class="codemirror.eclipse.ui.internal.preferences.CodeMirrorPreferencePage"
+            id="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%CodeMirrorPreferencePage.name">
+      </page>  
+	</extension>       	          
+    
 </plugin>

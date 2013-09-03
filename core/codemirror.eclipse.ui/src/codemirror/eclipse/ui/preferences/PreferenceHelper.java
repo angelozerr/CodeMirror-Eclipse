@@ -18,7 +18,7 @@ import codemirror.eclipse.swt.builder.addon.search.ShowTokenType;
 public class PreferenceHelper {
 
 	public static final String THEME_PREFERENCE_NAME = "theme";
-	public static final String HOVER_ENABLED_PREFERENCE_NAME = "markOc";
+	public static final String HOVER_ENABLED_PREFERENCE_NAME = "hover";
 	public static final String BROWSER_PREFERENCE_NAME = "browser";
 
 	public static void initialize(Mode mode, IPreferenceStore store) {

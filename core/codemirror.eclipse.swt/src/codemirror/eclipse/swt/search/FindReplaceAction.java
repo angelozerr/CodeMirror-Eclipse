@@ -1,6 +1,8 @@
 package codemirror.eclipse.swt.search;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.DialogSettings;
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.IPageChangedListener;
 import org.eclipse.jface.dialogs.PageChangedEvent;
 import org.eclipse.swt.events.DisposeEvent;
@@ -72,8 +74,8 @@ public class FindReplaceAction extends Action {
 		 *            the shell if no site is used
 		 * @since 3.3
 		 */
-		public FindReplaceDialogStub(Shell shell) {
-			fDialog = new FindReplaceDialog(shell);
+		public FindReplaceDialogStub(Shell shell, IDialogSettings settings) {
+			fDialog = new FindReplaceDialog(shell, settings);
 			fDialog.create();
 			fDialog.getShell().addDisposeListener(this);
 		}
@@ -215,29 +217,28 @@ public class FindReplaceAction extends Action {
 		final boolean isEditable;
 
 		if (fShell == null) {
-			/*if (fgFindReplaceDialogStub != null) {
-				Shell shell = fWorkbenchPart.getSite().getShell();
-				fgFindReplaceDialogStub.checkShell(shell);
-			}
-			if (fgFindReplaceDialogStub == null)
-				fgFindReplaceDialogStub = new FindReplaceDialogStub(
-						fWorkbenchPart.getSite());
-
-			if (fWorkbenchPart instanceof ITextEditorExtension2)
-				isEditable = ((ITextEditorExtension2) fWorkbenchPart)
-						.isEditorInputModifiable();
-			else
-				isEditable = fTarget.isEditable();
-*/
+			/*
+			 * if (fgFindReplaceDialogStub != null) { Shell shell =
+			 * fWorkbenchPart.getSite().getShell();
+			 * fgFindReplaceDialogStub.checkShell(shell); } if
+			 * (fgFindReplaceDialogStub == null) fgFindReplaceDialogStub = new
+			 * FindReplaceDialogStub( fWorkbenchPart.getSite());
+			 * 
+			 * if (fWorkbenchPart instanceof ITextEditorExtension2) isEditable =
+			 * ((ITextEditorExtension2) fWorkbenchPart)
+			 * .isEditorInputModifiable(); else isEditable =
+			 * fTarget.isEditable();
+			 */
 			dialog = fgFindReplaceDialogStub.getDialog();
 			isEditable = false;
 		} else {
 			if (fgFindReplaceDialogStubShell != null) {
 				fgFindReplaceDialogStubShell.checkShell(fShell);
 			}
-			if (fgFindReplaceDialogStubShell == null)
-				fgFindReplaceDialogStubShell = new FindReplaceDialogStub(fShell);
-
+			if (fgFindReplaceDialogStubShell == null) {
+				fgFindReplaceDialogStubShell = new FindReplaceDialogStub(
+						fShell, new DialogSettings("codemirror"));
+			}
 			isEditable = fTarget.isEditable();
 			dialog = fgFindReplaceDialogStubShell.getDialog();
 		}

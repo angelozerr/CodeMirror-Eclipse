@@ -9,8 +9,16 @@ public interface IFindReplaceTarget {
 	 */
 	boolean isEditable();
 
-	void search(String findString, boolean b);
+	boolean findNext(String findString, boolean forwardSearch,
+			boolean withOverlay);
+
+	int replaceAll(String query, String text);
 
 	boolean canPerformFind();
 
+	String getSelectionText();
+
+	void replaceSelection(String replaceString);
+
+	String getLineSeparator();
 }

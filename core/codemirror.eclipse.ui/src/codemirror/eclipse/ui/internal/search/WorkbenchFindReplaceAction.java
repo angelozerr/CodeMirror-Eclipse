@@ -16,42 +16,44 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import codemirror.eclipse.swt.search.FindReplaceAction;
 import codemirror.eclipse.swt.search.FindReplaceDialog;
 import codemirror.eclipse.swt.search.IFindReplaceTarget;
-
+import codemirror.eclipse.ui.internal.Activator;
 
 /**
- * An action which opens a Find/Replace dialog.
- * The dialog while open, tracks the active workbench part
- * and retargets itself to the active find/replace target.
+ * An action which opens a Find/Replace dialog. The dialog while open, tracks
+ * the active workbench part and retargets itself to the active find/replace
+ * target.
  * <p>
- * It can also be used without having an IWorkbenchPart e.g. for
- * dialogs or wizards by just providing a {@link Shell} and an {@link IFindReplaceTarget}.
+ * It can also be used without having an IWorkbenchPart e.g. for dialogs or
+ * wizards by just providing a {@link Shell} and an {@link IFindReplaceTarget}.
  * <em>In this case the dialog won't be shared with the one
  * used for the active workbench part.</em>
  * </p>
  * <p>
  * This class may be instantiated; it is not intended to be subclassed.
  * </p>
- *
+ * 
  * @see IFindReplaceTarget
  * @noextend This class is not intended to be subclassed by clients.
  */
-public class WorkbenchFindReplaceAction extends FindReplaceAction  {
+public class WorkbenchFindReplaceAction extends Action {
 
 	/**
-	 * Represents the "global" find/replace dialog. It tracks the active
-	 * part and retargets the find/replace dialog accordingly. The find/replace
+	 * Represents the "global" find/replace dialog. It tracks the active part
+	 * and retargets the find/replace dialog accordingly. The find/replace
 	 * target is retrieved from the active part using
 	 * <code>getAdapter(IFindReplaceTarget.class)</code>.
 	 * <p>
-	 * The stub has the same life cycle as the find/replace dialog.</p>
+	 * The stub has the same life cycle as the find/replace dialog.
+	 * </p>
 	 * <p>
-	 * If no IWorkbenchPart is available a Shell must be provided
-	 * In this case the IFindReplaceTarget will never change.</p>
+	 * If no IWorkbenchPart is available a Shell must be provided In this case
+	 * the IFindReplaceTarget will never change.
+	 * </p>
 	 */
-	static class FindReplaceDialogStub implements IPartListener2, IPageChangedListener, DisposeListener {
+	static class FindReplaceDialogStub implements IPartListener2,
+			IPageChangedListener, DisposeListener {
 
 		/** The workbench part */
 		private IWorkbenchPart fPart;
@@ -66,26 +68,31 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 		private FindReplaceDialog fDialog;
 
 		/**
-		 * Creates a new find/replace dialog accessor anchored at the given part site.
-		 *
-		 * @param site the part site
+		 * Creates a new find/replace dialog accessor anchored at the given part
+		 * site.
+		 * 
+		 * @param site
+		 *            the part site
 		 */
 		public FindReplaceDialogStub(IWorkbenchPartSite site) {
 			this(site.getShell());
-			fWindow= site.getWorkbenchWindow();
-			IPartService service= fWindow.getPartService();
+			fWindow = site.getWorkbenchWindow();
+			IPartService service = fWindow.getPartService();
 			service.addPartListener(this);
 			partActivated(service.getActivePart());
 		}
 
 		/**
-		 * Creates a new find/replace dialog accessor anchored at the given shell.
-		 *
-		 * @param shell the shell if no site is used
+		 * Creates a new find/replace dialog accessor anchored at the given
+		 * shell.
+		 * 
+		 * @param shell
+		 *            the shell if no site is used
 		 * @since 3.3
 		 */
 		public FindReplaceDialogStub(Shell shell) {
-			fDialog= new FindReplaceDialog(shell);
+			fDialog = new FindReplaceDialog(shell, Activator.getDefault()
+					.getDialogSettings());
 			fDialog.create();
 			fDialog.getShell().addDisposeListener(this);
 		}
@@ -100,53 +107,62 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 		}
 
 		private void partActivated(IWorkbenchPart part) {
-			IFindReplaceTarget target= part == null ? null : (IFindReplaceTarget) part.getAdapter(IFindReplaceTarget.class);
-			fPreviousPart= fPart;
-			fPart= target == null ? null : part;
+			IFindReplaceTarget target = part == null ? null
+					: (IFindReplaceTarget) part
+							.getAdapter(IFindReplaceTarget.class);
+			fPreviousPart = fPart;
+			fPart = target == null ? null : part;
 
 			if (fPreviousTarget != target) {
-				fPreviousTarget= target;
+				fPreviousTarget = target;
 				if (fDialog != null) {
-					boolean isEditable= false;
-					/*if (fPart instanceof ITextEditorExtension2) {
-						ITextEditorExtension2 extension= (ITextEditorExtension2) fPart;
-						isEditable= extension.isEditorInputModifiable();
-					} else*/ 
+					boolean isEditable = false;
+					/*
+					 * if (fPart instanceof ITextEditorExtension2) {
+					 * ITextEditorExtension2 extension= (ITextEditorExtension2)
+					 * fPart; isEditable= extension.isEditorInputModifiable(); }
+					 * else
+					 */
 					if (target != null)
-						isEditable= target.isEditable();
+						isEditable = target.isEditable();
 					fDialog.updateTarget(target, isEditable, false);
 				}
 			}
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partActivated(org.eclipse.ui.IWorkbenchPartReference)
+		 * @see org.eclipse.ui.IPartListener2#partActivated(org.eclipse.ui.
+		 * IWorkbenchPartReference)
 		 */
 		public void partActivated(IWorkbenchPartReference partRef) {
 			partActivated(partRef.getPart(true));
 		}
 
 		/*
-		 * @see org.eclipse.jface.dialogs.IPageChangedListener#pageChanged(org.eclipse.jface.dialogs.PageChangedEvent)
+		 * @see
+		 * org.eclipse.jface.dialogs.IPageChangedListener#pageChanged(org.eclipse
+		 * .jface.dialogs.PageChangedEvent)
+		 * 
 		 * @since 3.5
 		 */
 		public void pageChanged(PageChangedEvent event) {
 			if (event.getSource() instanceof IWorkbenchPart)
-				partActivated((IWorkbenchPart)event.getSource());
+				partActivated((IWorkbenchPart) event.getSource());
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partClosed(org.eclipse.ui.IWorkbenchPartReference)
+		 * @see org.eclipse.ui.IPartListener2#partClosed(org.eclipse.ui.
+		 * IWorkbenchPartReference)
 		 */
 		public void partClosed(IWorkbenchPartReference partRef) {
-			IWorkbenchPart part= partRef.getPart(true);
+			IWorkbenchPart part = partRef.getPart(true);
 			if (part == fPreviousPart) {
-				fPreviousPart= null;
-				fPreviousTarget= null;
+				fPreviousPart = null;
+				fPreviousTarget = null;
 			}
 
 			if (part == fPart)
-				partActivated((IWorkbenchPart)null);
+				partActivated((IWorkbenchPart) null);
 		}
 
 		/*
@@ -155,74 +171,86 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 		public void widgetDisposed(DisposeEvent event) {
 
 			if (fgFindReplaceDialogStub == this)
-				fgFindReplaceDialogStub= null;
+				fgFindReplaceDialogStub = null;
 
-			if(fgFindReplaceDialogStubShell == this)
-				fgFindReplaceDialogStubShell= null;
+			if (fgFindReplaceDialogStubShell == this)
+				fgFindReplaceDialogStubShell = null;
 
 			if (fWindow != null) {
 				fWindow.getPartService().removePartListener(this);
-				fWindow= null;
+				fWindow = null;
 			}
-			fDialog= null;
-			fPart= null;
-			fPreviousPart= null;
-			fPreviousTarget= null;
+			fDialog = null;
+			fPart = null;
+			fPreviousPart = null;
+			fPreviousTarget = null;
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partOpened(IWorkbenchPartReference)
+		 * @see
+		 * org.eclipse.ui.IPartListener2#partOpened(IWorkbenchPartReference)
 		 */
 		public void partOpened(IWorkbenchPartReference partRef) {
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partDeactivated(IWorkbenchPartReference)
+		 * @see
+		 * org.eclipse.ui.IPartListener2#partDeactivated(IWorkbenchPartReference
+		 * )
 		 */
 		public void partDeactivated(IWorkbenchPartReference partRef) {
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partBroughtToTop(IWorkbenchPartReference)
+		 * @see
+		 * org.eclipse.ui.IPartListener2#partBroughtToTop(IWorkbenchPartReference
+		 * )
 		 */
 		public void partBroughtToTop(IWorkbenchPartReference partRef) {
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partHidden(org.eclipse.ui.IWorkbenchPartReference)
+		 * @see org.eclipse.ui.IPartListener2#partHidden(org.eclipse.ui.
+		 * IWorkbenchPartReference)
+		 * 
 		 * @since 3.5
 		 */
 		public void partHidden(IWorkbenchPartReference partRef) {
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partInputChanged(org.eclipse.ui.IWorkbenchPartReference)
+		 * @see org.eclipse.ui.IPartListener2#partInputChanged(org.eclipse.ui.
+		 * IWorkbenchPartReference)
+		 * 
 		 * @since 3.5
 		 */
 		public void partInputChanged(IWorkbenchPartReference partRef) {
 		}
 
 		/*
-		 * @see org.eclipse.ui.IPartListener2#partVisible(org.eclipse.ui.IWorkbenchPartReference)
+		 * @see org.eclipse.ui.IPartListener2#partVisible(org.eclipse.ui.
+		 * IWorkbenchPartReference)
+		 * 
 		 * @since 3.5
 		 */
 		public void partVisible(IWorkbenchPartReference partRef) {
 		}
 
 		/**
-		 * Checks if the dialogs shell is the same as the given <code>shell</code> and if not clears
-		 * the stub and closes the dialog.
+		 * Checks if the dialogs shell is the same as the given
+		 * <code>shell</code> and if not clears the stub and closes the dialog.
 		 * 
-		 * @param shell the shell check
+		 * @param shell
+		 *            the shell check
 		 * @since 3.3
 		 */
 		public void checkShell(Shell shell) {
 			if (fDialog != null && shell != fDialog.getParentShell()) {
 				if (fgFindReplaceDialogStub == this)
-					fgFindReplaceDialogStub= null;
+					fgFindReplaceDialogStub = null;
 
 				if (fgFindReplaceDialogStubShell == this)
-					fgFindReplaceDialogStubShell= null;
+					fgFindReplaceDialogStubShell = null;
 
 				fDialog.close();
 			}
@@ -230,17 +258,20 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 
 	}
 
+	/**
+	 * Listener for disabling the dialog on shell close.
+	 * <p>
+	 * This stub is shared amongst <code>IWorkbenchPart</code>s.
+	 * </p>
+	 */
+	private static FindReplaceDialogStub fgFindReplaceDialogStub;
 
 	/**
 	 * Listener for disabling the dialog on shell close.
 	 * <p>
-	 * This stub is shared amongst <code>IWorkbenchPart</code>s.</p>
-	 */
-	private static FindReplaceDialogStub fgFindReplaceDialogStub;
-
-	/** Listener for disabling the dialog on shell close.
-	 * <p>
-	 * This stub is shared amongst <code>Shell</code>s.</p>
+	 * This stub is shared amongst <code>Shell</code>s.
+	 * </p>
+	 * 
 	 * @since 3.3
 	 */
 	private static FindReplaceDialogStub fgFindReplaceDialogStubShell;
@@ -253,6 +284,7 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 	private IWorkbenchWindow fWorkbenchWindow;
 	/**
 	 * The shell to use if the action is created with a shell.
+	 * 
 	 * @since 3.3
 	 */
 	private Shell fShell;
@@ -260,48 +292,59 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 	/**
 	 * Creates a new find/replace action for the given workbench part.
 	 * <p>
-	 * The action configures its visual representation from the given
-	 * resource bundle.</p>
-	 *
-	 * @param bundle the resource bundle
-	 * @param prefix a prefix to be prepended to the various resource keys
-	 *   (described in <code>ResourceAction</code> constructor), or
-	 *   <code>null</code> if none
-	 * @param workbenchPart	 the workbench part
+	 * The action configures its visual representation from the given resource
+	 * bundle.
+	 * </p>
+	 * 
+	 * @param bundle
+	 *            the resource bundle
+	 * @param prefix
+	 *            a prefix to be prepended to the various resource keys
+	 *            (described in <code>ResourceAction</code> constructor), or
+	 *            <code>null</code> if none
+	 * @param workbenchPart
+	 *            the workbench part
 	 * @see ResourceAction#ResourceAction(ResourceBundle, String)
 	 */
 	public WorkbenchFindReplaceAction(IWorkbenchPart workbenchPart) {
 		super(null, null);
 		Assert.isLegal(workbenchPart != null);
-		fWorkbenchPart= workbenchPart;
+		fWorkbenchPart = workbenchPart;
 		update();
 	}
 
 	/**
 	 * Creates a new find/replace action for the given target and shell.
 	 * <p>
-	 * This can be used without having an IWorkbenchPart e.g. for
-	 * dialogs or wizards.</p>
+	 * This can be used without having an IWorkbenchPart e.g. for dialogs or
+	 * wizards.
+	 * </p>
 	 * <p>
-	 * The action configures its visual representation from the given
-	 * resource bundle.</p>
-	 *
-	 * @param bundle the resource bundle
-	 * @param prefix a prefix to be prepended to the various resource keys
-	 *   (described in <code>ResourceAction</code> constructor), or
-	 *   <code>null</code> if none
-	 * @param target the IFindReplaceTarget to use
-	 * @param shell the shell
+	 * The action configures its visual representation from the given resource
+	 * bundle.
+	 * </p>
+	 * 
+	 * @param bundle
+	 *            the resource bundle
+	 * @param prefix
+	 *            a prefix to be prepended to the various resource keys
+	 *            (described in <code>ResourceAction</code> constructor), or
+	 *            <code>null</code> if none
+	 * @param target
+	 *            the IFindReplaceTarget to use
+	 * @param shell
+	 *            the shell
 	 * @see ResourceAction#ResourceAction(ResourceBundle, String)
-	 *
+	 * 
 	 * @since 3.3
 	 */
-	public WorkbenchFindReplaceAction(Shell shell, IFindReplaceTarget target) {
-		super(shell, target);
-	}
+	/*
+	 * public WorkbenchFindReplaceAction(Shell shell, IFindReplaceTarget target)
+	 * { super(shell, target); }
+	 */
 
 	/*
-	 *	@see IAction#run()
+	 * @see IAction#run()
 	 */
 	public void run() {
 		if (fTarget == null)
@@ -310,30 +353,33 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 		final FindReplaceDialog dialog;
 		final boolean isEditable;
 
-		if(fShell == null) {
+		if (fShell == null) {
 			if (fgFindReplaceDialogStub != null) {
-				Shell shell= fWorkbenchPart.getSite().getShell();
+				Shell shell = fWorkbenchPart.getSite().getShell();
 				fgFindReplaceDialogStub.checkShell(shell);
 			}
 			if (fgFindReplaceDialogStub == null)
-				fgFindReplaceDialogStub= new FindReplaceDialogStub(fWorkbenchPart.getSite());
+				fgFindReplaceDialogStub = new FindReplaceDialogStub(
+						fWorkbenchPart.getSite());
 
-			/*if (fWorkbenchPart instanceof ITextEditorExtension2)
-				isEditable= ((ITextEditorExtension2) fWorkbenchPart).isEditorInputModifiable();
-			else*/
-				isEditable= fTarget.isEditable();
+			/*
+			 * if (fWorkbenchPart instanceof ITextEditorExtension2) isEditable=
+			 * ((ITextEditorExtension2)
+			 * fWorkbenchPart).isEditorInputModifiable(); else
+			 */
+			isEditable = fTarget.isEditable();
 
-			dialog= fgFindReplaceDialogStub.getDialog();
+			dialog = fgFindReplaceDialogStub.getDialog();
 
 		} else {
 			if (fgFindReplaceDialogStubShell != null) {
 				fgFindReplaceDialogStubShell.checkShell(fShell);
 			}
 			if (fgFindReplaceDialogStubShell == null)
-				fgFindReplaceDialogStubShell= new FindReplaceDialogStub(fShell);
+				fgFindReplaceDialogStubShell = new FindReplaceDialogStub(fShell);
 
-			isEditable= fTarget.isEditable();
-			dialog= fgFindReplaceDialogStubShell.getDialog();
+			isEditable = fTarget.isEditable();
+			dialog = fgFindReplaceDialogStubShell.getDialog();
 		}
 
 		dialog.updateTarget(fTarget, isEditable, true);
@@ -345,14 +391,16 @@ public class WorkbenchFindReplaceAction extends FindReplaceAction  {
 	 */
 	public void update() {
 
-		if(fShell == null){
+		if (fShell == null) {
 			if (fWorkbenchPart == null && fWorkbenchWindow != null)
-				fWorkbenchPart= fWorkbenchWindow.getPartService().getActivePart();
+				fWorkbenchPart = fWorkbenchWindow.getPartService()
+						.getActivePart();
 
 			if (fWorkbenchPart != null)
-				fTarget= (IFindReplaceTarget) fWorkbenchPart.getAdapter(IFindReplaceTarget.class);
+				fTarget = (IFindReplaceTarget) fWorkbenchPart
+						.getAdapter(IFindReplaceTarget.class);
 			else
-				fTarget= null;
+				fTarget = null;
 		}
 		setEnabled(fTarget != null && fTarget.canPerformFind());
 	}

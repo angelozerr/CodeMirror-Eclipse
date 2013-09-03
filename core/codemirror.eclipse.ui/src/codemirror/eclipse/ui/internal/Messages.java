@@ -10,6 +10,7 @@ public class Messages extends NLS {
 	public static String saveErrorMessage;
 
 	// ------------- Preferences 
+	public static String CodeMirrorPreferences_description;
 	
 	public static String ThemePreferencePage_description;
 	public static String ThemePreferencePage_theme_label;
