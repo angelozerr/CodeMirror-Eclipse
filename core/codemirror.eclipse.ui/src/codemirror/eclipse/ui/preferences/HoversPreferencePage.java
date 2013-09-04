@@ -2,6 +2,7 @@ package codemirror.eclipse.ui.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -20,12 +21,17 @@ public class HoversPreferencePage extends CMFieldEditorPreferencePage implements
 	@Override
 	protected void createFieldEditors() {
 
-		BooleanFieldEditor contentAssistCacheFieldEditor = new BooleanFieldEditor(
+		BooleanFieldEditor hoverEnabledFieldEditor = new BooleanFieldEditor(
 				PreferenceHelper.HOVER_ENABLED_PREFERENCE_NAME,
 				Messages.HoversPreferencePage_hoverEnabled_label,
 				getFieldEditorParent());
-		addField(contentAssistCacheFieldEditor);
+		addField(hoverEnabledFieldEditor);
 
+		IntegerFieldEditor hoverDelayFieldEditor = new IntegerFieldEditor(
+				PreferenceHelper.HOVER_DELAY_PREFERENCE_NAME,
+				Messages.HoversPreferencePage_hoverDelay_label,
+				getFieldEditorParent());
+		addField(hoverDelayFieldEditor);
 	}
 
 	public void init(IWorkbench workbench) {
@@ -34,9 +40,7 @@ public class HoversPreferencePage extends CMFieldEditorPreferencePage implements
 
 	@Override
 	protected void update(CMBuilder builder) {
-		boolean textHover = getPreferenceStore().getBoolean(
-				PreferenceHelper.HOVER_ENABLED_PREFERENCE_NAME);
-		builder.getOptions().getTextHover(null).setTextHover(textHover);
+		PreferenceHelper.updateHover(builder, getPreferenceStore());
 
 	}
 }

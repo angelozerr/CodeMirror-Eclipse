@@ -42,19 +42,19 @@ public abstract class CMXQueryFormPage extends CMFormPage implements
 	}
 
 	public void addVariablesListener(IVariablesListener l) {
-		((CMXQueryControl) getCMControl()).addVariablesListener(l);
+		((CMXQueryControl) getCM()).addVariablesListener(l);
 	}
 
 	public void removeVariablesListener(IVariablesListener l) {
-		((CMXQueryControl) getCMControl()).removeVariablesListener(l);
+		((CMXQueryControl) getCM()).removeVariablesListener(l);
 	}
 
 	public Variable findVar(String varName) {
-		return ((CMXQueryControl) getCMControl()).findVar(varName);
+		return ((CMXQueryControl) getCM()).findVar(varName);
 	}
 
 	public Collection<Variable> getVars() {
-		return ((CMXQueryControl) getCMControl()).getVars();
+		return ((CMXQueryControl) getCM()).getVars();
 	}
 
 }

@@ -57,7 +57,7 @@ public class CMEditorPartHelper {
 
 	public static void saveCM(ICMEditorPart part, IProgressMonitor monitor)
 			throws IOException, CoreException {
-		CMControl cm = part.getCMControl();
+		CMControl cm = part.getCM();
 		part.saveCM(cm.getText(), monitor);
 		cm.setDirty(false);
 	}

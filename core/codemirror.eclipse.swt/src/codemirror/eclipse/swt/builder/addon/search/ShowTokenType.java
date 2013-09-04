@@ -61,7 +61,6 @@ public class ShowTokenType implements Writable {
 		return tokenTypes;
 	}
 
-	@Override
 	public void write(CMBuilder builder, Writer writer) throws IOException {
 		if (getStyle() == null) {
 			builder.write(writer, "\"", false);

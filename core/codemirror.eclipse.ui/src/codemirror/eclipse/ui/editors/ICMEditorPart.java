@@ -31,7 +31,7 @@ public interface ICMEditorPart {
 
 	void editorDirtyStateChanged();
 
-	CMControl getCMControl();
+	CMControl getCM();
 
 	CMControl createCM(String url, CMBuilder builder, Composite parent, int none);
 

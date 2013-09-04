@@ -17,9 +17,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.IFormPage;
 
+import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.ICMControlProvider;
 import codemirror.eclipse.swt.search.IFindReplaceTarget;
 
-public abstract class CMFormEditor extends FormEditor {
+public abstract class CMFormEditor extends FormEditor implements
+		ICMControlProvider {
 
 	private CMFormPage cmPage;
 
@@ -46,9 +49,7 @@ public abstract class CMFormEditor extends FormEditor {
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter == IFindReplaceTarget.class) {
-			if (cmPage != null) {
-				return cmPage.getCMControl();
-			}
+			return getCM();
 		}
 		return super.getAdapter(adapter);
 	}
@@ -56,5 +57,12 @@ public abstract class CMFormEditor extends FormEditor {
 	public int addPage(CMFormPage page) throws PartInitException {
 		this.cmPage = page;
 		return super.addPage(page);
+	}
+
+	public CMControl getCM() {
+		if (cmPage != null) {
+			return cmPage.getCM();
+		}
+		return null;
 	}
 }

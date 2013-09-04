@@ -27,7 +27,8 @@ public class XQueryPreferenceInitializer extends CMPreferenceInitializer {
 		PreferenceHelper.setDefaultTheme(store, Theme.XQ_LIGHT);
 
 		// Hover
-		PreferenceHelper.setDefaultHover(store, true);
+		PreferenceHelper.setDefaultHoverEnabled(store, true);
+		PreferenceHelper.setDefaultHoverDelay(store, 500);
 
 		// Mark Occurrences
 //		PreferenceHelper.setDefaultMarkOccurrences(store,

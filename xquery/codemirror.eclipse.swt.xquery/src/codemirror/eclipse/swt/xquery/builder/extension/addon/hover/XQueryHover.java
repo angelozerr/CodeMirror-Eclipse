@@ -9,7 +9,7 @@ public class XQueryHover extends TextHoverImpl {
 	public XQueryHover() {
 		super(
 				new String[] { "scripts/codemirror-xquery/addon/hover/xquery-hover.js" },
-				null);
+				new String[] { "scripts/codemirror-xquery/addon/hover/xquery-hover.css" });
 	}
 
 }

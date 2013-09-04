@@ -28,12 +28,14 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import codemirror.eclipse.swt.CMControl;
+import codemirror.eclipse.swt.ICMControlProvider;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.search.IFindReplaceTarget;
 import codemirror.eclipse.ui.internal.CMEditorPartHelper;
 import codemirror.eclipse.ui.internal.search.WorkbenchFindReplaceAction;
 
-public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
+public abstract class CMEditorPart extends EditorPart implements ICMEditorPart,
+		ICMControlProvider {
 
 	private CMControl cm;
 	private final String url;
@@ -138,7 +140,7 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 		firePropertyChange(PROP_DIRTY);
 	}
 
-	public CMControl getCMControl() {
+	public CMControl getCM() {
 		return cm;
 	}
 
@@ -181,7 +183,7 @@ public abstract class CMEditorPart extends EditorPart implements ICMEditorPart {
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter == IFindReplaceTarget.class) {
-			return getCMControl();
+			return getCM();
 		}
 		return super.getAdapter(adapter);
 	}

@@ -111,6 +111,8 @@ public class BaseOptions {
 			builder.write(writer, "]", false);
 		} else if (value instanceof Boolean) {
 			builder.write(writer, (Boolean) value ? "true" : "false", false);
+		} else if (value instanceof Integer) {
+			builder.write(writer, String.valueOf(((Integer) value).intValue()), false);
 		} else if (value instanceof Writable) {
 			((Writable) value).write(builder, writer);
 		} else {

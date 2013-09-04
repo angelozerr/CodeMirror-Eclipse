@@ -94,4 +94,11 @@ public class CMXQueryControl extends CMControl implements IVariablesAware {
 	public Variable findVar(String varName) {
 		return vars.get(varName);
 	}
+
+	public void selectDeclaredVar(String varName) {
+		String js = new StringBuilder(
+				"CodeMirror.XQuery.selectDeclaredVar(editor,'")
+				.append(varName).append("')").toString();
+		browser.evaluate(js);
+	}
 }

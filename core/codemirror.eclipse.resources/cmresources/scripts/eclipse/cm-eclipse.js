@@ -42,6 +42,16 @@ var CMEclipse = (function() {
 	      });
 	    
     },
+    posFromIndex: function(cm, off) {
+        var doc=cm.doc, ch, lineNo = doc.first;
+        doc.iter(function(line) {
+          var sz = line.text.length + 2;
+          if (sz > off) { ch = off; return true; }
+          off -= sz;
+          ++lineNo;
+        });
+        return cm.clipPos(CodeMirror.Pos(lineNo, ch));
+      },
     validate : function(cm, updateLinting, options) {
       if (typeof cm_validate == 'function') {
         var code = cm.getValue();

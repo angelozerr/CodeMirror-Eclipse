@@ -15,7 +15,6 @@ public class Function implements Writable {
 		return script;
 	}
 
-	@Override
 	public void write(CMBuilder builder, Writer writer) throws IOException {
 		builder.write(writer, this.getScript(), false);
 	}

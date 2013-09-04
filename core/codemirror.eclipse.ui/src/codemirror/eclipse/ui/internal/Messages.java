@@ -15,12 +15,14 @@ public class Messages extends NLS {
 	public static String ThemePreferencePage_description;
 	public static String ThemePreferencePage_theme_label;
 
-	public static String HoversPreferencePage_description;
 	public static String FoldingPreferencePage_description;
 
+	public static String HoversPreferencePage_description;
 	public static String HoversPreferencePage_hoverEnabled_label;
+	public static String HoversPreferencePage_hoverDelay_label;
 	
 	public static String MarkOccurrencesPreferencePage_description;
+
 	
 	static {
 		// load message values from bundle file

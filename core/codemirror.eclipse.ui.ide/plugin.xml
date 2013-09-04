@@ -10,4 +10,15 @@
     </operation>
  </extension>
  
+ <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="codemirror.eclipse.swt.ICMControlProvider"
+            class="codemirror.eclipse.ui.ide.adapters.GotoMarkerAdapterFactory">
+         <adapter
+               type="org.eclipse.ui.ide.IGotoMarker">
+         </adapter>
+      </factory>
+ </extension>
+   
 </plugin>

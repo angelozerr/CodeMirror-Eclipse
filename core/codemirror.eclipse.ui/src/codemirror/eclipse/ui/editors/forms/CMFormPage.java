@@ -193,7 +193,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 		getEditor().editorDirtyStateChanged();
 	}
 
-	public CMControl getCMControl() {
+	public CMControl getCM() {
 		return cm;
 	}
 
@@ -236,7 +236,7 @@ public abstract class CMFormPage extends FormPage implements ICMEditorPart {
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter == IFindReplaceTarget.class) {
-			return getCMControl();
+			return getCM();
 		}
 		return super.getAdapter(adapter);
 	}

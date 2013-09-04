@@ -1,4 +1,4 @@
-package codemirror.eclipse.swt.internal.org.apache.commons.lang3;
+package codemirror.eclipse.swt.utils;
 
 public class StringUtils {
 

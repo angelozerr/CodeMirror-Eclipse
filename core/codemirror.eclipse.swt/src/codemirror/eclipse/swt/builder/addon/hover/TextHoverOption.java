@@ -13,4 +13,12 @@ public class TextHoverOption extends BaseOptions {
 		super.addOption("textHover", textHover);
 	}
 
+	public void setDelay(Integer delay) {
+		if (delay == null) {
+			super.removeOption("delay");
+		} else {
+			super.addOption("delay", delay);
+		}
+	}
+
 }

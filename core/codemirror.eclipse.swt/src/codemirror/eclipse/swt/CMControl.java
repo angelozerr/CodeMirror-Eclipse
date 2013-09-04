@@ -22,9 +22,9 @@ import org.eclipse.swt.widgets.Shell;
 
 import codemirror.eclipse.swt.internal.SingleSourcingHelper;
 import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringEscapeUtils;
-import codemirror.eclipse.swt.internal.org.apache.commons.lang3.StringUtils;
 import codemirror.eclipse.swt.search.FindReplaceAction;
 import codemirror.eclipse.swt.search.IFindReplaceTarget;
+import codemirror.eclipse.swt.utils.StringUtils;
 
 /**
  * CodeMirror control.
@@ -48,6 +48,9 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 	private boolean initialized;
 
 	protected Action findReplaceAction;
+
+	private Integer charStart;
+	private Integer charEnd;
 
 	public CMControl(File file, Composite parent, int style) {
 		super(file, parent, style);
@@ -73,6 +76,11 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 		if (focusToBeSet) {
 			browser.evaluate(CM_REFOCUS_JS);
 			focusToBeSet = false;
+		}
+		if (charStart != null && charEnd != null) {
+			setSelection(charStart, charEnd);
+			this.charStart = null;
+			this.charEnd = null;
 		}
 	}
 
@@ -286,5 +294,20 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 		script.append(replaceString);
 		script.append("\");");
 		browser.evaluate(script.toString());
+	}
+
+	public void setSelection(int charStart, int charEnd) {
+		if (isLoaded()) {
+			StringBuilder script = new StringBuilder("editor.setSelection(");
+			script.append("CMEclipse.posFromIndex(editor,");
+			script.append(charStart);
+			script.append("),CMEclipse.posFromIndex(editor,");
+			script.append(charEnd);
+			script.append("));");
+			browser.evaluate(script.toString());
+		} else {
+			this.charStart = charStart;
+			this.charEnd = charEnd;
+		}
 	}
 }

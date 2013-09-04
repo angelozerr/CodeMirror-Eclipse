@@ -14,11 +14,13 @@ import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.addon.search.MatchHighlighterOption;
 import codemirror.eclipse.swt.builder.addon.search.ShowTokenType;
+import codemirror.eclipse.swt.utils.StringUtils;
 
 public class PreferenceHelper {
 
 	public static final String THEME_PREFERENCE_NAME = "theme";
-	public static final String HOVER_ENABLED_PREFERENCE_NAME = "hover";
+	public static final String HOVER_ENABLED_PREFERENCE_NAME = "hoverEnabled";
+	public static final String HOVER_DELAY_PREFERENCE_NAME = "hoverDelay";
 	public static final String BROWSER_PREFERENCE_NAME = "browser";
 
 	public static void initialize(Mode mode, IPreferenceStore store) {
@@ -111,15 +113,33 @@ public class PreferenceHelper {
 	 * @param store
 	 * @param enabled
 	 */
-	public static void setDefaultHover(IPreferenceStore store, boolean enabled) {
+	public static void setDefaultHoverEnabled(IPreferenceStore store,
+			boolean enabled) {
 		store.setDefault(PreferenceHelper.HOVER_ENABLED_PREFERENCE_NAME,
 				enabled);
 	}
 
+	public static void setDefaultHoverDelay(IPreferenceStore store,
+			Integer delay) {
+		store.setDefault(PreferenceHelper.HOVER_DELAY_PREFERENCE_NAME, delay);
+	}
+
 	public static void updateHover(CMBuilder builder, IPreferenceStore store) {
+		// enabled?
 		boolean textHover = store
 				.getBoolean(PreferenceHelper.HOVER_ENABLED_PREFERENCE_NAME);
 		builder.getOptions().getTextHover(null).setTextHover(textHover);
+		if (textHover) {
+			// delay?
+			int delay = store
+					.getInt(PreferenceHelper.HOVER_DELAY_PREFERENCE_NAME);
+			builder.getOptions().getTextHover(null)
+					.setDelay(delay == 0 ? null : delay);
+		}
+		else {
+			builder.getOptions().getTextHover(null).setTextHover(false);
+			builder.getOptions().getTextHover(null).setDelay(null);
+		}
 	}
 
 	// ------------------------ Web Browser type
@@ -133,7 +153,7 @@ public class PreferenceHelper {
 
 	public static WebBrowserType getWebBrowserType(IPreferenceStore store) {
 		String name = store.getString(BROWSER_PREFERENCE_NAME);
-		if (name != null) {
+		if (StringUtils.isNotEmpty(name)) {
 			return WebBrowserType.getWebBrowserType(name);
 		}
 		return null;
