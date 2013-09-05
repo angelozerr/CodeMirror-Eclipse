@@ -21,6 +21,7 @@
 		<module>codemirror.eclipse.xulrunner.initializer</module>
 		<module>codemirror.eclipse.xulrunner.win32.win32.x86</module>
 		<module>codemirror.eclipse.core.feature</module>
+		<module>codemirror.eclipse.xul.feature</module>
 	</modules>
 
 </project>
