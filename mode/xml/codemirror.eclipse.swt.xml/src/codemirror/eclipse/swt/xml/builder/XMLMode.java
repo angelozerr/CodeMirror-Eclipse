@@ -16,11 +16,11 @@ import codemirror.eclipse.swt.builder.Mode;
  * XML CodeMirror mode.
  * 
  */
-public class XmlMode extends Mode {
+public class XMLMode extends Mode {
 
-	public static final Mode INSTANCE = new XmlMode();
+	public static final Mode INSTANCE = new XMLMode();
 
-	private XmlMode() {
+	private XMLMode() {
 		super("text/xml", new String[] { "scripts/codemirror/mode/xml/xml.js" });
 	}
 }

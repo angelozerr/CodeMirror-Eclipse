@@ -34,9 +34,12 @@
   <script src="scripts/ternjs/tern/lib/comment.js"></script>
   <script src="scripts/ternjs/tern/lib/infer.js"></script>
 
-  <!-- CodeMirror addon with Tern JS -->
-  <link rel="stylesheet" href="scripts/codemirror-javascript/addon/hint/tern/tern-hint.css">
-  <script src="scripts/codemirror-javascript/addon/hint/tern/tern-hint.js"></script>    
+  <!-- Official CodeMirror Tern addon -->
+  <script src="scripts/codemirror/addon/tern/tern.js"></script>   
+
+  <!-- Extension of CodeMirror Tern addon -->
+  <link rel="stylesheet" href="scripts/codemirror-javascript/addon/hint/tern/tern-extension.css">
+  <script src="scripts/codemirror-javascript/addon/hint/tern/tern-extension.js"></script>    
   <script src="scripts/codemirror-javascript/addon/hint/tern/defs/ecma5.json.js"></script>
   <script src="scripts/codemirror-javascript/addon/hint/tern/defs/browser.json.js"></script>
 
@@ -74,7 +77,7 @@
       }      
       
       function myHint(cm) {
-      	return CodeMirror.showHint(cm, CodeMirror.ternHints, {async: true}); 
+      	return CodeMirror.showHint(cm, CodeMirror.ternHint, {async: true}); 
       }
      
       CodeMirror.commands.autocomplete = function(cm) {

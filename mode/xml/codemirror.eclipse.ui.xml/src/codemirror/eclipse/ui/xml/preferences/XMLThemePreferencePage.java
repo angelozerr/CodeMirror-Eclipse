@@ -8,28 +8,19 @@
  * Contributors:      
  *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
  *******************************************************************************/
-package codemirror.eclipse.swt.xml.builder;
+package codemirror.eclipse.ui.xml.preferences;
 
-import java.util.List;
-
-import codemirror.eclipse.swt.builder.CMBuilder;
-import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
-import codemirror.eclipse.swt.builder.Options;
+import codemirror.eclipse.swt.xml.builder.XMLMode;
+import codemirror.eclipse.ui.preferences.ThemePreferencePage;
+import codemirror.eclipse.ui.xml.internal.Activator;
 
 /**
- * JSON CodeMirror builder.
+ * XML theme preference page.
  * 
  */
-public class CMXmlBuilder extends CMBuilder {
+public class XMLThemePreferencePage extends ThemePreferencePage {
 
-	public CMXmlBuilder(String baseURL) {
-		super(XmlMode.INSTANCE, baseURL);
-		Options options = super.getOptions();
-		List<String> gutters = options.getGutters();
-
-		// Line numbers
-		options.setLineNumbers(true);
-		gutters.add(GuttersOptionUpdater.LINENUMBERS);
+	public XMLThemePreferencePage() {
+		super(Activator.getDefault().getPreferenceStore(), XMLMode.INSTANCE);
 	}
-
 }

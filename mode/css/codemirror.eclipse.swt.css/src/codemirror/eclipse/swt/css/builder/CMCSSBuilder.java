@@ -12,12 +12,12 @@ package codemirror.eclipse.swt.css.builder;
 
 import java.util.List;
 
-import addon.CSSLint;
 import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
+import codemirror.eclipse.swt.css.builder.addon.CSSLint;
 
 /**
  * CSS CodeMirror builder.
@@ -25,7 +25,7 @@ import codemirror.eclipse.swt.builder.addon.fold.FoldType;
  */
 public class CMCSSBuilder extends CMBuilder {
 
-	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] { FoldType.BRACE_FOLD };
+	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] { FoldType.BRACE_FOLD, FoldType.COMMENT_FOLD };
 
 	public CMCSSBuilder(String baseURL) {
 		super(CSSMode.INSTANCE, baseURL);

@@ -13,4 +13,33 @@
       </editor>
    </extension>
    
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="codemirror.eclipse.ui.xml.preferences.XMLEditorPreferenceInitializer">
+         </initializer>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">      
+      <page
+            class="codemirror.eclipse.ui.xml.preferences.XMLEditorPreferencePage"
+            id="codemirror.eclipse.ui.xml.preferences.XMLEditorPreferencePage"
+            category="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%XMLEditorPreferencePage.name">
+      </page>                
+      <page
+            class="codemirror.eclipse.ui.xml.preferences.XMLThemePreferencePage"
+            id="codemirror.eclipse.ui.xml.preferences.XMLThemePreferencePage"
+            category="codemirror.eclipse.ui.xml.preferences.XMLEditorPreferencePage"
+            name="%XMLThemePreferencePage.name">
+      </page>
+      <page
+            class="codemirror.eclipse.ui.xml.preferences.XMLFoldingPreferencePage"
+            id="codemirror.eclipse.ui.xml.preferences.XMLFoldingPreferencePage"
+            category="codemirror.eclipse.ui.xml.preferences.XMLEditorPreferencePage"
+            name="%XMLFoldingPreferencePage.name">
+      </page>
+   </extension>
+      
 </plugin>

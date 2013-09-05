@@ -1,0 +1,45 @@
+<?xquery version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%xqueryEditor.name"
+            extensions="xql"
+            icon="icons/obj16/xquery.gif"            
+            class="codemirror.eclipse.ui.xquery.editors.XQueryEditor"
+            id="codemirror.eclipse.ui.xquery.editors.XQueryEditor">
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="codemirror.eclipse.ui.xquery.preferences.XQueryPreferenceInitializer">
+         </initializer>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">      
+      <page
+            class="codemirror.eclipse.ui.xquery.preferences.XQueryEditorPreferencePage"
+            id="codemirror.eclipse.ui.xquery.preferences.XQueryEditorPreferencePage"
+            category="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%XQueryEditorPreferencePage.name">
+      </page>                
+      <page
+            class="codemirror.eclipse.ui.xquery.preferences.XQueryThemePreferencePage"
+            id="codemirror.eclipse.ui.xquery.preferences.XQueryThemePreferencePage"
+            category="codemirror.eclipse.ui.xquery.preferences.XQueryEditorPreferencePage"
+            name="%XQueryThemePreferencePage.name">
+      </page>
+      <page
+            class="codemirror.eclipse.ui.xquery.preferences.XQueryFoldingPreferencePage"
+            id="codemirror.eclipse.ui.xquery.preferences.XQueryFoldingPreferencePage"
+            category="codemirror.eclipse.ui.xquery.preferences.XQueryEditorPreferencePage"
+            name="%XQueryFoldingPreferencePage.name">
+      </page>
+   </extension>
+      
+</plugin>

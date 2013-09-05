@@ -8,20 +8,19 @@
  * Contributors:      
  *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
  *******************************************************************************/
-package addon;
+package codemirror.eclipse.ui.xquery.preferences;
 
-import codemirror.eclipse.swt.builder.addon.lint.LintImpl;
+import codemirror.eclipse.swt.xquery.builder.XQueryMode;
+import codemirror.eclipse.ui.preferences.FoldingPreferencePage;
+import codemirror.eclipse.ui.xquery.internal.Activator;
 
 /**
- * CSS Lint Implementation.
+ * XQuery folding preference page.
  * 
  */
-public class CSSLint extends LintImpl {
+public class XQueryFoldingPreferencePage extends FoldingPreferencePage {
 
-	public static final LintImpl INSTANCE = new CSSLint();
-
-	public CSSLint() {
-		super(new String[] { "scripts/csslint/csslint.js",
-				"scripts/codemirror/addon/lint/css-lint.js" }, null);
+	public XQueryFoldingPreferencePage() {
+		super(Activator.getDefault().getPreferenceStore(), XQueryMode.INSTANCE);
 	}
 }

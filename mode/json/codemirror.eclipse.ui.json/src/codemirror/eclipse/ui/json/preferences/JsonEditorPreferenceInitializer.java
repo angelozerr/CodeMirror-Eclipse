@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Angelo ZERR.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:      
+ *     Angelo Zerr <angelo.zerr@gmail.com> - initial API and implementation
+ *******************************************************************************/
 package codemirror.eclipse.ui.json.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -9,6 +19,10 @@ import codemirror.eclipse.ui.json.internal.Activator;
 import codemirror.eclipse.ui.preferences.CMPreferenceInitializer;
 import codemirror.eclipse.ui.preferences.PreferenceHelper;
 
+/**
+ * Json Preferences initializer.
+ * 
+ */
 public class JsonEditorPreferenceInitializer extends CMPreferenceInitializer {
 
 	public JsonEditorPreferenceInitializer() {
@@ -29,7 +43,7 @@ public class JsonEditorPreferenceInitializer extends CMPreferenceInitializer {
 		PreferenceHelper.setDefaultTheme(store, Theme.ECLIPSE);
 
 		// Hover
-		//PreferenceHelper.setDefaultHover(store, true);
+		// PreferenceHelper.setDefaultHover(store, true);
 
 		// Mark Occurrences
 		// PreferenceHelper.setDefaultMarkOccurrences(store,

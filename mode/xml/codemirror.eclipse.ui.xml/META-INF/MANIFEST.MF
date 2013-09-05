@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.ui;resolution:=optional,
  org.eclipse.rap.ui.forms;resolution:=optional,
  codemirror.eclipse.resources;bundle-version="1.0.0",
  codemirror.eclipse.ui;bundle-version="1.0.0",
- codemirror.eclipse.swt;bundle-version="1.0.0"
+ codemirror.eclipse.swt;bundle-version="1.0.0",
+ codemirror.eclipse.swt.xml;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .

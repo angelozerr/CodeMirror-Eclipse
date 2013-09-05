@@ -24,7 +24,8 @@ public class CSSEditorPreferenceInitializer extends CMPreferenceInitializer {
 
 		// Folding
 		PreferenceHelper.setDefaultFoldType(store, FoldType.BRACE_FOLD, true);
-
+		PreferenceHelper.setDefaultFoldType(store, FoldType.COMMENT_FOLD, true);
+		
 		// Theme
 		//PreferenceHelper.setDefaultTheme(store, Theme.ECLIPSE);
 

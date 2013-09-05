@@ -21,7 +21,6 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.Page;
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import codemirror.eclipse.swt.CMRunModeControl;
 import codemirror.eclipse.swt.resources.CMResourcesManager;
@@ -35,7 +34,7 @@ import codemirror.eclipse.ui.xquery.viewers.VariableContentProvider;
 import codemirror.eclipse.ui.xquery.viewers.VariableValueEditingSupport;
 
 public class XQueryVariablesOutlinePage extends Page implements
-		IContentOutlinePage, ISelectionListener, IVariablesListener {
+		/*IContentOutlinePage,*/ ISelectionListener, IVariablesListener {
 
 	private static final XQueryVariablesOutlinePage INSTANCE = new XQueryVariablesOutlinePage();
 

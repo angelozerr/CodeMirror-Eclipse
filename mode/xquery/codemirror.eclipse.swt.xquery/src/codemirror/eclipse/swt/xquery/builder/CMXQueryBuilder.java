@@ -79,7 +79,7 @@ public class CMXQueryBuilder extends CMBuilder {
 				"trackVars",
 				new Function("function(globalVars, changed) {\n"
 						+ "if (changed) {\n"
-						+ "cm_refreshVars(globalVars);\n}\n" + "}"));
+						+ "if (typeof cm_refreshVars == 'function') cm_refreshVars(globalVars);\n}\n" + "}"));
 	}
 
 	@Override

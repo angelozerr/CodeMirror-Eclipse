@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%sqlEditor.name"
+            extensions="sql"
+            icon="icons/obj16/sql.png"            
+            class="codemirror.eclipse.ui.sql.editors.SQLEditor"
+            id="codemirror.eclipse.ui.sql.editors.SQLEditor">
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="codemirror.eclipse.ui.sql.preferences.SQLEditorPreferenceInitializer">
+         </initializer>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">      
+      <page
+            class="codemirror.eclipse.ui.sql.preferences.SQLEditorPreferencePage"
+            id="codemirror.eclipse.ui.sql.preferences.SQLEditorPreferencePage"
+            category="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%SQLEditorPreferencePage.name">
+      </page>                
+      <page
+            class="codemirror.eclipse.ui.sql.preferences.SQLThemePreferencePage"
+            id="codemirror.eclipse.ui.sql.preferences.SQLThemePreferencePage"
+            category="codemirror.eclipse.ui.sql.preferences.SQLEditorPreferencePage"
+            name="%SQLThemePreferencePage.name">
+      </page>
+      <page
+            class="codemirror.eclipse.ui.sql.preferences.SQLFoldingPreferencePage"
+            id="codemirror.eclipse.ui.sql.preferences.SQLFoldingPreferencePage"
+            category="codemirror.eclipse.ui.sql.preferences.SQLEditorPreferencePage"
+            name="%SQLFoldingPreferencePage.name">
+      </page>
+   </extension>
+      
+</plugin>
