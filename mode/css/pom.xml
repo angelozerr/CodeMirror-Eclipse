@@ -7,9 +7,12 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>core</artifactId>
+	<artifactId>css</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>css</packaging>
-
+	<packaging>pom</packaging>
+	<modules>
+		<module>codemirror.eclipse.swt.css</module>
+		<module>codemirror.eclipse.ui.css</module>
+	</modules>
 
 </project>
