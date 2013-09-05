@@ -10,6 +10,9 @@
 	<artifactId>velocity</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	<modules>
+		<module>codemirror.eclipse.swt.velocity</module>
+		<module>codemirror.eclipse.ui.velocity</module>
+	</modules>
 
 </project>
