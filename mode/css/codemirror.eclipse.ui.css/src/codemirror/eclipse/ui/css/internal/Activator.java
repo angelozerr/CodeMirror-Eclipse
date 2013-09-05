@@ -10,17 +10,15 @@
  *******************************************************************************/
 package codemirror.eclipse.ui.css.internal;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+
+import codemirror.eclipse.swt.builder.CMBuilderRegistry;
+import codemirror.eclipse.swt.builder.CMRunModeBuilderRegistry;
+import codemirror.eclipse.swt.css.builder.CMCSSBuilder;
+import codemirror.eclipse.swt.css.builder.CMCSSRunModeBuilder;
+import codemirror.eclipse.ui.resources.CMResourcesRegistry;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -32,7 +30,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -41,35 +39,29 @@ public class Activator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		
-		// Try to configure SWT Browser with MOZILLA by setting the path of XULRunner.
-		Bundle bundle = Platform
-				.getBundle("org.mozilla.xulrunner.win32.win32.x86"); //$NON-NLS-1$
-		if (bundle != null) {
-			URL resourceUrl = bundle.getResource("xulrunner"); //$NON-NLS-1$
-			if (resourceUrl != null) {
-				try {
-					URL fileUrl = FileLocator.toFileURL(resourceUrl);
-					File file = new File(fileUrl.toURI());
-					System.setProperty(
-							"org.eclipse.swt.browser.XULRunnerPath", file.getAbsolutePath()); //$NON-NLS-1$
-				} catch (IOException e) {
-					// log the exception
-				} catch (URISyntaxException e) {
-					// log the exception
-				}
-			}
-		}
+
+		CMBuilderRegistry.getInstance().register(
+				new CMCSSBuilder(CMResourcesRegistry.getRegistry().getURL("")));
+		CMRunModeBuilderRegistry.getInstance().register(
+				new CMCSSRunModeBuilder(CMResourcesRegistry.getRegistry()
+						.getURL("")));
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
@@ -78,7 +70,7 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance
-	 *
+	 * 
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {
@@ -86,10 +78,11 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {

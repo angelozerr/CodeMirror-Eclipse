@@ -46,25 +46,6 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		
-		// Try to configure SWT Browser with MOZILLA by setting the path of XULRunner.
-		Bundle bundle = Platform
-				.getBundle("org.mozilla.xulrunner.win32.win32.x86"); //$NON-NLS-1$
-		if (bundle != null) {
-			URL resourceUrl = bundle.getResource("xulrunner"); //$NON-NLS-1$
-			if (resourceUrl != null) {
-				try {
-					URL fileUrl = FileLocator.toFileURL(resourceUrl);
-					File file = new File(fileUrl.toURI());
-					System.setProperty(
-							"org.eclipse.swt.browser.XULRunnerPath", file.getAbsolutePath()); //$NON-NLS-1$
-				} catch (IOException e) {
-					// log the exception
-				} catch (URISyntaxException e) {
-					// log the exception
-				}
-			}
-		}
 	}
 
 	/*

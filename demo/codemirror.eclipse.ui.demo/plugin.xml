@@ -25,7 +25,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="View"
+            name="File Explorer"
             class="codemirror.eclipse.ui.demo.FileExplorer"
             id="codemirror.eclipse.ui.demo.view">
       </view>
@@ -45,7 +45,14 @@
                   commandId="org.eclipse.ui.file.exit"
                   style="push">
             </command>
-         </menu>	        
+         </menu>
+         <menu
+               label="Window">
+	        <command
+	              commandId="org.eclipse.ui.window.preferences"
+	              style="push">    
+	        </command> 
+         </menu>         	        
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -59,5 +66,5 @@
          </toolbar>
       </menuContribution>            
    </extension>
-   
+
 </plugin>

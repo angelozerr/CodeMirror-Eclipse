@@ -1,9 +1,9 @@
 package codemirror.eclipse.ui.css.editors;
 
 import codemirror.eclipse.swt.IValidator;
-import codemirror.eclipse.swt.css.builder.CMCSSBuilder;
+import codemirror.eclipse.swt.builder.CMBuilderRegistry;
+import codemirror.eclipse.swt.css.builder.CSSMode;
 import codemirror.eclipse.ui.editors.CMEditorPart;
-import codemirror.eclipse.ui.resources.CMResourcesRegistry;
 
 public class CSSEditor extends CMEditorPart {
 
@@ -12,7 +12,7 @@ public class CSSEditor extends CMEditorPart {
 		 * super(CMResourcesRegistry.getRegistry().getURL(
 		 * CMResourcesConstants.CSS_HTML));
 		 */
-		super(new CMCSSBuilder(CMResourcesRegistry.getRegistry().getURL("")));
+		super(CMBuilderRegistry.getInstance().getBuilder(CSSMode.INSTANCE));
 	}
 
 	public IValidator getValidator() {

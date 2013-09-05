@@ -13,4 +13,33 @@
       </editor>
    </extension>
    
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="codemirror.eclipse.ui.css.preferences.CSSEditorPreferenceInitializer">
+         </initializer>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">      
+      <page
+            class="codemirror.eclipse.ui.css.preferences.CSSEditorPreferencePage"
+            id="codemirror.eclipse.ui.css.preferences.CSSEditorPreferencePage"
+            category="codemirror.eclipse.ui.preferences.CodeMirrorPreferencePage"
+            name="%CSSEditorPreferencePage.name">
+      </page>                
+      <page
+            class="codemirror.eclipse.ui.css.preferences.CSSThemePreferencePage"
+            id="codemirror.eclipse.ui.css.preferences.CSSThemePreferencePage"
+            category="codemirror.eclipse.ui.css.preferences.CSSEditorPreferencePage"
+            name="%CSSThemePreferencePage.name">
+      </page>
+      <page
+            class="codemirror.eclipse.ui.css.preferences.CSSFoldingPreferencePage"
+            id="codemirror.eclipse.ui.css.preferences.CSSFoldingPreferencePage"
+            category="codemirror.eclipse.ui.css.preferences.CSSEditorPreferencePage"
+            name="%CSSFoldingPreferencePage.name">
+      </page>
+   </extension>
+      
 </plugin>
