@@ -30,7 +30,10 @@
 			</plugin>
 		</plugins>
 	</build>
-	<modules>
+		<modules>
+			<module>core</module>
+		</modules>
+<!-- 	<modules>
 		<module>codemirror.eclipse.swt</module>
 		<module>codemirror.eclipse.ui</module>
 		<module>codemirror.eclipse.ui.xml</module>
@@ -52,7 +55,7 @@
 		<module>codemirror.eclipse.swt.json</module>
 		<module>codemirror.eclipse.swt.javascript</module>
 		<module>codemirror.eclipse.swt.css</module>
-	</modules>
+	</modules> -->
 
 	<repositories>
 		<repository>

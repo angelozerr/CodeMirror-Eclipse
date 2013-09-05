@@ -56,7 +56,7 @@ public class Theme {
 
 	public static final Theme VIBRANT_INK = createDefaultTheme("vibrant-ink");
 
-	public static final Theme XQÇDARK = createDefaultTheme("xq-dark");
+	public static final Theme XQ_DARK = createDefaultTheme("xq-dark");
 
 	public static final Theme XQ_LIGHT = createDefaultTheme("xq-light");
 
