@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>fr.opensagres.codemirror.eclipse</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>demo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>codemirror.eclipse.swt.samples</artifactId>

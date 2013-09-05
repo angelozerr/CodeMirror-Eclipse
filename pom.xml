@@ -33,6 +33,7 @@
 		<modules>
 			<module>core</module>
 			<module>mode</module>
+			<module>demo</module>
 		</modules>
 <!-- 	<modules>
 		<module>codemirror.eclipse.swt</module>
