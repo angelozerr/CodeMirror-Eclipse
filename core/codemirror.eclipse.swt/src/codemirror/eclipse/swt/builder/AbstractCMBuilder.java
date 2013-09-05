@@ -102,7 +102,7 @@ public abstract class AbstractCMBuilder implements ICMHtmlProvider {
 		} catch (IOException e) {
 			// Should never thrown
 		}
-		 System.err.println(writer);
+		// System.err.println(writer);
 		return writer.toString();
 	}
 
