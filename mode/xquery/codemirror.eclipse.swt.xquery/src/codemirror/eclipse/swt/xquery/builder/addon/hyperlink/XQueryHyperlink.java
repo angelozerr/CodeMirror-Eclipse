@@ -1,4 +1,4 @@
-package codemirror.eclipse.swt.xquery.builder.extension.addon.hyperlink;
+package codemirror.eclipse.swt.xquery.builder.addon.hyperlink;
 
 import codemirror.eclipse.swt.builder.addon.hyperlink.HyperlinkImpl;
 

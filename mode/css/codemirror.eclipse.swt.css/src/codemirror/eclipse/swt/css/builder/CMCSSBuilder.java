@@ -13,11 +13,14 @@ package codemirror.eclipse.swt.css.builder;
 import java.util.List;
 
 import codemirror.eclipse.swt.builder.CMBuilder;
+import codemirror.eclipse.swt.builder.ExtraKeysOption;
 import codemirror.eclipse.swt.builder.GuttersOptionUpdater;
 import codemirror.eclipse.swt.builder.Options;
 import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
+import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
 import codemirror.eclipse.swt.css.builder.addon.CSSLint;
+import codemirror.eclipse.swt.css.builder.commands.CSSAutocompleteCommand;
 
 /**
  * CSS CodeMirror builder.
@@ -25,7 +28,8 @@ import codemirror.eclipse.swt.css.builder.addon.CSSLint;
  */
 public class CMCSSBuilder extends CMBuilder {
 
-	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] { FoldType.BRACE_FOLD, FoldType.COMMENT_FOLD };
+	private static final FoldType[] SUPPORTED_FOLDTYPE = new FoldType[] {
+			FoldType.BRACE_FOLD, FoldType.COMMENT_FOLD };
 
 	public CMCSSBuilder(String baseURL) {
 		super(CSSMode.INSTANCE, baseURL);
@@ -49,6 +53,22 @@ public class CMCSSBuilder extends CMBuilder {
 		gutters.add(GuttersOptionUpdater.FOLDGUTTER);
 		FoldGutterOption fold = options.getFoldGutter();
 		fold.setRangeFinder(getSupportedFoldTypes());
+		
+		// Completion
+		ExtraKeysOption extraKeys = options.getExtraKeys();
+		extraKeys.addOption("':'", PassAndHintCommand.INSTANCE);
+		extraKeys.addOption("Ctrl-Space", CSSAutocompleteCommand.INSTANCE);
+		installHint(true, true);
+	}
+
+	@Override
+	protected void installHint(boolean withContextInfo, boolean withTemplates) {
+		super.installHint(withContextInfo, withTemplates);
+		installCSSHint();
+	}
+
+	protected void installCSSHint() {
+		addScript("scripts/codemirror/addon/hint/css-hint.js");
 	}
 
 }
