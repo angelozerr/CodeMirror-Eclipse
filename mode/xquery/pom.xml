@@ -10,6 +10,9 @@
 	<artifactId>xquery</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	<modules>
+		<module>codemirror.eclipse.swt.xquery</module>
+		<module>codemirror.eclipse.ui.xquery</module>
+	</modules>
 
 </project>
