@@ -5,14 +5,14 @@
 		<groupId>fr.opensagres.codemirror.eclipse</groupId>
 		<artifactId>mode</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	
+	</parent>	
 	<artifactId>css</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 	<modules>
 		<module>codemirror.eclipse.swt.css</module>
 		<module>codemirror.eclipse.ui.css</module>
+		<module>codemirror.eclipse.css.feature</module>
 	</modules>
 
 </project>
