@@ -3,13 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>fr.opensagres.codemirror.eclipse</groupId>
-		<artifactId>mode</artifactId>
+		<artifactId>html</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
-	<artifactId>xquery</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-
+	<artifactId>codemirror.eclipse.swt.html</artifactId>
+	<packaging>eclipse-plugin</packaging>
 
 </project>

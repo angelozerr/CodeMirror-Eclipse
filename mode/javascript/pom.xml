@@ -7,9 +7,12 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>core</artifactId>
+	<artifactId>javascript</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>javascript</packaging>
-
+	<packaging>pom</packaging>
+	<modules>
+		<module>codemirror.eclipse.swt.javascript</module>
+		<module>codemirror.eclipse.ui.javascript</module>
+	</modules>
 
 </project>

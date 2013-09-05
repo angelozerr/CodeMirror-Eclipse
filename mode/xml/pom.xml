@@ -7,9 +7,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>core</artifactId>
+	<artifactId>xml</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>xml</packaging>
+	<packaging>pom</packaging>
 
 
 </project>

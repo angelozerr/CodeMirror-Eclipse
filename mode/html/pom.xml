@@ -10,6 +10,9 @@
 	<artifactId>html</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	<modules>
+		<module>codemirror.eclipse.swt.html</module>
+		<module>codemirror.eclipse.ui.html</module>
+	</modules>
 
 </project>
