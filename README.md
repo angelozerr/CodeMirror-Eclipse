@@ -1,7 +1,7 @@
 CodeMirror Eclipse
 ==================
 
-You can see the Eclipse RAP demo at http://cmeclipse.opensagres.cloudbees.net/codemirror
+You can see the Eclipse RAP demo at http://cmeclipse-2.opensagres.eu.cloudbees.net/codemirror
 
 [CodeMirror](https://github.com/marijnh/CodeMirror) is JavaScript component that provides a code editor in the browser. It provides several modes 
 like javascript, xml, json, html, etc to manage syntax colors, syntax errors, completions etc.

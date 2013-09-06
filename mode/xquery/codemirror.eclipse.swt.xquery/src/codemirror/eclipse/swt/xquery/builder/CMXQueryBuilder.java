@@ -21,8 +21,8 @@ import codemirror.eclipse.swt.builder.Theme;
 import codemirror.eclipse.swt.builder.addon.fold.FoldGutterOption;
 import codemirror.eclipse.swt.builder.addon.fold.FoldType;
 import codemirror.eclipse.swt.builder.commands.PassAndHintCommand;
+import codemirror.eclipse.swt.xquery.builder.addon.hover.XQueryHover;
 import codemirror.eclipse.swt.xquery.builder.commands.XQueryAutocompleteCommand;
-import codemirror.eclipse.swt.xquery.builder.extension.addon.hover.XQueryHover;
 
 /**
  * XQuery CodeMirror builder.
@@ -53,8 +53,8 @@ public class CMXQueryBuilder extends CMBuilder {
 		extraKeys.addOption("':'", PassAndHintCommand.INSTANCE);
 		extraKeys.addOption("'$'", PassAndHintCommand.INSTANCE);
 		extraKeys.addOption("Ctrl-Space", XQueryAutocompleteCommand.INSTANCE);
-
 		installHint(true, true);
+		
 		installTrackVars(options);
 
 		// Fold

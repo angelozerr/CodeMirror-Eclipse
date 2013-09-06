@@ -58,6 +58,8 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class FindReplaceDialog extends Dialog {
 
+	public static final int TRAVERSE_MNEMONIC = 1 << 7;
+	
 	/**
 	 * Updates the find replace dialog on activation changes.
 	 */
@@ -419,7 +421,7 @@ public class FindReplaceDialog extends Dialog {
 					fFindNextButton.notifyListeners(SWT.Selection, event);
 					e.doit= false;
 				}
-				else if (e.detail == SWT.TRAVERSE_MNEMONIC) {
+				else if (e.detail == TRAVERSE_MNEMONIC) {
 					Character mnemonic= new Character(Character.toLowerCase(e.character));
 					if (fMnemonicButtonMap.containsKey(mnemonic)) {
 						Button button= (Button)fMnemonicButtonMap.get(mnemonic);

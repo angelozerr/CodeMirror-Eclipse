@@ -2,7 +2,7 @@ package codemirror.eclipse.swt.xquery.addon.variables;
 
 import java.util.Collection;
 
-import codemirror.eclipse.swt.xquery.internal.org.apache.commons.lang3.StringUtils;
+import codemirror.eclipse.swt.utils.StringUtils;
 
 public class VariableHelper {
 

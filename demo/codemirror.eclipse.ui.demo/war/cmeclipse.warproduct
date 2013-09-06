@@ -6,6 +6,14 @@
       <plugin id="codemirror.eclipse.resources"/>
       <plugin id="codemirror.eclipse.resources.rap" fragment="true"/>
       <plugin id="codemirror.eclipse.swt"/>
+      <plugin id="codemirror.eclipse.swt.css"/>
+      <plugin id="codemirror.eclipse.swt.html"/>
+      <plugin id="codemirror.eclipse.swt.javascript"/>
+      <plugin id="codemirror.eclipse.swt.json"/>
+      <plugin id="codemirror.eclipse.swt.sql"/>
+      <plugin id="codemirror.eclipse.swt.velocity"/>
+      <plugin id="codemirror.eclipse.swt.xml"/>
+      <plugin id="codemirror.eclipse.swt.xquery"/>
       <plugin id="codemirror.eclipse.ui"/>
       <plugin id="codemirror.eclipse.ui.css"/>
       <plugin id="codemirror.eclipse.ui.demo"/>
@@ -13,8 +21,10 @@
       <plugin id="codemirror.eclipse.ui.html"/>
       <plugin id="codemirror.eclipse.ui.javascript"/>
       <plugin id="codemirror.eclipse.ui.json"/>
+      <plugin id="codemirror.eclipse.ui.sql"/>
       <plugin id="codemirror.eclipse.ui.velocity"/>
       <plugin id="codemirror.eclipse.ui.xml"/>
+      <plugin id="codemirror.eclipse.ui.xquery"/>
       <plugin id="com.ibm.icu.base"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.felix.gogo.command"/>
@@ -38,7 +48,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.servletbridge"/>
-      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle"/>
+      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
@@ -56,6 +66,14 @@
    <configurations>
       <plugin id="codemirror.eclipse.resources" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.swt" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.css" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.html" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.javascript" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.json" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.sql" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.velocity" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.xml" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.swt.xquery" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.css" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.demo" autoStart="true" startLevel="0" />
@@ -63,8 +81,10 @@
       <plugin id="codemirror.eclipse.ui.html" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.javascript" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.json" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.ui.sql" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.velocity" autoStart="true" startLevel="0" />
       <plugin id="codemirror.eclipse.ui.xml" autoStart="true" startLevel="0" />
+      <plugin id="codemirror.eclipse.ui.xquery" autoStart="true" startLevel="0" />
       <plugin id="com.ibm.icu.base" autoStart="true" startLevel="0" />
       <plugin id="javax.xml" autoStart="true" startLevel="0" />
       <plugin id="org.apache.felix.gogo.command" autoStart="true" startLevel="0" />
@@ -88,7 +108,6 @@
       <plugin id="org.eclipse.equinox.preferences" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.registry" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.servletbridge" autoStart="true" startLevel="0" />
-      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.help" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.osgi" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.osgi.services" autoStart="true" startLevel="0" />
@@ -105,7 +124,7 @@
 
    <warConfiguration webXml="/codemirror.eclipse.ui.demo/war/WEB-INF/web.xml" launchIni="/codemirror.eclipse.ui.demo/war/WEB-INF/launch.ini">
    <libraries>
-      <library path="org.eclipse.equinox.servletbridge_1.2.200.v20130225-1702.jar" fromTarget="true"/>
+      <library path="org.eclipse.equinox.servletbridge_1.2.300.v20130508-1243.jar" fromTarget="true"/>
    </libraries>
    </warConfiguration>
 </product>
