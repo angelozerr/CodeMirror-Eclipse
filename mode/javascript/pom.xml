@@ -13,6 +13,7 @@
 	<modules>
 		<module>codemirror.eclipse.swt.javascript</module>
 		<module>codemirror.eclipse.ui.javascript</module>
+		<module>codemirror.eclipse.javascript.feature</module>
 	</modules>
 
 </project>
