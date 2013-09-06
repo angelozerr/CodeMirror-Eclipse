@@ -13,6 +13,7 @@
 	<modules>
 		<module>codemirror.eclipse.swt.html</module>
 		<module>codemirror.eclipse.ui.html</module>
+		<module>codemirror.eclipse.html.feature</module>
 	</modules>
 
 </project>
