@@ -6,13 +6,12 @@
 		<artifactId>mode</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
 	<artifactId>xml</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>codemirror.eclipse.swt.xml</module>
 		<module>codemirror.eclipse.ui.xml</module>
+		<module>codemirror.eclipse.xml.feature</module>
 	</modules>
 
 </project>

@@ -5,10 +5,8 @@
 		<groupId>fr.opensagres.codemirror.eclipse</groupId>
 		<artifactId>mode</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	
+	</parent>	
 	<artifactId>velocity</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>codemirror.eclipse.swt.velocity</module>
