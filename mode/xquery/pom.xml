@@ -13,6 +13,7 @@
 	<modules>
 		<module>codemirror.eclipse.swt.xquery</module>
 		<module>codemirror.eclipse.ui.xquery</module>
+		<module>codemirror.eclipse.xquery.feature</module>
 	</modules>
 
 </project>
