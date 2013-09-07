@@ -9,8 +9,28 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<tycho-version>0.18.1</tycho-version>
 	</properties>
+	<developers>
+		<developer>
+			<id>angelozerr</id>
+			<roles>
+				<role>architect</role>
+				<role>developper</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>pascalleclercq</id>
+			<roles>
+				<role>contributor</role>
+			</roles>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Eclipse Public License (EPL)</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
 	<build>
-
 		<defaultGoal>clean install</defaultGoal>
 		<plugins>
 			<plugin>
@@ -25,41 +45,16 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<resolver>p2</resolver>
-					<!-- <pomDependencies>consider</pomDependencies> -->
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-		<modules>
-			<module>core</module>
-			<module>mode</module>
-			<module>demo</module>
-			<module>update-site</module>
-		</modules>
-<!-- 	<modules>
-		<module>codemirror.eclipse.swt</module>
-		<module>codemirror.eclipse.ui</module>
-		<module>codemirror.eclipse.ui.xml</module>
-		<module>codemirror.eclipse.ui.css</module>
-		<module>codemirror.eclipse.resources</module>
-		<module>codemirror.eclipse.resources.rap</module>
-		<module>codemirror.eclipse.swt.xquery</module>
-		<module>codemirror.eclipse.ui.xquery</module>
-		<module>codemirror.eclipse.xulrunner</module>
-		<module>codemirror.eclipse.ui.velocity</module>
-		<module>codemirror.eclipse.ui.json</module>
-		<module>codemirror.eclipse.swt.samples</module>
-		<module>codemirror.eclipse.ui.javascript</module>
-		<module>codemirror.eclipse.ui.ide</module>
-		<module>codemirror.eclipse.ui.html</module>
-		<module>codemirror.eclipse.ui.demo</module>
-		<module>codemirror.eclipse.ui.demo.rap</module>
-		<module>codemirror.eclipse.swt.velocity</module>
-		<module>codemirror.eclipse.swt.json</module>
-		<module>codemirror.eclipse.swt.javascript</module>
-		<module>codemirror.eclipse.swt.css</module>
-	</modules> -->
-
+	<modules>
+		<module>core</module>
+		<module>mode</module>
+		<module>demo</module>
+		<module>update-site</module>
+	</modules>
 	<repositories>
 		<repository>
 			<id>kepler</id>
@@ -68,4 +63,11 @@
 		</repository>
 	</repositories>
 
+	<scm>
+		<url>https://github.com/angelozerr/CodeMirror-Eclipse</url>
+		<developerConnection>https://github.com/angelozerr/CodeMirror-Eclipse.git</developerConnection>
+	</scm>
+	<name>CodeMirror-Eclipse</name>
+	<url>https://github.com/angelozerr/CodeMirror-Eclipse</url>
+	<description>CodeMirror is JavaScript component that provides a code editor in the browser. It provides several modes like javascript, xml, json, html, etc to manage syntax colors, syntax errors, completions etc.</description>
 </project>
