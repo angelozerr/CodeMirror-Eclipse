@@ -6,12 +6,8 @@
 		<artifactId>parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
 	<artifactId>core</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
-
 	<modules>
 		<module>codemirror.eclipse.swt</module>
 		<module>codemirror.eclipse.ui</module>

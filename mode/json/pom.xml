@@ -6,11 +6,8 @@
 		<artifactId>mode</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
 	<artifactId>json</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
 	<modules>
 		<module>codemirror.eclipse.swt.json</module>
 		<module>codemirror.eclipse.ui.json</module>
