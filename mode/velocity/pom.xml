@@ -13,6 +13,7 @@
 	<modules>
 		<module>codemirror.eclipse.swt.velocity</module>
 		<module>codemirror.eclipse.ui.velocity</module>
+		<module>codemirror.eclipse.velocity.feature</module>
 	</modules>
 
 </project>
