@@ -34,6 +34,7 @@
 			<module>core</module>
 			<module>mode</module>
 			<module>demo</module>
+			<module>update-site</module>
 		</modules>
 <!-- 	<modules>
 		<module>codemirror.eclipse.swt</module>

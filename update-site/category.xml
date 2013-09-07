@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/codemirror.eclipse.core.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.core.feature" version="1.0.0.qualifier">
+      <category name="core"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.xul.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.xul.feature" version="1.0.0.qualifier">
+      <category name="core"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.css.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.css.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.html.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.html.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.javascript.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.javascript.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.json.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.json.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.sql.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.sql.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.velocity.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.velocity.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.xml.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.xml.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <feature url="features/codemirror.eclipse.xquery.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.xquery.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
+   <bundle id="codemirror.eclipse.swt.samples" version="1.0.0.qualifier">
+      <category name="demo"/>
+   </bundle>
+   <bundle id="codemirror.eclipse.ui.demo" version="1.0.0.qualifier">
+      <category name="demo"/>
+   </bundle>
+   <bundle id="codemirror.eclipse.ui.demo.rap" version="1.0.0.qualifier">
+      <category name="demo"/>
+   </bundle>
+   <category-def name="core" label="core"/>
+   <category-def name="mode" label="mode"/>
+   <category-def name="demo" label="demo"/>
+</site>
