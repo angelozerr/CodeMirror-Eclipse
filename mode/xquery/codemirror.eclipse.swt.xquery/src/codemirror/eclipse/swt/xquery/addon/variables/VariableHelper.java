@@ -16,35 +16,37 @@ public class VariableHelper {
 	}
 
 	private static boolean setValue(Variable variable, StringBuilder result) {
-		boolean hasValue = variable.isString() || StringUtils.isNotEmpty(variable.getValue());
-		String type = variable.getType();		
+		boolean hasValue = variable.isString()
+				|| StringUtils.isNotEmpty(variable.getValue());
+		String type = variable.getType();
 		if (!StringUtils.isEmpty(type)) {
 			boolean isArray = variable.isArray();
 			if (isArray) {
 				hasValue = true;
-				result.append("(");				
-			}
-			
-			addValue(variable.getValue(), variable.isString(), result);
-			
-			if (isArray) {
+				result.append("(");
 				Collection<ValueHolder> values = variable.getValues();
-				if (values != null){
+				if (values != null) {
+					int i = 0;
 					for (ValueHolder value : values) {
-						result.append(",");
+						if (i > 0)
+							result.append(",");
 						addValue(value.getValue(), variable.isString(), result);
+						i++;
 					}
 				}
-				
 				result.append(")");
+			} else {
+				addValue(variable.getValue(), variable.isString(), result);
 			}
+
 		} else {
 			addValue(variable.getValue(), false, result);
 		}
 		return hasValue;
 	}
 
-	private static void addValue(String value, boolean isString, StringBuilder result) {
+	private static void addValue(String value, boolean isString,
+			StringBuilder result) {
 		if (isString) {
 			result.append("'");
 			result.append(getValue(value));
