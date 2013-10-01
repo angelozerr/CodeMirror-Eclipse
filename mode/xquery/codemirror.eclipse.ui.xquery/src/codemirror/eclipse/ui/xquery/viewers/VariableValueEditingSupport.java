@@ -26,7 +26,7 @@ public class VariableValueEditingSupport extends EditingSupport {
 				(Composite) viewer.getControl(), SWT.READ_ONLY);
 		booleanEditor.setContenProvider(ArrayContentProvider.getInstance());
 		booleanEditor.setLabelProvider(new LabelProvider());
-		booleanEditor.setInput(new String[] {"", "false()", "true()"});
+		booleanEditor.setInput(new String[] { "", "false()", "true()" });
 	}
 
 	@Override
@@ -42,6 +42,10 @@ public class VariableValueEditingSupport extends EditingSupport {
 
 	@Override
 	protected boolean canEdit(Object element) {
+		if (element instanceof Variable) {
+			// first line of array variable is not editable.
+			return !((Variable) element).isArray();
+		}
 		return true;
 	}
 
