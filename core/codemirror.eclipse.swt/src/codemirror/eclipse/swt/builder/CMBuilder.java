@@ -46,26 +46,26 @@ public class CMBuilder extends AbstractCMBuilder {
 		this.options = createOptions();
 
 		installFullScreenAddon(options);
-		
+
 		// <!-- SWT Browser - CodeMirror -->
 		addScript("scripts/eclipse/cm-eclipse.js");
 		installSearchAddon();
-		
+
 		getOptions().setMode(mode);
 		getOptions().setStyleActiveLine(true);
 		getOptions().setLineWrapping(true);
 		getOptions().setShowCursorWhenSelecting(true);
-		
+
 		ExtraKeysOption extraKeys = options.getExtraKeys();
-		extraKeys.addOption("Ctrl-F",SearchCommand.INSTANCE);
+		extraKeys.addOption("Ctrl-F", SearchCommand.INSTANCE);
 
 	}
 
 	protected void installSearchAddon() {
-		//addScript("scripts/codemirror/addon/dialog/dialog.js");
+		// addScript("scripts/codemirror/addon/dialog/dialog.js");
 		addScript("scripts/codemirror/addon/search/searchcursor.js");
 		addScript("scripts/eclipse/cm-eclipse-search.js");
-		//addStyle("scripts/codemirror/addon/dialog/dialog.css");
+		// addStyle("scripts/codemirror/addon/dialog/dialog.css");
 	}
 
 	protected void installFullScreenAddon(Options options) {
@@ -73,7 +73,7 @@ public class CMBuilder extends AbstractCMBuilder {
 		addStyle("scripts/codemirror/addon/display/fullscreen.css");
 		options.addOption("fullScreen", true);
 	}
-	
+
 	protected void installHint(boolean withContextInfo, boolean withTemplates) {
 		// <!-- CodeMirror -->
 		addScript("scripts/codemirror/addon/hint/show-hint.js");
@@ -136,16 +136,14 @@ public class CMBuilder extends AbstractCMBuilder {
 	protected void writeHtmlHead(Writer writer) throws IOException {
 		super.writeHtmlHead(writer);
 
-		/*write(writer, "<style type=\"text/css\" >");
+		write(writer, "<style type=\"text/css\" >");
 
-		write(writer, " .CodeMirror-focused .cm-matchhighlight {");
-		write(writer,
-				"background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);");
-		write(writer, "background-position: bottom;");
-		write(writer, "background-repeat: repeat-x;");
+		write(writer, " .CodeMirror div.CodeMirror-cursor {");
+		write(writer, "border-left: 2px solid black;");
+		write(writer, "z-index: 3;");
 		write(writer, "}");
 
-		write(writer, "</style>");*/
+		write(writer, "</style>");
 	}
 
 	public Options getOptions() {
