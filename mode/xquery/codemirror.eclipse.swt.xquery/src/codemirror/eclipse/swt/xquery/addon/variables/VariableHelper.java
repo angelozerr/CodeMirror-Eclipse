@@ -16,44 +16,53 @@ public class VariableHelper {
 	}
 
 	private static boolean setValue(Variable variable, StringBuilder result) {
-		boolean hasValue = variable.isString()
-				|| StringUtils.isNotEmpty(variable.getValue());
-		String type = variable.getType();
-		if (!StringUtils.isEmpty(type)) {
-			boolean isArray = variable.isArray();
-			if (isArray) {
-				hasValue = true;
-				result.append("(");
-				Collection<ValueHolder> values = variable.getValues();
-				if (values != null) {
-					int i = 0;
-					for (ValueHolder value : values) {
-						if (i > 0)
-							result.append(",");
-						addValue(value.getValue(), variable.isString(), result);
-						i++;
-					}
+		boolean isArray = variable.isArray();
+		if (isArray) {
+			result.append("(");
+			Collection<ValueHolder> values = variable.getValues();
+			if (values != null) {
+				int i = 0;
+				for (ValueHolder value : values) {
+					if (i > 0)
+						result.append(",");
+					addValue(value, result);
+					i++;
 				}
-				result.append(")");
-			} else {
-				addValue(variable.getValue(), variable.isString(), result);
 			}
-
-		} else {
-			addValue(variable.getValue(), false, result);
+			result.append(")");
+			return true;
 		}
-		return hasValue;
+		return addValue(variable, result);
 	}
 
-	private static void addValue(String value, boolean isString,
+	private static boolean addValue(ValueHolder valueHolder,
 			StringBuilder result) {
-		if (isString) {
-			result.append("'");
-			result.append(getValue(value));
-			result.append("'");
-		} else {
-			result.append(getValue(value));
+		String value = valueHolder.getValue();
+		Variable variable = valueHolder.getVariable();
+		boolean isOptionnal = !variable.isArray() && StringUtils.isEmpty(value)
+				&& variable.isOptionnal();
+		if (!isOptionnal) {
+			if (variable.isString()) {
+				result.append("'");
+				result.append(getValue(value));
+				result.append("'");
+				return true;
+			} else if (variable.isNumeric()) {
+				result.append(variable.getTypeWithoutOccurence());
+				result.append("(");
+				result.append(getValue(value));
+				result.append(")");
+				return true;
+			} else if (variable.isDate()) {
+				result.append(variable.getTypeWithoutOccurence());
+				result.append("('");
+				result.append(getValue(value));
+				result.append("')");
+				return true;
+			}
 		}
+		result.append(getValue(value));
+		return StringUtils.isNotEmpty(value);
 	}
 
 	private static String getValue(String value) {

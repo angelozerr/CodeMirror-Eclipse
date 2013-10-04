@@ -1,5 +1,8 @@
 package codemirror.eclipse.ui.xquery.viewers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
@@ -19,14 +22,17 @@ public class VariableValueEditingSupport extends EditingSupport {
 
 	private final ComboBoxViewerCellEditor booleanEditor;
 
+	private final DateTimeCellEditor dateTimeEditor;
+
+	private final Map<String, CellEditor> editorsMap;
+
 	public VariableValueEditingSupport(ColumnViewer viewer) {
 		super(viewer);
-		this.editor = new TextCellEditor((Composite) viewer.getControl());
-		this.booleanEditor = new ComboBoxViewerCellEditor(
-				(Composite) viewer.getControl(), SWT.READ_ONLY);
-		booleanEditor.setContenProvider(ArrayContentProvider.getInstance());
-		booleanEditor.setLabelProvider(new LabelProvider());
-		booleanEditor.setInput(new String[] { "", "false()", "true()" });
+		this.editorsMap = new HashMap<String, CellEditor>();
+		Composite parent = (Composite) viewer.getControl();
+		this.editor = new TextCellEditor(parent);
+		this.booleanEditor = createBooleanEditor(parent);
+		this.dateTimeEditor = createDateTimeEditor(parent);
 	}
 
 	@Override
@@ -36,8 +42,28 @@ public class VariableValueEditingSupport extends EditingSupport {
 			if (variable.isBoolean()) {
 				return booleanEditor;
 			}
+			/*TODO : manage calendar for xs:date
+			 * else if (variable.isDate()) {
+				return dateTimeEditor;
+			}*/
+			String varName = variable.getName();
+			CellEditor editor = editorsMap.get(varName);
+			if (editor == null) {
+				editor = createEditor((Composite) getViewer().getControl(),
+						varName);
+				if (editor != null) {
+					editorsMap.put(varName, editor);
+				}
+			}
+			if (editor != null) {
+				return editor;
+			}
 		}
 		return editor;
+	}
+
+	protected CellEditor createEditor(Composite parent, String varName) {
+		return new StringComboBoxCellEditor(parent, new String[] {});
 	}
 
 	@Override
@@ -64,13 +90,25 @@ public class VariableValueEditingSupport extends EditingSupport {
 	protected void setValue(Object element, Object value) {
 		ValueHolder valueHolder = ((ValueHolder) element);
 		valueHolder.setValue(String.valueOf(value));
-		/*
-		 * if (valueHolder.getVariable().isBoolean() && value instanceof
-		 * Boolean) { if ((Boolean)value) { valueHolder.setValue("true()"); }
-		 * else { valueHolder.setValue("false()"); } } else {
-		 * valueHolder.setValue(String.valueOf(value)); }
-		 */
 		getViewer().update(element, null);
 	}
 
+	private ComboBoxViewerCellEditor createBooleanEditor(Composite parent) {
+		ComboBoxViewerCellEditor booleanEditor = new ComboBoxViewerCellEditor(
+				parent, SWT.READ_ONLY);
+		booleanEditor.setContenProvider(ArrayContentProvider.getInstance());
+		booleanEditor.setLabelProvider(new LabelProvider());
+		booleanEditor.setInput(new String[] { "", "false()", "true()" });
+		return booleanEditor;
+	}
+
+	private DateTimeCellEditor createDateTimeEditor(Composite parent) {
+		return new DateTimeCellEditor(parent, 1);
+	}
+
+	protected void registerEditor(CellEditor editor, String... varNames) {
+		for (int i = 0; i < varNames.length; i++) {
+			editorsMap.put(varNames[i], editor);
+		}
+	}
 }
