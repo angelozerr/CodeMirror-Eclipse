@@ -41,11 +41,9 @@ public class VariableValueEditingSupport extends EditingSupport {
 			Variable variable = ((ValueHolder) element).getVariable();
 			if (variable.isBoolean()) {
 				return booleanEditor;
-			}
-			/*TODO : manage calendar for xs:date
-			 * else if (variable.isDate()) {
+			} else if (variable.isDate()) {
 				return dateTimeEditor;
-			}*/
+			}
 			String varName = variable.getName();
 			CellEditor editor = editorsMap.get(varName);
 			if (editor == null) {

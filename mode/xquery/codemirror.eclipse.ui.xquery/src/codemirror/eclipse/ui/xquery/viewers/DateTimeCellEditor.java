@@ -19,9 +19,11 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
 public class DateTimeCellEditor extends DialogCellEditor {
+
 	private boolean allowPast = true;
 	private long flags;
 	private String date;
+	private IDateFormatter dateFormatter = XMLDateTimeFormatter.getInstance();
 
 	/**
 	 * 
@@ -58,30 +60,27 @@ public class DateTimeCellEditor extends DialogCellEditor {
 	protected void doSetValue(Object value) {
 		ignoreTextModifyEvents = true;
 		try {
-			if (value == null) {
-				this.date = null;
-				// if (defaultLabel != null && !defaultLabel.isDisposed())
-				// defaultLabel.setText("");
-				if (text != null && !text.isDisposed())
-					text.setText("");
-			} else if (value instanceof Date) {
-				Date date = (Date) value;
-				// this.date = date;
-				// if (defaultLabel != null && !defaultLabel.isDisposed())
-				// defaultLabel.setText(DateFormatter.formatDate(date, flags));
-				if (text != null && !text.isDisposed()) {
-					// text.setText(DateFormatter.formatDate(date, flags));
-				}
+			this.date = getDateAsString(value);
+			if (text != null && !text.isDisposed()) {
+				text.setText(date);
 			}
-			// else
-			// throw new
-			// IllegalArgumentException("value must be an instance of java.util.Date or null! "
-			// + value);
-
 			textModified = false;
 		} finally {
 			ignoreTextModifyEvents = false;
 		}
+	}
+
+	private String getDateAsString(Object value) {
+		if (value == null) {
+			return "";
+		}
+		if (value instanceof String) {
+			return (String) value;
+		}
+		if (value instanceof Date) {
+			return dateFormatter.format((Date) value);
+		}
+		return "";
 	}
 
 	private Button defaultButton;
@@ -144,7 +143,7 @@ public class DateTimeCellEditor extends DialogCellEditor {
 					 * "The text \"%s\" cannot be interpeted as a date!", txt));
 					 * return; } setValue(date);
 					 */
-					//setValue(Calendar.getInstance().getTime());
+					// setValue(Calendar.getInstance().getTime());
 					setValue(txt);
 				}
 				if (!overDefaultButton)
@@ -160,7 +159,12 @@ public class DateTimeCellEditor extends DialogCellEditor {
 				cellEditorWindow.getShell(), allowPast, flags,
 				defaultButton.toDisplay(0, -32));
 		Calendar cal = Calendar.getInstance();
-		Date date = (Date) getValue();
+		Date date = null;
+		try {
+			date = dateFormatter.format((String) getValue());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		if (date != null)
 			cal.setTime(date);
 
