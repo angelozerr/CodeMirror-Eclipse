@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2001, 2006 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     Jens Lukowski/Innoopract - initial renaming/restructuring
+ *     
+ *******************************************************************************/
 package codemirror.eclipse.ui.xquery.viewers;
 
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
@@ -11,13 +23,16 @@ import codemirror.eclipse.swt.utils.StringUtils;
  */
 
 public class StringComboBoxCellEditor extends ComboBoxCellEditor {
+
 	private boolean fSettingValue = false;
+	private boolean addItemWhenNotFound;
 
 	/**
      * 
      */
 	public StringComboBoxCellEditor() {
 		super();
+		setAddItemWhenNotFound(true);
 	}
 
 	/**
@@ -26,6 +41,7 @@ public class StringComboBoxCellEditor extends ComboBoxCellEditor {
 	 */
 	public StringComboBoxCellEditor(Composite parent, String[] items) {
 		super(parent, items);
+		setAddItemWhenNotFound(true);
 	}
 
 	/**
@@ -35,6 +51,7 @@ public class StringComboBoxCellEditor extends ComboBoxCellEditor {
 	 */
 	public StringComboBoxCellEditor(Composite parent, String[] items, int style) {
 		super(parent, items, style);
+		setAddItemWhenNotFound(true);
 	}
 
 	protected Object doGetValue() {
@@ -74,7 +91,7 @@ public class StringComboBoxCellEditor extends ComboBoxCellEditor {
 				if (selection >= 0) {
 					super.doSetValue(new Integer(selection));
 				} else {
-					if (StringUtils.isNotEmpty(stringValue)) {
+					if (mustAddNewItem(stringValue)) {
 						String[] newItems = new String[items.length + 1];
 						newItems[0] = stringValue;
 						for (int i = 0; i < items.length; i++) {
@@ -98,6 +115,17 @@ public class StringComboBoxCellEditor extends ComboBoxCellEditor {
 		}
 	}
 
+	/**
+	 * Returne true if the given no existing item should be added and false
+	 * otherwise.
+	 * 
+	 * @param item
+	 * @return
+	 */
+	private boolean mustAddNewItem(String item) {
+		return addItemWhenNotFound && StringUtils.isNotEmpty(item);
+	}
+
 	public void setItems(String[] newItems) {
 		if ((getControl() == null) || getControl().isDisposed()) {
 			//           Logger.log(Logger.ERROR, "Attempted to update item list for disposed cell editor"); //$NON-NLS-1$
@@ -114,5 +142,26 @@ public class StringComboBoxCellEditor extends ComboBoxCellEditor {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Set true if item which is not found in the combo must be added and false
+	 * otherwise.
+	 * 
+	 * @param addItemWhenNotFound
+	 */
+	public void setAddItemWhenNotFound(boolean addItemWhenNotFound) {
+		this.addItemWhenNotFound = addItemWhenNotFound;
+	}
+
+	/**
+	 * Returns true if item which is not found in the combo must be added and
+	 * false otherwise.
+	 * 
+	 * @return true if item which is not found in the combo must be added and
+	 *         false otherwise.
+	 */
+	public boolean isAddItemWhenNotFound() {
+		return addItemWhenNotFound;
 	}
 }
