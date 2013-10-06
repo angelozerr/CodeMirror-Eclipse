@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2006 IBM Corporation and others.
+ * Copyright (c) 2001, 2013 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     Jens Lukowski/Innoopract - initial renaming/restructuring
+ *     Angelo ZERR - add item in the combo when it is not found.
  *     
  *******************************************************************************/
 package codemirror.eclipse.ui.xquery.viewers;
@@ -19,7 +20,10 @@ import org.eclipse.swt.widgets.Composite;
 import codemirror.eclipse.swt.utils.StringUtils;
 
 /**
- * An extended ComboBoxCellEditor that selects and returns Strings
+ * An extended ComboBoxCellEditor that selects and returns Strings. The code
+ * comes from
+ * org.eclipse.wst.xml.ui.internal.properties.StringComboBoxCellEditor and
+ * manages "add item in the combo when it is not found."
  */
 
 public class StringComboBoxCellEditor extends ComboBoxCellEditor {
