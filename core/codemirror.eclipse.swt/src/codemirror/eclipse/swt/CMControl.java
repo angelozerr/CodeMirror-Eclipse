@@ -44,7 +44,7 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 	private List<IDirtyListener> listeners = new ArrayList<IDirtyListener>();
 	private IValidator validator;
 	private boolean focusToBeSet;
-	private String lineSeparator = System.getProperty("line.separator"); //$NON-NLS-1$;
+	private String lineSeparator;
 	private boolean initialized;
 
 	protected Action findReplaceAction;
@@ -56,18 +56,21 @@ public class CMControl extends AbstractCMControl implements IFindReplaceTarget {
 		super(file, parent, style);
 		this.focusToBeSet = false;
 		this.initialized = false;
+		setLineSeparator(System.getProperty("line.separator"));
 	}
 
 	public CMControl(String url, Composite parent, int style) {
 		super(url, parent, style);
 		this.focusToBeSet = false;
 		this.initialized = false;
+		setLineSeparator(System.getProperty("line.separator"));
 	}
 
 	public CMControl(ICMHtmlProvider builder, Composite parent, int style) {
 		super(builder, parent, style);
 		this.focusToBeSet = false;
 		this.initialized = false;
+		setLineSeparator(System.getProperty("line.separator"));
 	}
 
 	@Override
