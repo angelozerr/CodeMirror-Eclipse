@@ -14,6 +14,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import codemirror.eclipse.swt.builder.CMBuilder;
 import codemirror.eclipse.swt.builder.CMBuilderRegistry;
 import codemirror.eclipse.swt.builder.CMRunModeBuilder;
 import codemirror.eclipse.swt.builder.CMRunModeBuilderRegistry;
@@ -62,7 +63,11 @@ public class Activator extends AbstractUIPlugin {
 		if (runModeRegistry.getBuilder(XQueryMode.INSTANCE) == null) {
 			runModeRegistry.register(new CMXQueryRunModeBuilder(baseURL));
 		}
+		
 		// XML
+		if (registry.getBuilder(XmlMode.INSTANCE) == null) {
+			registry.register(new CMBuilder(XmlMode.INSTANCE,baseURL));
+		}
 		if (runModeRegistry.getBuilder(XmlMode.INSTANCE) == null) {
 			runModeRegistry.register(new CMRunModeBuilder(XmlMode.INSTANCE,
 					baseURL));

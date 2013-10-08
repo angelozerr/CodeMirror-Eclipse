@@ -51,7 +51,12 @@ public class CalendarDateTimeEditLookupDialog extends Dialog {
 	 */
 	public CalendarDateTimeEditLookupDialog(Shell parentShell, long flags,
 			Point initialLocation) {
-		this(parentShell, true, flags, null);
+		this(parentShell, true, flags, initialLocation);
+	}
+
+	public CalendarDateTimeEditLookupDialog(Shell parentShell,
+			Point initialLocation) {
+		this(parentShell, true, -1, initialLocation);
 	}
 
 	/**
@@ -144,28 +149,28 @@ public class CalendarDateTimeEditLookupDialog extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				Calendar cal = Calendar.getInstance();
-				// cal.setTime(DateTimeUtil.getDate(calendarDateTime));
-
-				if (getDate().after(cal) && !allowPast) {
-					/*
-					 * MessageDialog.openError( getShell(), Messages.getString(
-					 * "org.nightlabs.base.ui.composite.CalendarDateTimeEditLookupDialog.errorDialog.title"
-					 * ), Messages.getString(
-					 * "org.nightlabs.base.ui.composite.CalendarDateTimeEditLookupDialog.errorDialog.message"
-					 * )); //$NON-NLS-1$ //$NON-NLS-2$
-					 * DateTimeUtil.setDate(getDate(), calendarDateTime);
-					 */
-				} else {
-					if (dateDateTime != null) { // TODO that thing is
-												// commented out below -
-												// shall we remove it
-												// completely? Marco.
-						dateDateTime.setYear(calendarDateTime.getYear());
-						dateDateTime.setMonth(calendarDateTime.getMonth());
-						dateDateTime.setDay(calendarDateTime.getDay());
-					}
+				/*
+				 * Calendar cal = Calendar.getInstance();
+				 * cal.setTime(DateTimeUtil.getDate(calendarDateTime));
+				 * 
+				 * if (getDate().after(cal) && !allowPast) { /*
+				 * MessageDialog.openError( getShell(), Messages.getString(
+				 * "org.nightlabs.base.ui.composite.CalendarDateTimeEditLookupDialog.errorDialog.title"
+				 * ), Messages.getString(
+				 * "org.nightlabs.base.ui.composite.CalendarDateTimeEditLookupDialog.errorDialog.message"
+				 * )); //$NON-NLS-1$ //$NON-NLS-2$
+				 * DateTimeUtil.setDate(getDate(), calendarDateTime);
+				 */
+				// } else {*/
+				if (dateDateTime != null) { // TODO that thing is
+											// commented out below -
+											// shall we remove it
+											// completely? Marco.
+					dateDateTime.setYear(calendarDateTime.getYear());
+					dateDateTime.setMonth(calendarDateTime.getMonth());
+					dateDateTime.setDay(calendarDateTime.getDay());
 				}
+				// }
 			}
 		});
 
@@ -173,36 +178,34 @@ public class CalendarDateTimeEditLookupDialog extends Dialog {
 		// createDateDateTime(dateComp);
 		// }
 
-		  ++numColumns; 
-		  Composite timeComp = new Composite(page, SWT.NONE); //
-			GridLayout l = new GridLayout(numColumns, true);
-			timeComp.setLayout(l);
-		  
-		  //new Label(timeComp, SWT.NONE).setText(Messages.getString(
-		  //"CalendarDateTimeEditLookupDialog.label.date")); //$NON-NLS-1$ //
-		  //createDateDateTime(timeComp);
-		  
-		  int timeStyle = SWT.TIME;
-		  
-		  /*if ((DateFormatProvider.TIME_SEC & flags) ==
-		  DateFormatProvider.TIME_SEC) timeStyle |= SWT.MEDIUM; else if
-		  ((DateFormatProvider.TIME_MSEC & flags) ==
-		  DateFormatProvider.TIME_MSEC) timeStyle |= SWT.LONG; else timeStyle
-		  |= SWT.SHORT;
-		  
-		  new Label(timeComp, SWT.NONE).setText(Messages
-		  .getString("CalendarDateTimeEditLookupDialog.label.time"));
-		  //$NON-NLS-1$ 
-		  */
-		  timeDateTime = new DateTime(timeComp, timeStyle |
-		  SWT.BORDER); 
-		  timeDateTime.setLayoutData(new
-		  GridData(GridData.FILL_HORIZONTAL)); 
-		  timeDateTime.setHours(date.get(Calendar.HOUR_OF_DAY));
-		  timeDateTime.setMinutes(date.get(Calendar.MINUTE));
-		  timeDateTime.setSeconds(date.get(Calendar.SECOND));
-		//DateTimeUtil.setDate(date, timeDateTime); 
-		 
+		++numColumns;
+		Composite timeComp = new Composite(page, SWT.NONE); //
+		GridLayout l = new GridLayout(numColumns, true);
+		timeComp.setLayout(l);
+
+		// new Label(timeComp, SWT.NONE).setText(Messages.getString(
+		//"CalendarDateTimeEditLookupDialog.label.date")); //$NON-NLS-1$ //
+		// createDateDateTime(timeComp);
+
+		int timeStyle = SWT.TIME;
+
+		/*
+		 * if ((DateFormatProvider.TIME_SEC & flags) ==
+		 * DateFormatProvider.TIME_SEC) timeStyle |= SWT.MEDIUM; else if
+		 * ((DateFormatProvider.TIME_MSEC & flags) ==
+		 * DateFormatProvider.TIME_MSEC) timeStyle |= SWT.LONG; else timeStyle
+		 * |= SWT.SHORT;
+		 * 
+		 * new Label(timeComp, SWT.NONE).setText(Messages
+		 * .getString("CalendarDateTimeEditLookupDialog.label.time"));
+		 * //$NON-NLS-1$
+		 */
+		timeDateTime = new DateTime(timeComp, timeStyle | SWT.BORDER);
+		timeDateTime.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		timeDateTime.setHours(date.get(Calendar.HOUR_OF_DAY));
+		timeDateTime.setMinutes(date.get(Calendar.MINUTE));
+		timeDateTime.setSeconds(date.get(Calendar.SECOND));
+		// DateTimeUtil.setDate(date, timeDateTime);
 
 		page.setLayout(new GridLayout(numColumns, false));
 		return page;

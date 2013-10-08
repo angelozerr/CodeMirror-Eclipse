@@ -1,6 +1,7 @@
 package codemirror.eclipse.swt.xquery.addon.variables;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -19,6 +20,7 @@ public class Variable extends ValueHolder {
 	private boolean isXSType;
 	private boolean isNumeric;
 	private boolean isDate;
+	private boolean isDOMType;
 
 	public Variable() {
 		super(null);
@@ -41,6 +43,7 @@ public class Variable extends ValueHolder {
 	}
 
 	public void setType(String type) {
+		boolean typeHasChanged = (type != null && !type.equals(this.type));
 		this.type = type;
 		this.typeWithoutOccurence = type;
 		this.values = null;
@@ -53,6 +56,7 @@ public class Variable extends ValueHolder {
 		this.isDate = false;
 		if (type != null) {
 			this.isXSType = type.startsWith("xs:");
+			this.isDOMType = !isXSType;
 			this.isString = type.startsWith("xs:string");
 			this.isBoolean = type.startsWith("xs:boolean");
 			this.isNumeric = type.startsWith("xs:float")
@@ -79,18 +83,38 @@ public class Variable extends ValueHolder {
 						type.length() - 1);
 			}
 		}
-		if (isEmptyValue() && !isArray && !isOptionnal) {
+		if (typeHasChanged && isEmptyValue() && !isOptionnal) {
 			// set default value
-			if (isNumeric) {
-				setValue("0");
-			} else if (isBoolean) {
-				setValue("false()");
+			if (isArray) {
+				addValue(new ValueHolder(this));
+			} else {
+				this.setValue(getDefaultValue(this));
 			}
+
 		}
+	}
+
+	private static String getDefaultValue(ValueHolder valueHolder) {
+		Variable variable = valueHolder.getVariable();
+		if (variable.isString()) {
+			return "";
+		} else if (variable.isNumeric()) {
+			return "0";
+		} else if (variable.isBoolean()) {
+			return "false()";
+		} else if (variable.isDate()) {
+			return XMLDateTimeFormatter.getInstance().format(
+					Calendar.getInstance().getTime());
+		}
+		return null;
 	}
 
 	public boolean isXSType() {
 		return isXSType;
+	}
+
+	public boolean isDOMType() {
+		return isDOMType;
 	}
 
 	public boolean isOptionnal() {
@@ -115,6 +139,10 @@ public class Variable extends ValueHolder {
 	public void addValue(ValueHolder value) {
 		if (values == null) {
 			values = new ArrayList<ValueHolder>();
+		}
+		if (StringUtils.isEmpty(value.getValue())) {
+			String defaultValue = getDefaultValue(value);
+			value.setValue(defaultValue);
 		}
 		values.add(value);
 	}

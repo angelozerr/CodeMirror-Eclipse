@@ -1,4 +1,4 @@
-package codemirror.eclipse.ui.xquery.viewers;
+package codemirror.eclipse.swt.xquery.addon.variables;
 
 import java.util.Date;
 

@@ -1,7 +1,5 @@
-package codemirror.eclipse.ui.xquery.viewers;
+package codemirror.eclipse.swt.xquery.addon.variables;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -30,7 +28,6 @@ public class XMLDateTimeFormatter implements IDateFormatter {
 			try {
 				datatypeFactory = DatatypeFactory.newInstance();
 			} catch (DatatypeConfigurationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

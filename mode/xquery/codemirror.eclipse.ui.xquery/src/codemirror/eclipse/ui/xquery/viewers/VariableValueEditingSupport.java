@@ -20,9 +20,11 @@ public class VariableValueEditingSupport extends EditingSupport {
 
 	private final TextCellEditor editor;
 
-	private final ComboBoxViewerCellEditor booleanEditor;
+	private final CellEditor booleanEditor;
 
-	private final DateTimeCellEditor dateTimeEditor;
+	private final CellEditor dateTimeEditor;
+
+	private final CellEditor xmlEditor;
 
 	private final Map<String, CellEditor> editorsMap;
 
@@ -33,6 +35,7 @@ public class VariableValueEditingSupport extends EditingSupport {
 		this.editor = new TextCellEditor(parent);
 		this.booleanEditor = createBooleanEditor(parent);
 		this.dateTimeEditor = createDateTimeEditor(parent);
+		this.xmlEditor = createXMLEditor(parent);
 	}
 
 	@Override
@@ -43,6 +46,8 @@ public class VariableValueEditingSupport extends EditingSupport {
 				return booleanEditor;
 			} else if (variable.isDate()) {
 				return dateTimeEditor;
+			} else if (variable.isDOMType()) {
+				return xmlEditor;
 			}
 			String varName = variable.getName();
 			CellEditor editor = editorsMap.get(varName);
@@ -100,8 +105,12 @@ public class VariableValueEditingSupport extends EditingSupport {
 		return booleanEditor;
 	}
 
-	private DateTimeCellEditor createDateTimeEditor(Composite parent) {
-		return new DateTimeCellEditor(parent, 1);
+	private XMLInputDialog createXMLEditor(Composite parent) {
+		return new XMLInputDialog(parent);
+	}
+
+	private CellEditor createDateTimeEditor(Composite parent) {
+		return new DateTimeCellEditor(parent);
 	}
 
 	protected void registerEditor(CellEditor editor, String... varNames) {

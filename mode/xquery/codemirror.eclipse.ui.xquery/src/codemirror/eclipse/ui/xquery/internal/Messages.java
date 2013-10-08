@@ -20,6 +20,9 @@ public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "codemirror.eclipse.ui.xquery.internal.Messages";//$NON-NLS-1$
 
+	public static String XMLInputDialog_title;
+	public static String XMLInputDialog_message;
+	
 	// ------------- Preferences
 
 	public static String XQueryEditorPreferencePage_description;
