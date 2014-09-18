@@ -36,6 +36,8 @@ public class Theme {
 
 	public static final Theme NEAT = createDefaultTheme("neat");
 
+	public static final Theme NEO = createDefaultTheme("neo");
+
 	public static final Theme NIGHT = createDefaultTheme("night");
 
 	public static final Theme PARAISO_DARK = createDefaultTheme("paraiso-dark");

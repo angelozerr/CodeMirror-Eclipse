@@ -10,6 +10,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>css</module>
+		<module>cypher</module>
 		<module>html</module>
 		<module>javascript</module>
 		<module>json</module>
