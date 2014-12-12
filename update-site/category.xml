@@ -9,6 +9,9 @@
    <feature url="features/codemirror.eclipse.css.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.css.feature" version="1.0.0.qualifier">
       <category name="mode"/>
    </feature>
+   <feature url="features/codemirror.eclipse.cypher.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.cypher.feature" version="1.0.0.qualifier">
+      <category name="mode"/>
+   </feature>
    <feature url="features/codemirror.eclipse.html.feature_1.0.0.qualifier.jar" id="codemirror.eclipse.html.feature" version="1.0.0.qualifier">
       <category name="mode"/>
    </feature>
