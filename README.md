@@ -41,6 +41,6 @@ See cloudbees job: [https://opensagres.ci.cloudbees.com/job/CodeMirror-Eclipse/]
 
 # Similar project
 
- * [codemirror-eclipse-rcp](https://github.com/eiswind/codemirror-eclipse-rcp)
+ * [codemirror-eclipse-rcp](https://github.com/eiswind/codemirror-eclipse-rcp) (no longer can be found)
  * [CodeMirror RAP/RWT Widget](http://polymap.org/polymap3/wiki/CodeMirror)
  * [rap-ckeditor](https://github.com/eclipsesource/rap-ckeditor)
